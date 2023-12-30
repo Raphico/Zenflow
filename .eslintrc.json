@@ -4,7 +4,7 @@
   "extends": [
     "next/core-web-vitals",
     "plugin:tailwindcss/recommended",
-    "plugin:@typescript-eslint/recommended"
+    "plugin:@typescript-eslint/recommended-type-checked"
   ],
   "plugins": ["@typescript-eslint", "tailwindcss"],
   "parser": "@typescript-eslint/parser",
