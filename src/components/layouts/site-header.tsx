@@ -16,7 +16,7 @@ export function SiteHeader() {
         <div className="flex items-center gap-6">
           <Link href="/" className="flex items-center gap-2">
             <Icons.logo className="h-6 w-6" aria-hidden="true" />
-            <span className="hidden text-lg font-bold md:inline-block">
+            <span className="hidden text-lg font-bold lg:inline-block">
               {siteConfig.name}
             </span>
           </Link>
