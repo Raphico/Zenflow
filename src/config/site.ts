@@ -18,7 +18,6 @@ export const siteConfig: SiteConfig = {
     {
       title: "Stack",
       href: "/stack",
-      disabled: true,
     },
     {
       title: "Blog",
