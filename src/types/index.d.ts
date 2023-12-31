@@ -2,6 +2,7 @@ export type NavItem = {
   title: string
   href: string
   disabled?: boolean
+  external?: boolean
 }
 
 export type SiteConfig = {
@@ -16,4 +17,8 @@ export type SiteConfig = {
     discord: string
   }
   mainNav: NavItem[]
+  footerNav: {
+    title: string
+    items: NavItem[]
+  }[]
 }

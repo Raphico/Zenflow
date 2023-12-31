@@ -18,7 +18,7 @@ A task manager web application built with Next.js 14
 
 - [x] SEO optimization & site configuration
 - [ ] Landing Page
-- [ ] Dark Mode Implementation
+- [x] Dark Mode Implementation
 - [ ] User Authentication using Ne tAuth
 - [ ] Account and Preference Settings Setup
 - [ ] Create New Task Functionality

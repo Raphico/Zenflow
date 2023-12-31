@@ -31,4 +31,71 @@ export const siteConfig: SiteConfig = {
       disabled: true,
     },
   ],
+  footerNav: [
+    {
+      title: "Credits",
+      items: [
+        {
+          title: "Taxonomy",
+          href: "https://github.com/shadcn-ui/taxonomy",
+          external: true,
+        },
+        {
+          title: "skateshop",
+          href: "https://github.com/sadmann7/skateshop/",
+          external: true,
+        },
+        {
+          title: "shadcn/ui",
+          href: "https://ui.shadcn.com/",
+          external: true,
+        },
+      ],
+    },
+    {
+      title: "Socials",
+      items: [
+        {
+          title: "Twitter",
+          href: links.twitter,
+          external: true,
+        },
+        {
+          title: "Github",
+          href: links.githubAccount,
+          external: true,
+        },
+        {
+          title: "Discord",
+          href: links.discord,
+          external: true,
+        },
+      ],
+    },
+    {
+      title: "Zenflow Tunes",
+      items: [
+        {
+          title: "~CZ~",
+          href: "https://soundcloud.com/user-471347893",
+          external: true,
+        },
+        {
+          title: "LAGXNA",
+          href: "https://open.spotify.com/search/LAGXNA",
+          external: true,
+        },
+        {
+          title: "Miyamoto Musashi Meditation",
+          href: "https://youtu.be/VK6sh73APFE?si=2cXysOOUI_4PJ7BH",
+          external: true,
+        },
+        {
+          title: "Flow of time",
+          href: "https://youtu.be/EtD7_8kCMHA?si=8XrkiVbDoFJsyoTv",
+          external: true,
+        },
+      ],
+    },
+  ],
 }
