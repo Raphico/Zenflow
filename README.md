@@ -17,9 +17,10 @@ A task manager web application built with Next.js 14
 ## Roadmap
 
 - [x] SEO optimization & site configuration
-- [ ] Landing Page
+- [x] Landing Page
 - [x] Dark Mode Implementation
-- [ ] User Authentication using Ne tAuth
+- [ ] blog page
+- [ ] User Authentication using NextAuth
 - [ ] Account and Preference Settings Setup
 - [ ] Create New Task Functionality
 - [ ] Implement Tasks Board View
@@ -30,6 +31,7 @@ A task manager web application built with Next.js 14
 - [ ] Board Actions (Edit and Delete)
 - [ ] Task Search, Filtering, and Sorting Functionality
 - [ ] Integrate Analytics Page
+- [ ] Integrate stripe
 
 ## Running Locally
 
