@@ -40,7 +40,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="container space-y-8 md:py-12 lg:py-24">
+      <section className="container space-y-8 py-12 lg:py-24">
         <h2 className="text-center text-2xl font-bold sm:text-3xl">
           Why Zenflow?
         </h2>
