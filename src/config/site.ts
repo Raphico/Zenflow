@@ -14,4 +14,21 @@ export const siteConfig: SiteConfig = {
   url: "https://zenflow.vercel.app/",
   ogImage: "https://zenflow.vercel.app/og.png",
   links,
+  mainNav: [
+    {
+      title: "Stack",
+      href: "/stack",
+      disabled: true,
+    },
+    {
+      title: "Blog",
+      href: "/blog",
+      disabled: true,
+    },
+    {
+      title: "Pricing",
+      href: "/pricing",
+      disabled: true,
+    },
+  ],
 }
