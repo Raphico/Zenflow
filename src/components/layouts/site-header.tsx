@@ -33,7 +33,7 @@ export function SiteHeader() {
                     "text-sm font-medium text-muted-foreground transition-colors",
                     {
                       "text-foreground": isActive,
-                      "opacity-50": item?.disabled,
+                      "opacity-50 cursor-not-allowed": item?.disabled,
                       "hover:text-foreground": !item?.disabled,
                     }
                   )}
@@ -45,7 +45,10 @@ export function SiteHeader() {
           </nav>
         </div>
 
-        <Link href="/sign-in" className={cn(buttonVariants({ size: "sm" }))}>
+        <Link
+          href="#"
+          className={cn("cursor-not-allowed", buttonVariants({ size: "sm" }))}
+        >
           Sign In
         </Link>
       </div>
