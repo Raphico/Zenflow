@@ -15,12 +15,18 @@
     "@t3-oss/env-nextjs": "^0.7.1",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.1",
+    "contentlayer": "^0.3.4",
+    "date-fns": "^3.0.6",
     "lucide-react": "^0.303.0",
     "next": "14.0.4",
+    "next-contentlayer": "^0.3.4",
     "next-themes": "^0.2.1",
     "react": "^18",
     "react-dom": "^18",
     "react-wrap-balancer": "^1.1.0",
+    "rehype-autolink-headings": "^7.1.0",
+    "rehype-slug": "^6.0.0",
+    "remark-gfm": "^4.0.0",
     "tailwind-merge": "^2.2.0",
     "tailwindcss-animate": "^1.0.7",
     "zod": "^3.22.4"
@@ -38,5 +44,10 @@
     "postcss": "^8",
     "tailwindcss": "^3.3.0",
     "typescript": "^5.3.3"
+  },
+  "overrides": {
+    "next-contentlayer": {
+      "next": "$next"
+    }
   }
 }
