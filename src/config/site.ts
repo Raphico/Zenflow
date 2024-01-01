@@ -4,7 +4,7 @@ const links = {
   twitter: "https://twitter.com/Raphico_OA",
   github: "https://github.com/Raphico/Zenflow",
   githubAccount: "https://github.com/Raphico",
-  discord: "",
+  discord: "https://discord.com/users/raphico",
 }
 
 export const siteConfig: SiteConfig = {
