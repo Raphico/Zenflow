@@ -67,7 +67,7 @@ export const Author = defineDocumentType(() => ({
     },
     avatar: {
       type: "string",
-      require: true,
+      required: true,
     },
     twitter: {
       type: "string",
