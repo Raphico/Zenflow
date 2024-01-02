@@ -22,7 +22,6 @@ export const siteConfig: SiteConfig = {
     {
       title: "Blog",
       href: "/blog",
-      disabled: true,
     },
     {
       title: "Pricing",
