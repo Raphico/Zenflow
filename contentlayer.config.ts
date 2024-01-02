@@ -22,7 +22,7 @@ export const Post = defineDocumentType(() => ({
   name: "Post",
   filePathPattern: "blog/**/*.mdx",
   contentType: "mdx",
-  field: {
+  fields: {
     title: {
       type: "string",
       required: true,
@@ -43,7 +43,7 @@ export const Post = defineDocumentType(() => ({
       type: "boolean",
       default: true,
     },
-    author: {
+    authors: {
       // Reference types are not embedded.
       // Until this is fixed, we can use a simple list.
       // type: "reference",
@@ -52,8 +52,8 @@ export const Post = defineDocumentType(() => ({
       of: { type: "string" },
       required: true,
     },
-    computedFields,
   },
+  computedFields,
 }))
 
 export const Author = defineDocumentType(() => ({
