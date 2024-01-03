@@ -2,6 +2,11 @@ import type { Metadata } from "next"
 
 import { Icons } from "@/components/icons"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import {
+  PageHeader,
+  PageHeaderDescription,
+  PageHeaderHeading,
+} from "@/components/page-header"
 
 export const metadata: Metadata = {
   title: "Stack",
@@ -10,13 +15,13 @@ export const metadata: Metadata = {
 
 export default function StackPage() {
   return (
-    <section className="container max-w-5xl space-y-8 py-8 md:py-12 lg:py-24">
-      <div className="space-y-1 text-center">
-        <h2 className="text-2xl font-bold sm:text-3xl">Tech Stack</h2>
-        <p className="text-muted-foreground">
+    <section className="container max-w-5xl space-y-8 py-8 lg:py-12">
+      <PageHeader>
+        <PageHeaderHeading>Tech Stack</PageHeaderHeading>
+        <PageHeaderDescription>
           Discover the technologies powering Zenflow
-        </p>
-      </div>
+        </PageHeaderDescription>
+      </PageHeader>
 
       <div className="grid w-full gap-6 sm:grid-cols-2 lg:grid-cols-3">
         <Card>
