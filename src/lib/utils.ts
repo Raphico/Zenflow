@@ -18,3 +18,7 @@ export function formatDate(input: string | number): string {
 export function absoluteUrl(path: string) {
   return `${env.NEXT_PUBLIC_APP_URL}${path}`
 }
+
+export function truncate(text: string, maxLength: number) {
+  return text.length <= maxLength ? text : `${text.slice(0, maxLength)}...`
+}

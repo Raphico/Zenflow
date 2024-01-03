@@ -12,6 +12,7 @@ import { buttonVariants } from "@/components/ui/button"
 import { AspectRatio } from "@/components/ui/aspect-ratio"
 import { Mdx } from "@/components/mdx/mdx-components"
 import { Separator } from "@/components/ui/separator"
+import { PostPager } from "./_components/post-pager"
 
 interface PostPageProps {
   params: {
@@ -136,12 +137,14 @@ export default function PostPage({ params }: PostPageProps) {
       </AspectRatio>
       <Mdx code={post.body.code} />
       <Separator className="my-4" />
-      <div className="flex items-center justify-center">
-        <Link href="/blog" className={cn(buttonVariants({ variant: "ghost" }))}>
-          <ChevronLeft className="mr-2 h-4 w-4" aria-hidden="true" />
-          See all posts
-        </Link>
-      </div>
+      <PostPager currentPost={post} allPosts={allPosts} />
+      <Link
+        href="/blog"
+        className={cn(buttonVariants({ variant: "ghost" }), "mx-auto")}
+      >
+        <ChevronLeft className="mr-2 h-4 w-4" aria-hidden="true" />
+        See all posts
+      </Link>
     </article>
   )
 }
