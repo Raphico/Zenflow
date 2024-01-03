@@ -1,8 +1,22 @@
-import { ChevronLeft, ChevronRight, type LucideProps } from "lucide-react"
+import {
+  Check,
+  ChevronLeft,
+  ChevronRight,
+  Copy,
+  Facebook,
+  Linkedin,
+  Twitter,
+  type LucideProps,
+} from "lucide-react"
 
 export const Icons = {
+  copy: Copy,
   chevronLeft: ChevronLeft,
   chevronRight: ChevronRight,
+  facebook: Facebook,
+  linkedin: Linkedin,
+  tick: Check,
+  twitter: Twitter,
   subscription: ({ ...props }: LucideProps) => (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" {...props}>
       <path

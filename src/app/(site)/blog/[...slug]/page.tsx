@@ -13,6 +13,7 @@ import { AspectRatio } from "@/components/ui/aspect-ratio"
 import { Mdx } from "@/components/mdx/mdx-components"
 import { Separator } from "@/components/ui/separator"
 import { PostPager } from "./_components/post-pager"
+import { SharePost } from "./_components/share-post"
 
 interface PostPageProps {
   params: {
@@ -137,6 +138,11 @@ export default function PostPage({ params }: PostPageProps) {
       </AspectRatio>
       <Mdx code={post.body.code} />
       <Separator className="my-4" />
+      <SharePost
+        postTitle={post.title}
+        postUrl={absoluteUrl(`blog/${post.slugAsParams}`)}
+      />
+      <Separator />
       <PostPager currentPost={post} allPosts={allPosts} />
       <Link
         href="/blog"
