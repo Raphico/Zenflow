@@ -29,7 +29,8 @@ export function PostPager({ currentPost, allPosts }: PostPagerProps) {
           className={cn(
             buttonVariants({
               variant: "ghost",
-            })
+            }),
+            "whitespace-normal"
           )}
         >
           <Icons.chevronLeft className="mr-2 h-4 w-4" aria-hidden="true" />
@@ -44,7 +45,7 @@ export function PostPager({ currentPost, allPosts }: PostPagerProps) {
             buttonVariants({
               variant: "ghost",
             }),
-            "ml-auto"
+            "ml-auto whitespace-normal"
           )}
         >
           {truncate(nextPost.title, 20)}

@@ -26,7 +26,7 @@ export function SharePost({ postTitle, postUrl }: SharePostProps) {
   }
 
   return (
-    <div className="flex items-center justify-between">
+    <div className="flex flex-col items-center justify-center gap-4 sm:flex-row sm:justify-between">
       <p className="text-lg font-bold">Share this Post</p>
       <div className="flex items-center gap-4">
         <Button

@@ -96,36 +96,36 @@ export default function PostPage({ params }: PostPageProps) {
   return (
     <article className="container mx-auto grid max-w-3xl gap-8 py-8 lg:py-12">
       <div className="space-y-4">
+        <p className="text-sm text-muted-foreground">
+          Published {formatDate(post.publishedAt)}
+        </p>
         <h1 className="text-4xl font-bold lg:text-5xl">{post.title}</h1>
         <p className="text-muted-foreground">{post.description}</p>
-        <div className="flex items-center gap-2">
-          {authors?.length ? (
-            <div className="flex items-center gap-4">
-              {authors.map((author) =>
-                author ? (
-                  <Link
-                    key={author._id}
-                    href={author.twitter}
-                    className="flex items-center gap-2 text-sm"
-                  >
-                    <Image
-                      src={author.avatar}
-                      alt={author.name}
-                      width={30}
-                      height={30}
-                      className="rounded-full bg-white"
-                    />
-                    <p className="font-medium">By {author.name}</p>
-                  </Link>
-                ) : null
-              )}
-            </div>
-          ) : null}
-          <span className="text-muted-foreground">/</span>
-          <p className="text-sm text-muted-foreground">
-            Published {formatDate(post.publishedAt)}
-          </p>
-        </div>
+        {authors?.length ? (
+          <div className="flex items-center gap-4">
+            {authors.map((author) =>
+              author ? (
+                <Link
+                  key={author._id}
+                  href={author.twitter}
+                  className="flex items-center gap-2 text-sm"
+                >
+                  <Image
+                    src={author.avatar}
+                    alt={author.name}
+                    width={30}
+                    height={30}
+                    className="rounded-full bg-white"
+                  />
+                  <p className="font-medium">
+                    <span className="text-muted-foreground">By</span>{" "}
+                    {author.name}
+                  </p>
+                </Link>
+              ) : null
+            )}
+          </div>
+        ) : null}
       </div>
       <AspectRatio ratio={16 / 9}>
         <Image
