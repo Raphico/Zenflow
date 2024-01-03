@@ -96,9 +96,11 @@ export default function PostPage({ params }: PostPageProps) {
   return (
     <article className="container mx-auto grid max-w-3xl gap-8 py-8 lg:py-12">
       <div className="space-y-4">
-        <p className="text-sm text-muted-foreground">
-          Published {formatDate(post.publishedAt)}
-        </p>
+        <div className="flex items-center gap-2 text-sm text-muted-foreground">
+          <p>{formatDate(post.publishedAt)}</p>
+          <span>•</span>
+          <p>{post.readingTimeInMinutes} min read</p>
+        </div>
         <h1 className="text-4xl font-bold lg:text-5xl">{post.title}</h1>
         <p className="text-muted-foreground">{post.description}</p>
         {authors?.length ? (

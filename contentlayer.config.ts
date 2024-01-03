@@ -16,6 +16,19 @@ const computedFields: ComputedFields = {
     type: "string",
     resolve: (doc) => doc._raw.flattenedPath.split("/").slice(1).join("/"),
   },
+  readingTimeInMinutes: {
+    type: "string",
+    resolve: (doc) => {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+      const rawContent = doc.body.raw as string
+      const wordsPerMinute = 200
+      const wordCount = rawContent.split(/\s+/).length
+
+      const estimatedReadingTime = Math.ceil(wordCount / wordsPerMinute)
+
+      return estimatedReadingTime
+    },
+  },
 }
 
 export const Post = defineDocumentType(() => ({
