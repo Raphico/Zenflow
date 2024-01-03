@@ -6,7 +6,6 @@ import { cn } from "@/lib/utils"
 import { siteConfig } from "@/config/site"
 import { Icons } from "@/components/icons"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { ClockIcon, RefreshCcwIcon, RocketIcon, TrophyIcon } from "lucide-react"
 
 export default function HomePage() {
   return (
@@ -48,7 +47,7 @@ export default function HomePage() {
         <div className="grid w-full gap-6 sm:grid-cols-2">
           <Card>
             <CardHeader className="p-4">
-              <RocketIcon className="h-10 w-10" aria-hidden="true" />
+              <Icons.rocket className="h-10 w-10" aria-hidden="true" />
             </CardHeader>
             <CardContent className="flex flex-col items-start gap-2">
               <CardTitle className="text-lg">
@@ -62,7 +61,7 @@ export default function HomePage() {
           </Card>
           <Card>
             <CardHeader className="p-4">
-              <RefreshCcwIcon className="h-10 w-10" aria-hidden="true" />
+              <Icons.refreshCcw className="h-10 w-10" aria-hidden="true" />
             </CardHeader>
             <CardContent className="flex flex-col items-start gap-2">
               <CardTitle className="text-lg">
@@ -76,7 +75,7 @@ export default function HomePage() {
           </Card>
           <Card>
             <CardHeader className="p-4">
-              <TrophyIcon className="h-10 w-10" aria-hidden="true" />
+              <Icons.trophy className="h-10 w-10" aria-hidden="true" />
             </CardHeader>
             <CardContent className="flex flex-col items-start gap-2">
               <CardTitle className="text-lg">
@@ -90,7 +89,7 @@ export default function HomePage() {
           </Card>
           <Card>
             <CardHeader className="p-4">
-              <ClockIcon className="h-10 w-10" aria-hidden="true" />
+              <Icons.clock className="h-10 w-10" aria-hidden="true" />
             </CardHeader>
             <CardContent className="flex flex-col items-start gap-2">
               <CardTitle className="text-lg">

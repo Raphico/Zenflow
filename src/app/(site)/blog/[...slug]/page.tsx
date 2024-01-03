@@ -7,7 +7,7 @@ import { allAuthors, allPosts } from "contentlayer/generated"
 import "@/styles/mdx.css"
 
 import { cn, formatDate, absoluteUrl } from "@/lib/utils"
-import { ChevronLeft } from "lucide-react"
+import { Icons } from "@/components/icons"
 import { buttonVariants } from "@/components/ui/button"
 import { AspectRatio } from "@/components/ui/aspect-ratio"
 import { Mdx } from "@/components/mdx/mdx-components"
@@ -150,7 +150,7 @@ export default function PostPage({ params }: PostPageProps) {
         href="/blog"
         className={cn(buttonVariants({ variant: "ghost" }), "mx-auto")}
       >
-        <ChevronLeft className="mr-2 h-4 w-4" aria-hidden="true" />
+        <Icons.chevronLeft className="mr-2 h-4 w-4" aria-hidden="true" />
         See all posts
       </Link>
     </article>

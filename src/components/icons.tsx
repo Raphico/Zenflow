@@ -2,21 +2,35 @@ import {
   Check,
   ChevronLeft,
   ChevronRight,
+  Clock,
   Copy,
   Facebook,
   Linkedin,
+  Laptop,
+  RefreshCcw,
+  Rocket,
+  Sun,
   Twitter,
+  Trophy,
   type LucideProps,
 } from "lucide-react"
+import { MoonIcon } from "@radix-ui/react-icons"
 
 export const Icons = {
   copy: Copy,
   chevronLeft: ChevronLeft,
+  clock: Clock,
   chevronRight: ChevronRight,
   facebook: Facebook,
+  moon: MoonIcon,
   linkedin: Linkedin,
+  laptop: Laptop,
+  refreshCcw: RefreshCcw,
+  rocket: Rocket,
+  sun: Sun,
   tick: Check,
   twitter: Twitter,
+  trophy: Trophy,
   subscription: ({ ...props }: LucideProps) => (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" {...props}>
       <path
