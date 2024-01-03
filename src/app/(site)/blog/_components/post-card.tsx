@@ -19,7 +19,7 @@ export function PostCard({ post, index }: PostCardProps) {
             src={post.image}
             alt={`${post.title} featured image`}
             fill
-            className="rounded-md object-cover transition-opacity hover:opacity-80"
+            className="rounded-md border bg-muted object-cover transition-opacity hover:opacity-80"
             priority={index <= 1}
           />
         </AspectRatio>
