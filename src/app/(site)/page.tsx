@@ -13,7 +13,7 @@ export default function HomePage() {
       <section className="flex flex-col items-center justify-center gap-4 py-12 text-center md:pt-32">
         <Balancer
           as="h1"
-          className="text-3xl font-bold sm:text-5xl md:text-6xl lg:text-7xl"
+          className="font-heading text-3xl font-bold sm:text-5xl md:text-6xl lg:text-7xl"
         >
           Elevate Your Productivity, Simplify Your Life
         </Balancer>
@@ -40,7 +40,7 @@ export default function HomePage() {
       </section>
 
       <section className="container space-y-8 py-8 md:py-12 lg:py-24">
-        <h2 className="text-center text-2xl font-bold sm:text-3xl">
+        <h2 className="text-center font-heading text-2xl font-bold sm:text-3xl">
           Why Zenflow?
         </h2>
 

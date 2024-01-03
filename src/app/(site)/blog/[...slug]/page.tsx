@@ -101,7 +101,9 @@ export default function PostPage({ params }: PostPageProps) {
           <span>•</span>
           <p>{post.readingTimeInMinutes} min read</p>
         </div>
-        <h1 className="text-4xl font-bold lg:text-5xl">{post.title}</h1>
+        <h1 className="font-heading text-4xl font-bold lg:text-5xl">
+          {post.title}
+        </h1>
         <p className="text-muted-foreground">{post.description}</p>
         {authors?.length ? (
           <div className="flex items-center gap-4">

@@ -17,7 +17,7 @@ const PageHeader = ({
 )
 
 const headingVariants = cva(
-  "font-bold leading-tight tracking-tighter lg:leading-[1.1]",
+  "font-heading font-bold leading-tight tracking-tighter lg:leading-[1.1]",
   {
     variants: {
       size: {

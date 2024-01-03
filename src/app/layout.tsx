@@ -3,7 +3,7 @@ import { env } from "../env.mjs"
 
 import "@/styles/globals.css"
 
-import { Inter as FontSans } from "next/font/google"
+import { Inter as FontSans, Montserrat as FontHeading } from "next/font/google"
 import { cn } from "@/lib/utils"
 import { siteConfig } from "@/config/site"
 import { ThemeProvider } from "@/components/theme-provider"
@@ -11,6 +11,11 @@ import { ThemeProvider } from "@/components/theme-provider"
 const fontSans = FontSans({
   subsets: ["latin"],
   variable: "--font-sans",
+})
+
+const fontHeading = FontHeading({
+  subsets: ["latin"],
+  variable: "--font-heading",
 })
 
 export const metadata: Metadata = {
@@ -87,7 +92,8 @@ export default function RootLayout({
       <body
         className={cn(
           "min-h-screen bg-background font-sans antialiased",
-          fontSans.variable
+          fontSans.variable,
+          fontHeading.variable
         )}
       >
         <ThemeProvider
