@@ -1,5 +1,5 @@
-import { SiteFooter } from "@/components/layouts/site-footer"
-import { SiteHeader } from "@/components/layouts/site-header"
+import { SiteFooter } from "./_components/site-footer"
+import { SiteHeader } from "./_components/site-header"
 
 export default function Layout({ children }: React.PropsWithChildren) {
   return (

@@ -1,11 +1,11 @@
 "use client"
 
 import { siteConfig } from "@/config/site"
-import { Icons } from "../icons"
+import { Icons } from "@/components/icons"
 import Link from "next/link"
 import { cn } from "@/lib/utils"
 import { usePathname } from "next/navigation"
-import { buttonVariants } from "../ui/button"
+import { buttonVariants } from "@/components/ui/button"
 
 export function SiteHeader() {
   const pathname = usePathname()
