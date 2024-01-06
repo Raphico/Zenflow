@@ -8,7 +8,7 @@ A task manager web application built with Next.js 14
 - **Styling:** [Tailwind CSS](https://tailwindcss.com)
 - **User Management:** [NextAuth](https://next-auth.js.org/)
 - **Database:** [Neon](https://neon.tech/)
-- **ORM:** [Drizzle ORM](https://orm.drizzle.team)
+- **ORM:** [Prisma ORM](https://www.prisma.io)
 - **UI Components:** [shadcn/ui](https://ui.shadcn.com)
 - **Email:** [React Email](https://react.email)
 - **Content Management:** [Contentlayer](https://www.contentlayer.dev)
