@@ -9,7 +9,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 
 export default function HomePage() {
   return (
-    <div className="mx-auto w-full max-w-5xl">
+    <div className="container max-w-5xl">
       <section className="flex flex-col items-center justify-center gap-4 py-12 text-center md:pt-32">
         <Balancer
           as="h1"
