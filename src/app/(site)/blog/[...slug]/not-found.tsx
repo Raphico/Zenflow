@@ -1,5 +1,6 @@
 import { Icons } from "@/components/icons"
-import { Button } from "@/components/ui/button"
+import { buttonVariants } from "@/components/ui/button"
+import Link from "next/link"
 
 export default function NotFound() {
   return (
@@ -11,10 +12,10 @@ export default function NotFound() {
           The post you are looking for might have been removed or is temporarily
           unavailable.
         </p>
-        <Button variant="ghost">
+        <Link href="/blog" className={buttonVariants({ variant: "ghost" })}>
           <Icons.chevronLeft className="mr-2 h-4 w-4" aria-hidden="true" />
           See all posts
-        </Button>
+        </Link>
       </div>
     </section>
   )
