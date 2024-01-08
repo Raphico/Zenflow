@@ -53,7 +53,7 @@ export default function StackPage() {
           <CardContent className="flex flex-col items-start gap-2">
             <CardTitle className="text-lg">Database</CardTitle>
             <p className="text-sm text-muted-foreground">
-              ORM using Drizzle and deployed on Neon
+              ORM using Drizzle and deployed on PlanetScale
             </p>
           </CardContent>
         </Card>
@@ -75,7 +75,7 @@ export default function StackPage() {
           <CardContent className="flex flex-col items-start gap-2">
             <CardTitle className="text-lg">Authentication</CardTitle>
             <p className="text-sm text-muted-foreground">
-              Authentication using NextAuth.js and middlewares
+              Authentication using clerk and middlewares
             </p>
           </CardContent>
         </Card>
