@@ -45,10 +45,7 @@ export function SiteHeader() {
           </nav>
         </div>
 
-        <Link
-          href="#"
-          className={cn("cursor-not-allowed", buttonVariants({ size: "sm" }))}
-        >
+        <Link href="/sign-in" className={cn(buttonVariants({ size: "sm" }))}>
           Sign In
         </Link>
       </div>
