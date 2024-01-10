@@ -53,7 +53,7 @@ export function OAuthSignIn() {
   }
 
   return (
-    <div className="grid w-full gap-4">
+    <div className="grid w-full grid-cols-2 gap-4">
       {providers.map((provider) => {
         const Icon = Icons[provider.icon]
         return (
@@ -72,7 +72,7 @@ export function OAuthSignIn() {
             ) : (
               <Icon className="mr-2 h-4 w-4" aria-hidden="true" />
             )}
-            Continue with {provider.name}
+            {provider.name}
           </Button>
         )
       })}
