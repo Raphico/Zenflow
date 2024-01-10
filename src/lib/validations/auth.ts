@@ -24,3 +24,12 @@ export const verifyEmailSchema = z.object({
     })
     .max(6),
 })
+
+export const resetRequestSchema = z.object({
+  email: authSchema.shape.email,
+})
+
+export const passwordVerificationSchema = z.object({
+  code: verifyEmailSchema.shape.code,
+  password: authSchema.shape.password,
+})

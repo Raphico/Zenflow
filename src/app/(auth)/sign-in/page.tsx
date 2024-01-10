@@ -39,15 +39,24 @@ export default function SignIn() {
 
       <SignInForm />
 
-      <div className="flex items-center justify-center gap-2">
-        <span className="text-sm text-muted-foreground">
-          Don&apos;t have an account?
-        </span>
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-2">
+          <span className="hidden text-sm text-muted-foreground lg:inline-block">
+            Don&apos;t have an account?
+          </span>
+          <Link
+            href="/sign-up"
+            className="text-sm underline-offset-4 hover:underline"
+          >
+            Sign Up
+          </Link>
+        </div>
+
         <Link
-          href="/sign-up"
+          href="/sign-in/reset-password"
           className="text-sm underline-offset-4 hover:underline"
         >
-          Sign up
+          Forgot password?
         </Link>
       </div>
     </>
