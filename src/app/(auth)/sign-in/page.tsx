@@ -7,6 +7,7 @@ import {
   PageHeaderHeading,
 } from "@/components/page-header"
 import { OAuthSignIn } from "@/components/auth/oauth-sign-in"
+import { SignInForm } from "@/components/forms/sign-in-form"
 
 export const metadata: Metadata = {
   title: "Sign in",
@@ -35,6 +36,8 @@ export default function SignIn() {
           </span>
         </div>
       </div>
+
+      <SignInForm />
 
       <div className="flex items-center justify-center gap-2">
         <span className="text-sm text-muted-foreground">

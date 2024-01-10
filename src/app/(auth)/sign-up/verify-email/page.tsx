@@ -1,0 +1,29 @@
+import { type Metadata } from "next"
+
+import {
+  PageHeader,
+  PageHeaderDescription,
+  PageHeaderHeading,
+} from "@/components/page-header"
+import { VerifyEmailForm } from "@/components/forms/verify-email-form"
+
+export const metadata: Metadata = {
+  title: "Verify email",
+  description: "Verify your email to create an account",
+}
+
+export default function VerifyEmail() {
+  return (
+    <>
+      <PageHeader className="place-items-center text-center">
+        <PageHeaderHeading size="sm">Verify Email</PageHeaderHeading>
+        <PageHeaderDescription size="sm">
+          Please check your inbox and paste the sign up code below to create an
+          account
+        </PageHeaderDescription>
+      </PageHeader>
+
+      <VerifyEmailForm />
+    </>
+  )
+}

@@ -1,9 +1,11 @@
 import {
+  AlertTriangle,
   Check,
   ChevronLeft,
   ChevronRight,
   Clock,
   Copy,
+  Eye,
   Facebook,
   Linkedin,
   Laptop,
@@ -14,6 +16,7 @@ import {
   Twitter,
   Trophy,
   type LucideProps,
+  EyeOff,
 } from "lucide-react"
 import { MoonIcon } from "@radix-ui/react-icons"
 
@@ -22,12 +25,15 @@ export const Icons = {
   chevronLeft: ChevronLeft,
   clock: Clock,
   chevronRight: ChevronRight,
+  error: AlertTriangle,
   facebook: Facebook,
+  hide: EyeOff,
   moon: MoonIcon,
   linkedin: Linkedin,
   laptop: Laptop,
   refreshCcw: RefreshCcw,
   rocket: Rocket,
+  show: Eye,
   spinner: Loader2,
   sun: Sun,
   tick: Check,
