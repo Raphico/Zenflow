@@ -22,3 +22,7 @@ export type SiteConfig = {
     items: NavItem[]
   }[]
 }
+
+export type DashboardConfig = {
+  mainNav: NavItem[]
+}
