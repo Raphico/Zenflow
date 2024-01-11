@@ -66,15 +66,6 @@ export function DashboardHeader({ user }: DashboardHeaderProps) {
                 Preference
               </Link>
             </DropdownMenuItem>
-
-            <DropdownMenuSeparator />
-
-            <DropdownMenuItem asChild>
-              <Link href="#">
-                <Icons.signOut className="mr-2 h-4 w-4" aria-hidden="true" />
-                SignOut
-              </Link>
-            </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
