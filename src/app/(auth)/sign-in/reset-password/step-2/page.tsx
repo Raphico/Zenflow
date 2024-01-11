@@ -16,8 +16,8 @@ export default function ResetPasswordStep2Page() {
   return (
     <>
       <PageHeader className="place-items-center text-center">
-        <PageHeaderHeading size="sm">Reset password</PageHeaderHeading>
-        <PageHeaderDescription size="sm">
+        <PageHeaderHeading>Reset password</PageHeaderHeading>
+        <PageHeaderDescription>
           Please enter the verification code sent to your email address, along
           with your new password.
         </PageHeaderDescription>

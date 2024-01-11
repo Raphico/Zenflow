@@ -16,8 +16,8 @@ export default function ResetPasswordPage() {
   return (
     <>
       <PageHeader className="place-items-center text-center">
-        <PageHeaderHeading size="sm">Reset Password</PageHeaderHeading>
-        <PageHeaderDescription size="sm">
+        <PageHeaderHeading>Reset Password</PageHeaderHeading>
+        <PageHeaderDescription>
           Enter the email address associated with your account. We&apos;ll send
           an email with instructions to reset your password.
         </PageHeaderDescription>

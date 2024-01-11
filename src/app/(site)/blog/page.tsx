@@ -31,8 +31,10 @@ export default function BlogPage() {
   return (
     <section className="container max-w-5xl py-8 lg:py-12">
       <PageHeader>
-        <PageHeaderHeading>Productivity Hub: Tips & Insights</PageHeaderHeading>
-        <PageHeaderDescription>
+        <PageHeaderHeading size="lg">
+          Productivity Hub: Tips & Insights
+        </PageHeaderHeading>
+        <PageHeaderDescription size="lg">
           Explore our blog for expert insights on productivity, task management,
           and workflow optimization.
         </PageHeaderDescription>

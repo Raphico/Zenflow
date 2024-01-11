@@ -16,8 +16,8 @@ export default function VerifyEmail() {
   return (
     <>
       <PageHeader className="place-items-center text-center">
-        <PageHeaderHeading size="sm">Verify Email</PageHeaderHeading>
-        <PageHeaderDescription size="sm">
+        <PageHeaderHeading>Verify Email</PageHeaderHeading>
+        <PageHeaderDescription>
           Please check your inbox and paste the sign up code below to create an
           account
         </PageHeaderDescription>

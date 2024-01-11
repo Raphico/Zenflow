@@ -18,8 +18,8 @@ export default function SignIn() {
   return (
     <>
       <PageHeader className="place-items-center text-center">
-        <PageHeaderHeading size="sm">Welcome back!</PageHeaderHeading>
-        <PageHeaderDescription size="sm">
+        <PageHeaderHeading>Welcome back!</PageHeaderHeading>
+        <PageHeaderDescription>
           Choose your preferred sign-in method
         </PageHeaderDescription>
       </PageHeader>

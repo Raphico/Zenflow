@@ -18,8 +18,8 @@ export default function SignIn() {
   return (
     <>
       <PageHeader className="place-items-center text-center">
-        <PageHeaderHeading size="sm">Welcome to Zenflow!</PageHeaderHeading>
-        <PageHeaderDescription size="sm">
+        <PageHeaderHeading>Welcome to Zenflow!</PageHeaderHeading>
+        <PageHeaderDescription>
           Create your ZenFlow account in just a few simple steps
         </PageHeaderDescription>
       </PageHeader>

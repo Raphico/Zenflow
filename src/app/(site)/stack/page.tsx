@@ -17,8 +17,8 @@ export default function StackPage() {
   return (
     <section className="container max-w-5xl space-y-8 py-8 lg:py-12">
       <PageHeader>
-        <PageHeaderHeading>Tech Stack</PageHeaderHeading>
-        <PageHeaderDescription>
+        <PageHeaderHeading size="lg">Tech Stack</PageHeaderHeading>
+        <PageHeaderDescription size="lg">
           Discover the technologies powering Zenflow
         </PageHeaderDescription>
       </PageHeader>

@@ -21,8 +21,8 @@ const headingVariants = cva(
   {
     variants: {
       size: {
-        default: "text-3xl sm:text-4xl",
-        sm: "text-2xl",
+        default: "text-2xl",
+        lg: "text-3xl sm:text-4xl",
       },
     },
     defaultVariants: {
@@ -49,8 +49,8 @@ const PageHeaderHeading = ({
 const descriptionVariants = cva("max-w-2xl text-muted-foreground", {
   variants: {
     size: {
-      default: "text-base sm:text-lg",
-      sm: "text-sm",
+      default: "text-sm",
+      lg: "text-base sm:text-lg",
     },
   },
   defaultVariants: {
