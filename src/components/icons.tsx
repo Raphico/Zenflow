@@ -6,17 +6,20 @@ import {
   Clock,
   Copy,
   Eye,
+  EyeOff,
   Facebook,
   Linkedin,
   Laptop,
   Loader2,
+  LogOut,
   RefreshCcw,
   Rocket,
   Sun,
+  Settings,
   Twitter,
   Trophy,
+  UserRound,
   type LucideProps,
-  EyeOff,
 } from "lucide-react"
 import { MoonIcon } from "@radix-ui/react-icons"
 
@@ -33,12 +36,15 @@ export const Icons = {
   laptop: Laptop,
   refreshCcw: RefreshCcw,
   rocket: Rocket,
+  settings: Settings,
+  signOut: LogOut,
   show: Eye,
   spinner: Loader2,
   sun: Sun,
   tick: Check,
   twitter: Twitter,
   trophy: Trophy,
+  user: UserRound,
   google: ({ ...props }: LucideProps) => (
     <svg role="img" viewBox="0 0 24 24" {...props}>
       <path
