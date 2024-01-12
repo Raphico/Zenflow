@@ -47,7 +47,7 @@ export function AppHeader({ user }: DashboardHeaderProps) {
             <DropdownMenuLabel>
               <div className="flex flex-col space-y-1">
                 <p className="text-sm font-medium leading-none">
-                  {user?.username || email.split("@").at(0)}
+                  {user?.username || user?.firstName}
                 </p>
                 <p className="text-[12px] text-muted-foreground">{email}</p>
               </div>
@@ -57,6 +57,12 @@ export function AppHeader({ user }: DashboardHeaderProps) {
               <Link href="#">
                 <Icons.user className="mr-2 h-4 w-4" aria-hidden="true" />
                 Account
+              </Link>
+            </DropdownMenuItem>
+            <DropdownMenuItem asChild>
+              <Link href="#">
+                <Icons.dollar className="mr-2 h-4 w-4" aria-hidden="true" />
+                Billing
               </Link>
             </DropdownMenuItem>
 
