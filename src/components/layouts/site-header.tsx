@@ -28,14 +28,11 @@ export function SiteHeader() {
               return (
                 <Link
                   key={item.href}
-                  href={item?.disabled ? "#" : item.href}
+                  href={item.href}
                   className={cn(
-                    "text-sm font-medium text-muted-foreground transition-colors",
-                    {
-                      "text-foreground": isActive,
-                      "opacity-50 cursor-not-allowed": item?.disabled,
-                      "hover:text-foreground": !item?.disabled,
-                    }
+                    "text-sm font-medium transition-colors hover:text-foreground",
+                    isActive ? "text-foreground" : "text-muted-foreground",
+                    item.disabled && "pointer-events-none opacity-60"
                   )}
                 >
                   {item.title}
