@@ -59,7 +59,7 @@ export function SignInForm() {
           // If complete, user exists and provided password match -- set session active
           await setActive({ session: completeSignIn.createdSessionId })
           // Redirect the user to a post sign-in route
-          router.push("/dashboard")
+          router.push("/app/dashboard")
         }
       } catch (error) {
         catchClerkError(error)

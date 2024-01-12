@@ -1,7 +1,7 @@
 import { getCachedUser } from "@/lib/fetchers/auth"
 import { redirect } from "next/navigation"
 
-import { DashboardHeader } from "./_components/dashboard-header"
+import { AppHeader } from "@/components/layouts/app-header"
 
 export default async function DashboardLayout({
   children,
@@ -14,7 +14,7 @@ export default async function DashboardLayout({
 
   return (
     <div className="flex min-h-screen flex-col">
-      <DashboardHeader user={user} />
+      <AppHeader user={user} />
       <main className="container flex-1 py-8 lg:py-10">{children}</main>
     </div>
   )

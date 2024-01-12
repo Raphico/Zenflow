@@ -56,7 +56,7 @@ export function VerifyEmailForm() {
         // If complete, the user has been created -- set the session active
         if (completeSignUp.status === "complete") {
           await setActive({ session: completeSignUp.createdSessionId })
-          router.push("/dashboard")
+          router.push("/app/dashboard")
         }
       } catch (error) {
         catchClerkError(error)

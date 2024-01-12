@@ -11,7 +11,7 @@ export default async function AuthLayout({
   const user = await currentUser()
 
   if (user) {
-    redirect("/dashboard")
+    redirect("/app/dashboard")
   }
 
   return (

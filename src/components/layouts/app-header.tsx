@@ -2,7 +2,7 @@ import Link from "next/link"
 import type { User } from "@clerk/nextjs/server"
 
 import { Icons } from "@/components/icons"
-import { DashboardNav } from "./dashboard-nav"
+import { AppNav } from "./app-nav"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -19,7 +19,7 @@ interface DashboardHeaderProps {
   user: User | null
 }
 
-export function DashboardHeader({ user }: DashboardHeaderProps) {
+export function AppHeader({ user }: DashboardHeaderProps) {
   const email = getUserEmail(user)
 
   const initial = email.charAt(0)
@@ -29,7 +29,7 @@ export function DashboardHeader({ user }: DashboardHeaderProps) {
       <div className="container flex h-14 items-center justify-between">
         <div className="flex items-center gap-6">
           <Icons.logo className="h-6 w-6" aria-hidden="true" />
-          <DashboardNav />
+          <AppNav />
         </div>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>

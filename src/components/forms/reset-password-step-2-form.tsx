@@ -56,7 +56,7 @@ export function ResetPasswordStep2Form() {
             session: firstFactor.createdSessionId,
           })
 
-          router.push("/dashboard")
+          router.push("/app/dashboard")
 
           toast.success("Your password has been reset", {
             description: "You can now log in with your new password.",

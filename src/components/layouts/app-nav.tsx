@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation"
 import { dashboardConfig } from "@/config/dashboard"
 import { cn } from "@/lib/utils"
 
-export function DashboardNav() {
+export function AppNav() {
   const pathname = usePathname()
 
   return (
