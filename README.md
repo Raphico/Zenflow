@@ -20,7 +20,7 @@ A task manager web application built with Next.js 14
 - [x] Landing Page
 - [x] Dark Mode Implementation
 - [x] blog page
-- [ ] User Authentication using NextAuth
+- [x] User Authentication using clerk
 - [ ] Account and Preference Settings Setup
 - [ ] Create New Task Functionality
 - [ ] Implement Tasks Board View
