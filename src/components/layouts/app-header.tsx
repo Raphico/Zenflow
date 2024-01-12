@@ -47,14 +47,14 @@ export function AppHeader({ user }: DashboardHeaderProps) {
             <DropdownMenuLabel>
               <div className="flex flex-col space-y-1">
                 <p className="text-sm font-medium leading-none">
-                  {user?.username || user?.firstName}
+                  {user?.username}
                 </p>
                 <p className="text-[12px] text-muted-foreground">{email}</p>
               </div>
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuItem asChild>
-              <Link href="#">
+              <Link href="/profile/account">
                 <Icons.user className="mr-2 h-4 w-4" aria-hidden="true" />
                 Account
               </Link>

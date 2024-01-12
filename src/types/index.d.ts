@@ -1,8 +1,11 @@
+import type { Icons } from "@/components/icons"
+
 export type NavItem = {
   title: string
   href: string
   disabled?: boolean
   external?: boolean
+  icon?: keyof typeof Icons
 }
 
 export type SiteConfig = {
@@ -25,4 +28,5 @@ export type SiteConfig = {
 
 export type DashboardConfig = {
   mainNav: NavItem[]
+  sidebarNav: NavItem[]
 }
