@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
 export default function DashboardPage() {
   return (
-    <section className="container py-8 lg:py-10">
+    <section>
       <PageHeader>
         <PageHeaderHeading>Welcome, back!</PageHeaderHeading>
         <PageHeaderDescription>
