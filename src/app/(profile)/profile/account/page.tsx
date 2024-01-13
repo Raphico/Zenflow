@@ -6,10 +6,11 @@ import {
   PageHeaderHeading,
 } from "@/components/page-header"
 import { Separator } from "@/components/ui/separator"
+import { UserProfile } from "@clerk/nextjs"
 
 export const metadata: Metadata = {
   title: "Account",
-  description: "manage your account",
+  description: "manage your account settings",
 }
 
 export default function AccountPage() {
@@ -20,6 +21,9 @@ export default function AccountPage() {
         <PageHeaderDescription>Manage account settings</PageHeaderDescription>
       </PageHeader>
       <Separator className="my-6" />
+      <section className="w-full overflow-hidden">
+        <UserProfile />
+      </section>
     </section>
   )
 }
