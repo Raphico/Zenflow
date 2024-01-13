@@ -1,12 +1,18 @@
+import { redirect } from "next/navigation"
+import { getCachedUser } from "@/lib/fetchers/auth"
+
 import { AppHeader } from "@/components/layouts/app-header"
 import { SidebarNav } from "@/components/layouts/sidebar-nav"
 import { dashboardConfig } from "@/config/dashboard"
-import { getCachedUser } from "@/lib/fetchers/auth"
 
 export default async function ProfileLayout({
   children,
 }: React.PropsWithChildren) {
   const user = await getCachedUser()
+
+  if (!user) {
+    redirect("/sign-in")
+  }
 
   return (
     <div className="flex min-h-screen flex-col">

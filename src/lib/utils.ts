@@ -45,9 +45,9 @@ export function catchClerkError(err: unknown) {
   }
 }
 
-export function getUserEmail(user: User | null) {
+export function getUserEmail(user: User) {
   const email =
-    user?.emailAddresses?.find((e) => e.id === user.primaryEmailAddressId)
+    user.emailAddresses.find((e) => e.id === user.primaryEmailAddressId)
       ?.emailAddress ?? ""
 
   return email
