@@ -6,24 +6,25 @@ import {
   PageHeaderHeading,
 } from "@/components/page-header"
 import { Separator } from "@/components/ui/separator"
-import { UserProfile } from "@clerk/nextjs"
+import { ProfileForm } from "@/components/forms/profile-form"
+import { getCachedUser } from "@/lib/fetchers/auth"
 
 export const metadata: Metadata = {
   title: "Account",
   description: "manage your account settings",
 }
 
-export default function AccountPage() {
+export default async function AccountPage() {
+  const user = await getCachedUser()
+
   return (
-    <section>
+    <>
       <PageHeader>
         <PageHeaderHeading>Account</PageHeaderHeading>
         <PageHeaderDescription>Manage account settings</PageHeaderDescription>
       </PageHeader>
       <Separator className="my-6" />
-      <section className="w-full overflow-hidden">
-        <UserProfile />
-      </section>
-    </section>
+      <ProfileForm user={{ username: user?.username || "" }} />
+    </>
   )
 }
