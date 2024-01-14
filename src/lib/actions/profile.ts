@@ -29,4 +29,6 @@ export async function deleteAccount() {
   }
 
   await clerkClient.users.deleteUser(userId)
+
+  revalidatePath("/sign-in")
 }
