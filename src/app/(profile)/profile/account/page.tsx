@@ -10,6 +10,7 @@ import { Separator } from "@/components/ui/separator"
 import { getCachedUser } from "@/lib/fetchers/auth"
 import { ProfileForm } from "@/components/forms/profile-form"
 import { LogoutButton } from "@/components/auth/logout-button"
+import { DeleteAccountDialog } from "./_components/delete-account-dialog"
 
 export const metadata: Metadata = {
   title: "Account",
@@ -31,15 +32,30 @@ export default async function AccountPage() {
       </PageHeader>
       <Separator className="my-6" />
       <ProfileForm user={{ username: user.username }} />
-      <Separator className="my-6" />
-      <section className="flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:justify-between">
-        <div className="space-y-1">
-          <h3 className="text-sm font-medium">Log out</h3>
-          <p className="text-[12px] text-muted-foreground">
-            Log out from this account
-          </p>
+      <Separator className="my-8" />
+      <section className="grid gap-6">
+        <div className="flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:justify-between">
+          <div className="space-y-1">
+            <h3 className="text-sm font-medium">Log out</h3>
+            <p className="text-[12px] text-muted-foreground">
+              Log out from this account
+            </p>
+          </div>
+          <LogoutButton />
         </div>
-        <LogoutButton />
+
+        <div className="flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:justify-between">
+          <div className="space-y-1">
+            <h3 className="text-sm font-medium text-destructive">
+              Delete Account
+            </h3>
+            <p className="text-[12px] text-muted-foreground">
+              Permanently delete the account and remove access from all
+              workspaces.
+            </p>
+          </div>
+          <DeleteAccountDialog />
+        </div>
       </section>
     </>
   )
