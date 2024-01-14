@@ -32,9 +32,9 @@ export default async function AccountPage() {
       </PageHeader>
       <Separator className="my-6" />
       <ProfileForm user={{ username: user.username }} />
-      <Separator className="my-8" />
-      <section className="grid gap-6">
-        <div className="flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:justify-between">
+      <Separator className="my-6 sm:my-8" />
+      <section className="grid gap-4 sm:gap-6">
+        <div className="flex flex-col items-start gap-2 sm:flex-row sm:items-center sm:justify-between">
           <div className="space-y-1">
             <h3 className="text-sm font-medium">Log out</h3>
             <p className="text-[12px] text-muted-foreground">
@@ -44,7 +44,7 @@ export default async function AccountPage() {
           <LogoutButton />
         </div>
 
-        <div className="flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex flex-col items-start gap-2 sm:flex-row sm:items-center sm:justify-between">
           <div className="space-y-1">
             <h3 className="text-sm font-medium text-destructive">
               Delete Account
