@@ -67,9 +67,9 @@ export function AppHeader({ user }: DashboardHeaderProps) {
             </DropdownMenuItem>
 
             <DropdownMenuItem asChild>
-              <Link href="#">
+              <Link href="/profile/preferences">
                 <Icons.settings className="mr-2 h-4 w-4" aria-hidden="true" />
-                Preference
+                Preferences
               </Link>
             </DropdownMenuItem>
           </DropdownMenuContent>

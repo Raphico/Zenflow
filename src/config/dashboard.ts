@@ -25,8 +25,8 @@ export const dashboardConfig: DashboardConfig = {
       disabled: true,
     },
     {
-      title: "Preference",
-      href: "/profile/preference",
+      title: "Preferences",
+      href: "/profile/preferences",
       icon: "settings",
       disabled: true,
     },
