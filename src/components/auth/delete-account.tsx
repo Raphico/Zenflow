@@ -1,4 +1,8 @@
-import { DeleteAccountButton } from "@/components/auth/delete-account-button"
+"use client"
+
+import * as React from "react"
+import { useRouter } from "next/navigation"
+
 import {
   AlertDialog,
   AlertDialogAction,
@@ -11,8 +15,26 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
 import { Button, buttonVariants } from "@/components/ui/button"
+import { deleteAccount } from "@/lib/actions/account"
+import { catchClerkError } from "@/lib/utils"
+import { Icons } from "@/components/icons"
 
-export function DeleteAccountDialog() {
+export function DeleteAccount() {
+  const [isPending, startTransition] = React.useTransition()
+  const router = useRouter()
+
+  const handleDeleteUser = () => {
+    startTransition(async () => {
+      try {
+        await deleteAccount()
+
+        router.push("/")
+      } catch (error) {
+        catchClerkError(error)
+      }
+    })
+  }
+
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
@@ -31,10 +53,17 @@ export function DeleteAccountDialog() {
         <AlertDialogFooter>
           <AlertDialogCancel>Cancel</AlertDialogCancel>
           <AlertDialogAction
+            disabled={isPending}
+            onClick={handleDeleteUser}
             className={buttonVariants({ variant: "destructive" })}
-            asChild
           >
-            <DeleteAccountButton />
+            {isPending && (
+              <Icons.spinner
+                className="mr-2 h-4 w-4 animate-spin"
+                aria-hidden="true"
+              />
+            )}
+            Continue
           </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>

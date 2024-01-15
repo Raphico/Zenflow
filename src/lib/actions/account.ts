@@ -1,7 +1,7 @@
 "use server"
 
 import type { z } from "zod"
-import { profileSchema } from "../validations/profile"
+import { changePasswordSchema, profileSchema } from "../validations/account"
 import { auth, clerkClient } from "@clerk/nextjs"
 import { revalidatePath } from "next/cache"
 
@@ -31,4 +31,20 @@ export async function deleteAccount() {
   await clerkClient.users.deleteUser(userId)
 
   revalidatePath("/sign-in")
+}
+
+export async function updateUserPassword(
+  rawInputs: z.infer<typeof changePasswordSchema>
+) {
+  const inputs = changePasswordSchema.parse(rawInputs)
+
+  const { userId } = auth()
+
+  if (!userId) {
+    throw new Error("User not found!")
+  }
+
+  await clerkClient.users.updateUser(userId, {
+    password: inputs.newPassword,
+  })
 }

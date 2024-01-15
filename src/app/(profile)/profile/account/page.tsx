@@ -10,7 +10,8 @@ import { Separator } from "@/components/ui/separator"
 import { getCachedUser } from "@/lib/fetchers/auth"
 import { ProfileForm } from "@/components/forms/profile-form"
 import { LogoutButton } from "@/components/auth/logout-button"
-import { DeleteAccountDialog } from "./_components/delete-account-dialog"
+import { DeleteAccount } from "@/components/auth/delete-account"
+import { ChangePasswordForm } from "@/components/forms/change-password-form"
 
 export const metadata: Metadata = {
   title: "Account",
@@ -33,6 +34,17 @@ export default async function AccountPage() {
       <Separator className="my-6" />
       <ProfileForm user={{ username: user.username }} />
       <Separator className="my-6 sm:my-8" />
+      <section className="flex flex-col items-start gap-2 sm:flex-row sm:items-center sm:justify-between">
+        <div className="space-y-1">
+          <h3 className="text-sm font-medium">Password</h3>
+          <p className="text-[12px] text-muted-foreground">
+            change the password associated with this account
+          </p>
+        </div>
+
+        <ChangePasswordForm />
+      </section>
+      <Separator className="my-6 sm:my-8" />
       <section className="grid gap-4 sm:gap-6">
         <div className="flex flex-col items-start gap-2 sm:flex-row sm:items-center sm:justify-between">
           <div className="space-y-1">
@@ -54,7 +66,7 @@ export default async function AccountPage() {
               workspaces.
             </p>
           </div>
-          <DeleteAccountDialog />
+          <DeleteAccount />
         </div>
       </section>
     </>

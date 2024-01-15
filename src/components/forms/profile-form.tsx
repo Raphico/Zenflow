@@ -3,7 +3,7 @@
 import * as React from "react"
 import type { User } from "@clerk/nextjs/server"
 
-import { profileSchema } from "@/lib/validations/profile"
+import { profileSchema } from "@/lib/validations/account"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import type { z } from "zod"
@@ -20,7 +20,7 @@ import { Input } from "../ui/input"
 import { Button } from "../ui/button"
 import { Icons } from "../icons"
 import { catchClerkError } from "@/lib/utils"
-import { updateProfile } from "@/lib/actions/profile"
+import { updateProfile } from "@/lib/actions/account"
 import { toast } from "sonner"
 
 interface ProfileFormProps {
