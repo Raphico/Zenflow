@@ -14,6 +14,7 @@ import {
 import { Button } from "@/components/ui/button"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { getUserEmail } from "@/lib/utils"
+import { dashboardConfig } from "@/config/dashboard"
 
 interface DashboardHeaderProps {
   user: User
@@ -53,25 +54,19 @@ export function AppHeader({ user }: DashboardHeaderProps) {
               </div>
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
-            <DropdownMenuItem asChild>
-              <Link href="/profile/account">
-                <Icons.user className="mr-2 h-4 w-4" aria-hidden="true" />
-                Account
-              </Link>
-            </DropdownMenuItem>
-            <DropdownMenuItem asChild>
-              <Link href="#">
-                <Icons.dollar className="mr-2 h-4 w-4" aria-hidden="true" />
-                Billing
-              </Link>
-            </DropdownMenuItem>
-
-            <DropdownMenuItem asChild>
-              <Link href="/profile/preferences">
-                <Icons.settings className="mr-2 h-4 w-4" aria-hidden="true" />
-                Preferences
-              </Link>
-            </DropdownMenuItem>
+            {dashboardConfig.sidebarNav.map((item) => {
+              const Icon = item.icon && Icons[item.icon]
+              return (
+                <DropdownMenuItem key={item.href} asChild>
+                  <Link href={item.href}>
+                    {Icon && (
+                      <Icon className="mr-2 h-4 w-4" aria-hidden="true" />
+                    )}
+                    {item.title}
+                  </Link>
+                </DropdownMenuItem>
+              )
+            })}
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
