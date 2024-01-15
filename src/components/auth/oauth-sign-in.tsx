@@ -39,7 +39,7 @@ export function OAuthSignIn() {
       await signIn.authenticateWithRedirect({
         strategy: oauthStrategy,
         redirectUrl: "/sso-callback",
-        redirectUrlComplete: "/dashboard",
+        redirectUrlComplete: "/app/dashboard",
       })
     } catch (error) {
       setIsLoading(null)
