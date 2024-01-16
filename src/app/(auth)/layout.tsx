@@ -1,6 +1,6 @@
 import Link from "next/link"
+import { getCachedUser } from "@/lib/fetchers/auth"
 import { redirect } from "next/navigation"
-import { currentUser } from "@clerk/nextjs"
 
 import { Icons } from "@/components/icons"
 import { siteConfig } from "@/config/site"
@@ -8,7 +8,7 @@ import { siteConfig } from "@/config/site"
 export default async function AuthLayout({
   children,
 }: React.PropsWithChildren) {
-  const user = await currentUser()
+  const user = await getCachedUser()
 
   if (user) {
     redirect("/app/dashboard")
