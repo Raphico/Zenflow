@@ -21,7 +21,7 @@ A task manager web application built with Next.js 14
 - [x] Dark Mode Implementation
 - [x] blog page
 - [x] User Authentication using clerk
-- [ ] Account and Preference Settings Setup
+- [x] Account and Preference Settings Setup
 - [ ] Create New Task Functionality
 - [ ] Implement Tasks Board View
 - [ ] Task Actions (Edit, Delete, Mark as Done, Duplicate, etc)
