@@ -23,16 +23,14 @@ import { useTheme } from "next-themes"
 
 type Inputs = z.infer<typeof preferenceSchema>
 
-const defaultValues: Partial<Inputs> = {
-  theme: "light",
-}
-
 export function PreferenceForm() {
-  const { setTheme } = useTheme()
+  const { setTheme, theme } = useTheme()
 
   const form = useForm<Inputs>({
     resolver: zodResolver(preferenceSchema),
-    defaultValues,
+    defaultValues: {
+      theme: theme as "dark" | "light",
+    },
   })
 
   function onSubmit(values: Inputs) {
