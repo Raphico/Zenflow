@@ -3,7 +3,7 @@
 import type { z } from "zod"
 import { changePasswordSchema, profileSchema } from "../validations/account"
 import { auth, clerkClient } from "@clerk/nextjs"
-import { revalidateTag } from "next/cache"
+import { revalidatePath } from "next/cache"
 
 export async function updateProfile(rawInputs: z.infer<typeof profileSchema>) {
   const inputs = profileSchema.parse(rawInputs)
@@ -18,7 +18,7 @@ export async function updateProfile(rawInputs: z.infer<typeof profileSchema>) {
     username: inputs.username,
   })
 
-  revalidateTag("cached-user")
+  revalidatePath("/profile/account")
 }
 
 export async function deleteAccount() {
@@ -30,7 +30,7 @@ export async function deleteAccount() {
 
   await clerkClient.users.deleteUser(userId)
 
-  revalidateTag("cached-user")
+  revalidatePath("/sign-in")
 }
 
 export async function updateUserPassword(
