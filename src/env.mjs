@@ -4,6 +4,7 @@ import { z } from "zod"
 export const env = createEnv({
   server: {
     CLERK_SECRET_KEY: z.string(),
+    DATABASE_URL: z.string().url(),
   },
   client: {
     NEXT_PUBLIC_APP_URL: z.string().url(),
@@ -14,6 +15,7 @@ export const env = createEnv({
     CLERK_SECRET_KEY: process.env.CLERK_SECRET_KEY,
     NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY:
       process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY,
+    DATABASE_URL: process.env.DATABASE_URL,
   },
   emptyStringAsUndefined: true,
 })
