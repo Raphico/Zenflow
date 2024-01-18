@@ -6,7 +6,10 @@
     "dev": "next dev",
     "build": "contentlayer build && next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "db:generate": "dotenv drizzle-kit generate:mysql",
+    "db:push": "dotenv drizzle-kit push:mysql",
+    "db:studio": "dotenv drizzle-kit studio --verbose"
   },
   "dependencies": {
     "@clerk/nextjs": "^4.29.3",
