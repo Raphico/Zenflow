@@ -10,13 +10,6 @@ import {
 } from "drizzle-orm/mysql-core"
 import { relations } from "drizzle-orm"
 
-export const boards = mysqlTable("boards", {
-  id: serial("id").primaryKey(),
-  title: varchar("title", { length: 191 }).notNull(),
-  createdAt: timestamp("createdAt").defaultNow(),
-  updatedAt: timestamp("updatedAt").onUpdateNow(),
-})
-
 export const tasks = mysqlTable("tasks", {
   id: serial("id").primaryKey(),
   userId: varchar("userId", { length: 191 }).notNull(),
@@ -26,7 +19,6 @@ export const tasks = mysqlTable("tasks", {
   status: varchar("status", { length: 25 }).notNull(),
   tags: varchar("tags", { length: 25 }),
   dueDate: datetime("dueDate"),
-  boardId: int("boardId").notNull(),
   createdAt: timestamp("createdAt").defaultNow(),
   updatedAt: timestamp("updatedAt").onUpdateNow(),
 })
@@ -42,15 +34,7 @@ export const subtasks = mysqlTable("subtasks", {
 })
 
 // relationships
-export const boardsRelations = relations(boards, ({ many }) => ({
-  tasks: many(tasks),
-}))
-
-export const tasksRelations = relations(tasks, ({ one, many }) => ({
-  board: one(boards, {
-    fields: [tasks.boardId],
-    references: [boards.id],
-  }),
+export const tasksRelations = relations(tasks, ({ many }) => ({
   subtasks: many(subtasks),
 }))
 
