@@ -1,7 +1,7 @@
 import { getCachedUser } from "@/lib/fetchers/auth"
 import { redirect } from "next/navigation"
 
-import { SidebarNav } from "@/components/layouts/sidebar-nav"
+import { Sidebar } from "@/components/layouts/sidebar"
 import { dashboardConfig } from "@/config/dashboard"
 
 export default async function DashboardLayout({
@@ -16,7 +16,7 @@ export default async function DashboardLayout({
   return (
     <div className="flex min-h-screen flex-col">
       <header className="container sticky top-0 z-50 flex h-14 w-full items-center px-4">
-        <SidebarNav
+        <Sidebar
           user={{
             username: user.username,
             imageUrl: user.imageUrl,

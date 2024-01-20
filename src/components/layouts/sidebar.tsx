@@ -17,12 +17,12 @@ import {
 import { Icons } from "@/components/icons"
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar"
 
-interface SidebarNavProps {
+interface SidebarProps {
   user: Pick<User, "username" | "imageUrl">
   items: SidebarNavItem[]
 }
 
-export function SidebarNav({ user, items }: SidebarNavProps) {
+export function Sidebar({ user, items }: SidebarProps) {
   const segment = useSelectedLayoutSegment()
   const [isOpen, setIsOpen] = React.useState(false)
 
