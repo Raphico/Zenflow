@@ -109,7 +109,9 @@ export function PreferenceForm() {
           )}
         />
 
-        <Button type="submit">Update preferences</Button>
+        <Button type="submit" variant="outline">
+          Update preferences
+        </Button>
       </form>
     </Form>
   )

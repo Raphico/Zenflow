@@ -1,9 +1,11 @@
 import {
   AlertTriangle,
+  CircleUserRound,
   Check,
   ChevronLeft,
   ChevronRight,
   Clock,
+  Columns2,
   Copy,
   DollarSign,
   Eye,
@@ -11,6 +13,8 @@ import {
   Facebook,
   Linkedin,
   Laptop,
+  LayoutDashboard,
+  LineChart,
   Loader2,
   LogOut,
   RefreshCcw,
@@ -19,16 +23,19 @@ import {
   Settings,
   Twitter,
   Trophy,
-  UserRound,
+  X,
   type LucideProps,
 } from "lucide-react"
 import { MoonIcon } from "@radix-ui/react-icons"
 
 export const Icons = {
+  analytics: LineChart,
   copy: Copy,
   chevronLeft: ChevronLeft,
-  clock: Clock,
   chevronRight: ChevronRight,
+  close: X,
+  clock: Clock,
+  dashboard: LayoutDashboard,
   dollar: DollarSign,
   error: AlertTriangle,
   facebook: Facebook,
@@ -46,7 +53,8 @@ export const Icons = {
   tick: Check,
   twitter: Twitter,
   trophy: Trophy,
-  user: UserRound,
+  user: CircleUserRound,
+  view: Columns2,
   google: ({ ...props }: LucideProps) => (
     <svg role="img" viewBox="0 0 24 24" {...props}>
       <path

@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 
 export default function PreferencePage() {
   return (
-    <>
+    <div className="mx-auto w-full max-w-5xl">
       <PageHeader>
         <PageHeaderHeading>Preferences</PageHeaderHeading>
         <PageHeaderDescription>
@@ -24,6 +24,6 @@ export default function PreferencePage() {
       </PageHeader>
       <Separator className="my-6" />
       <PreferenceForm />
-    </>
+    </div>
   )
 }

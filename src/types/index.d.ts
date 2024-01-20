@@ -5,7 +5,6 @@ export type NavItem = {
   href: string
   disabled?: boolean
   external?: boolean
-  icon?: keyof typeof Icons
 }
 
 export type SiteConfig = {
@@ -26,7 +25,8 @@ export type SiteConfig = {
   }[]
 }
 
+type SidebarNavItem = NavItem & { icon: keyof typeof Icons }
+
 export type DashboardConfig = {
-  mainNav: NavItem[]
-  sidebarNav: NavItem[]
+  sidebarNav: SidebarNavItem[]
 }

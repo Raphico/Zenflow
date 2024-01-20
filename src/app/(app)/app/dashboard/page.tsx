@@ -12,13 +12,13 @@ export const metadata: Metadata = {
 
 export default function DashboardPage() {
   return (
-    <section>
+    <div className="mx-auto w-full max-w-7xl">
       <PageHeader>
         <PageHeaderHeading>Welcome, back!</PageHeaderHeading>
         <PageHeaderDescription>
           Here&apos;s a quick overview of your tasks
         </PageHeaderDescription>
       </PageHeader>
-    </section>
+    </div>
   )
 }

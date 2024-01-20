@@ -8,7 +8,7 @@ import { Skeleton } from "@/components/ui/skeleton"
 
 export default function PreferencesPage() {
   return (
-    <>
+    <div className="mx-auto w-full max-w-5xl">
       <PageHeader>
         <PageHeaderHeading>Preference</PageHeaderHeading>
         <PageHeaderDescription>
@@ -25,6 +25,6 @@ export default function PreferencesPage() {
           </div>
         </div>
       </div>
-    </>
+    </div>
   )
 }
