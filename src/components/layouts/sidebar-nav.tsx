@@ -8,7 +8,6 @@ import type { User } from "@clerk/nextjs/server"
 
 import { cn } from "@/lib/utils"
 import { Button, buttonVariants } from "@/components/ui/button"
-import { ScrollArea } from "@/components/ui/scroll-area"
 import {
   Sheet,
   SheetClose,
@@ -37,8 +36,8 @@ export function SidebarNav({ user, items }: SidebarNavProps) {
           <span className="sr-only">Toggle Menu</span>
         </Button>
       </SheetTrigger>
-      <SheetContent side="left" className="space-y-8 pl-1 pr-0">
-        <div className="flex items-center justify-between px-7">
+      <SheetContent side="left" className="space-y-8 px-7">
+        <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
             <Avatar className="h-8 w-8">
               <AvatarImage src={user.imageUrl} alt={`Picture`} />
@@ -55,32 +54,30 @@ export function SidebarNav({ user, items }: SidebarNavProps) {
             <span className="sr-only">Close</span>
           </SheetClose>
         </div>
-        <ScrollArea className="my-4 h-[calc(100vh-8rem)] pb-10 pl-6">
-          <nav className="flex flex-col items-start gap-2 pl-1 pr-7">
-            {items.map((item) => {
-              const Icon = Icons[item.icon]
-              const isActive = item.href.includes(segment as string)
+        <nav className="flex flex-col items-start gap-2">
+          {items.map((item) => {
+            const Icon = Icons[item.icon]
+            const isActive = item.href.includes(segment as string)
 
-              return (
-                <Link
-                  key={item.href}
-                  aria-label={item.title}
-                  href={item.href}
-                  className={cn(
-                    buttonVariants({ variant: "ghost" }),
-                    "w-full justify-start",
-                    isActive && "bg-muted hover:bg-muted",
-                    item.disabled && "pointer-events-none opacity-60"
-                  )}
-                  onClick={() => setIsOpen(false)}
-                >
-                  <Icon className="mr-2 h-4 w-4" aria-hidden="true" />
-                  <span>{item.title}</span>
-                </Link>
-              )
-            })}
-          </nav>
-        </ScrollArea>
+            return (
+              <Link
+                key={item.href}
+                aria-label={item.title}
+                href={item.href}
+                className={cn(
+                  buttonVariants({ variant: "ghost" }),
+                  "w-full justify-start",
+                  isActive && "bg-muted hover:bg-muted",
+                  item.disabled && "pointer-events-none opacity-60"
+                )}
+                onClick={() => setIsOpen(false)}
+              >
+                <Icon className="mr-2 h-4 w-4" aria-hidden="true" />
+                <span>{item.title}</span>
+              </Link>
+            )
+          })}
+        </nav>
       </SheetContent>
     </Sheet>
   )
