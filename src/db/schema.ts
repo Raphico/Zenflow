@@ -10,6 +10,15 @@ import {
 } from "drizzle-orm/mysql-core"
 import { relations } from "drizzle-orm"
 
+export const boards = mysqlTable("boards", {
+  id: serial("id").primaryKey(),
+  name: varchar("name", { length: 35 }).notNull().unique(),
+  createdAt: timestamp("createdAt").defaultNow(),
+  updatedAt: timestamp("updatedAt").defaultNow(),
+})
+
+export type Board = typeof boards.$inferSelect
+
 export const tasks = mysqlTable("tasks", {
   id: serial("id").primaryKey(),
   userId: varchar("userId", { length: 191 }).notNull(),
@@ -18,6 +27,7 @@ export const tasks = mysqlTable("tasks", {
   priority: mysqlEnum("priority", ["P1", "P2", "P3", "P4"]).default("P4"),
   status: varchar("status", { length: 25 }).notNull(),
   tags: varchar("tags", { length: 25 }),
+  boardId: int("boardId").notNull(),
   dueDate: datetime("dueDate"),
   createdAt: timestamp("createdAt").defaultNow(),
   updatedAt: timestamp("updatedAt").onUpdateNow(),
@@ -34,7 +44,15 @@ export const subtasks = mysqlTable("subtasks", {
 })
 
 // relationships
-export const tasksRelations = relations(tasks, ({ many }) => ({
+export const boardsRelations = relations(boards, ({ many }) => ({
+  tasks: many(tasks),
+}))
+
+export const tasksRelations = relations(tasks, ({ one, many }) => ({
+  board: one(boards, {
+    fields: [tasks.boardId],
+    references: [boards.id],
+  }),
   subtasks: many(subtasks),
 }))
 

@@ -1,0 +1,1 @@
+ALTER TABLE `boards` MODIFY COLUMN `name` varchar(35) NOT NULL;

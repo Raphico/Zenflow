@@ -15,6 +15,34 @@
       "when": 1705683557126,
       "tag": "0001_amazing_carlie_cooper",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1705794486362,
+      "tag": "0002_magical_shadow_king",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "5",
+      "when": 1705828930253,
+      "tag": "0003_boring_lady_deathstrike",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "5",
+      "when": 1705831490517,
+      "tag": "0004_colorful_wasp",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "5",
+      "when": 1705833763527,
+      "tag": "0005_nostalgic_dorian_gray",
+      "breakpoints": true
     }
   ]
 }

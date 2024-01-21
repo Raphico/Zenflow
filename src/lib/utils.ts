@@ -9,15 +9,6 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 
-export function formatDate(input: string | number): string {
-  const date = new Date(input)
-  return date.toLocaleDateString("en-US", {
-    month: "long",
-    day: "numeric",
-    year: "numeric",
-  })
-}
-
 export function absoluteUrl(path: string) {
   return `${env.NEXT_PUBLIC_APP_URL}${path}`
 }
@@ -26,9 +17,43 @@ export function truncate(text: string, maxLength: number) {
   return text.length <= maxLength ? text : `${text.slice(0, maxLength)}...`
 }
 
+type DebounceFunction = (...args: unknown[]) => void
+
+export const debounce = (
+  mainFunction: DebounceFunction,
+  timeout = 300
+): DebounceFunction => {
+  // Declare a variable called 'timer' to store the timer ID
+  let timer: ReturnType<typeof setTimeout>
+
+  // Return an anonymous function that takes in any number of arguments
+  return function (...args) {
+    // Clear the previous timer to prevent the execution of 'mainFunction'
+    clearTimeout(timer)
+
+    // Set a new timer that will execute 'mainFunction' after the specified delay
+    timer = setTimeout(() => {
+      mainFunction(...args)
+    }, timeout)
+  }
+}
+
 /** Originally from `sadmann7/skateshop`
  * @link https://github.com/sadmann7/skateshop/blob/main/src/lib/utils.tsx
  */
+export function formatDate(
+  date: Date | string | number,
+  options: Intl.DateTimeFormatOptions = {
+    month: "long",
+    day: "numeric",
+    year: "numeric",
+  }
+) {
+  return new Intl.DateTimeFormat("en-US", {
+    ...options,
+  }).format(new Date(date))
+}
+
 export function catchClerkError(err: unknown) {
   const unknownErr = "Something went wrong, please try again later."
 
@@ -41,5 +66,18 @@ export function catchClerkError(err: unknown) {
     return toast.error(err.errors[0]?.longMessage ?? unknownErr)
   } else {
     return toast.error(unknownErr)
+  }
+}
+
+export function catchError(err: unknown) {
+  if (err instanceof z.ZodError) {
+    const errors = err.issues.map((issue) => {
+      return issue.message
+    })
+    return toast(errors.join("\n"))
+  } else if (err instanceof Error) {
+    return toast(err.message)
+  } else {
+    return toast("Something went wrong, please try again later.")
   }
 }

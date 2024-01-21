@@ -22,7 +22,10 @@ import {
   Sun,
   Settings,
   Twitter,
+  Trash2,
   Trophy,
+  PencilLine,
+  Plus,
   X,
   type LucideProps,
 } from "lucide-react"
@@ -36,7 +39,9 @@ export const Icons = {
   close: X,
   clock: Clock,
   dashboard: LayoutDashboard,
+  delete: Trash2,
   dollar: DollarSign,
+  edit: PencilLine,
   error: AlertTriangle,
   facebook: Facebook,
   hide: EyeOff,
@@ -53,6 +58,7 @@ export const Icons = {
   tick: Check,
   twitter: Twitter,
   trophy: Trophy,
+  plus: Plus,
   user: CircleUserRound,
   view: Columns2,
   google: ({ ...props }: LucideProps) => (
