@@ -1,10 +1,12 @@
 "use client"
 
+import * as React from "react"
 import type { Board } from "@/db/schema"
 
 import { Icons } from "../icons"
 import { Card, CardContent, CardFooter, CardHeader } from "../ui/card"
 import { formatDate } from "@/lib/utils"
+import { DeleteBoardDialog } from "../delete-board-dialog"
 
 interface BoardCardProps {
   board: Board
@@ -16,7 +18,7 @@ export function BoardCard({ board }: BoardCardProps) {
       <CardHeader className="flex flex-row items-center justify-end">
         <div className="flex items-center gap-2">
           <Icons.edit className="h-4 w-4 text-muted-foreground" />
-          <Icons.delete className="h-4 w-4 text-muted-foreground" />
+          <DeleteBoardDialog board={{ id: board.id, name: board.name }} />
         </div>
       </CardHeader>
       <CardContent>
