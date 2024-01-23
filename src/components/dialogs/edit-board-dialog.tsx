@@ -6,6 +6,7 @@ import { boardSchema } from "@/lib/validations/board"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import type { z } from "zod"
+import type { Board } from "@/db/schema"
 
 import {
   Dialog,
@@ -26,30 +27,35 @@ import {
 import { Input } from "../ui/input"
 import { Button } from "../ui/button"
 import { Icons } from "../icons"
-import { createBoard } from "@/lib/actions/board"
+import { updateBoard } from "@/lib/actions/board"
 import { toast } from "sonner"
 import { catchError } from "@/lib/utils"
 
+interface EditBoardDialogProps {
+  board: Pick<Board, "id" | "name">
+}
+
 type Inputs = z.infer<typeof boardSchema>
 
-export function CreateBoardDialog() {
+export function EditBoardDialog({ board }: EditBoardDialogProps) {
   const [isPending, startTransition] = React.useTransition()
   const [open, setOpen] = React.useState(false)
 
   const form = useForm<Inputs>({
     resolver: zodResolver(boardSchema),
     defaultValues: {
-      name: "",
+      name: board.name,
     },
   })
 
   const onSubmit = (values: Inputs) => {
     startTransition(async () => {
       try {
-        await createBoard({
+        await updateBoard({
+          id: board.id,
           name: values.name,
         })
-        toast.success(`${values.name} Created!`)
+        toast.success(`${values.name} updated!`)
         setOpen(false)
       } catch (error) {
         catchError(error)
@@ -60,16 +66,19 @@ export function CreateBoardDialog() {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button variant="outline" className="h-44">
-          <Icons.plus className="mr-2 h-4 w-4" aria-hidden="true" />
-          Create a board
+        <Button variant="ghost" size="icon">
+          <Icons.edit
+            className="h-4 w-4 text-muted-foreground"
+            aria-hidden="true"
+          />
+          <span className="sr-only">Edit Board</span>
         </Button>
       </DialogTrigger>
       <DialogContent className="max-w-96">
         <DialogHeader>
-          <DialogTitle>Create a board</DialogTitle>
+          <DialogTitle>Edit board</DialogTitle>
           <DialogDescription>
-            Set up a new board to organize your tasks efficiently
+            Update the name of your board to better reflect its purpose.
           </DialogDescription>
         </DialogHeader>
         <Form {...form}>
@@ -98,7 +107,7 @@ export function CreateBoardDialog() {
                   aria-hidden="true"
                 />
               )}
-              Create Board
+              Update Board
             </Button>
           </form>
         </Form>

@@ -1,6 +1,6 @@
 import { z } from "zod"
 
-export const createBoardSchema = z.object({
+export const boardSchema = z.object({
   name: z
     .string()
     .min(1, {
@@ -9,4 +9,9 @@ export const createBoardSchema = z.object({
     .max(35, {
       message: "Board name cannot exceed 35 characters",
     }),
+})
+
+export const updateBoardSchema = z.object({
+  id: z.number(),
+  name: boardSchema.shape.name,
 })
