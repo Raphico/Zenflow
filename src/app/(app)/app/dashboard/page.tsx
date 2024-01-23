@@ -1,5 +1,7 @@
 import { type Metadata } from "next"
 import { db } from "@/db"
+import { boards } from "@/db/schema"
+import { like } from "drizzle-orm"
 
 import {
   PageHeader,
@@ -15,8 +17,17 @@ export const metadata: Metadata = {
   description: "Manage your boards",
 }
 
-export default async function DashboardPage() {
-  const allBoards = await db.query.boards.findMany()
+interface DashboardPageProps {
+  searchParams?: { [key: string]: string | undefined }
+}
+
+export default async function DashboardPage(props: DashboardPageProps) {
+  const allBoards = props.searchParams
+    ? await db
+        .select()
+        .from(boards)
+        .where(like(boards.name, `%${props.searchParams.query}%`))
+    : await db.query.boards.findMany()
 
   return (
     <div className="mx-auto w-full max-w-4xl space-y-6">
