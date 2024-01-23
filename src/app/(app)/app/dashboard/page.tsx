@@ -6,16 +6,9 @@ import {
   PageHeaderDescription,
   PageHeaderHeading,
 } from "@/components/page-header"
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover"
 import { SearchBoards } from "@/components/search-boards"
-import { Button } from "@/components/ui/button"
-import { Icons } from "@/components/icons"
-import { CreateBoardForm } from "@/components/forms/create-board-form"
 import { BoardCard } from "@/components/cards/board-card"
+import { CreateBoardDialog } from "@/components/dialogs/create-board-dialog"
 
 export const metadata: Metadata = {
   title: "Dashboard",
@@ -38,17 +31,7 @@ export default async function DashboardPage() {
         {allBoards.map((board) => (
           <BoardCard key={board.id} board={board} />
         ))}
-        <Popover>
-          <PopoverTrigger asChild>
-            <Button variant="outline" className="h-44">
-              <Icons.plus className="mr-2 h-4 w-4" aria-hidden="true" />
-              Create a board
-            </Button>
-          </PopoverTrigger>
-          <PopoverContent className="w-80">
-            <CreateBoardForm />
-          </PopoverContent>
-        </Popover>
+        <CreateBoardDialog />
       </section>
     </div>
   )

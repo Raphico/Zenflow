@@ -15,7 +15,7 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
 import { Button, buttonVariants } from "@/components/ui/button"
-import { Icons } from "./icons"
+import { Icons } from "../icons"
 import { catchError } from "@/lib/utils"
 import { deleteBoard } from "@/lib/actions/board"
 import { toast } from "sonner"
