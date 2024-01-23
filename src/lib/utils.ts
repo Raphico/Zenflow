@@ -17,17 +17,17 @@ export function truncate(text: string, maxLength: number) {
   return text.length <= maxLength ? text : `${text.slice(0, maxLength)}...`
 }
 
-type DebounceFunction = (...args: unknown[]) => void
+type DebounceFunction<T extends unknown[]> = (...args: T) => void
 
-export const debounce = (
-  mainFunction: DebounceFunction,
+export const debounce = <T extends unknown[]>(
+  mainFunction: DebounceFunction<T>,
   timeout = 300
-): DebounceFunction => {
+): DebounceFunction<T> => {
   // Declare a variable called 'timer' to store the timer ID
   let timer: ReturnType<typeof setTimeout>
 
   // Return an anonymous function that takes in any number of arguments
-  return function (...args) {
+  return function (...args: T) {
     // Clear the previous timer to prevent the execution of 'mainFunction'
     clearTimeout(timer)
 
