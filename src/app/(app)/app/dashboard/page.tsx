@@ -40,7 +40,7 @@ export default async function DashboardPage() {
         ))}
         <Popover>
           <PopoverTrigger asChild>
-            <Button variant="outline" className="h-full">
+            <Button variant="outline" className="h-44">
               <Icons.plus className="mr-2 h-4 w-4" aria-hidden="true" />
               Create a board
             </Button>

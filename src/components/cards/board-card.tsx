@@ -14,7 +14,7 @@ interface BoardCardProps {
 
 export function BoardCard({ board }: BoardCardProps) {
   return (
-    <Card>
+    <Card className="h-44">
       <CardHeader className="flex flex-row items-center justify-end">
         <div className="flex items-center gap-2">
           <Icons.edit className="h-4 w-4 text-muted-foreground" />
