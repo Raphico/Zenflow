@@ -18,15 +18,15 @@ export const metadata: Metadata = {
 }
 
 interface DashboardPageProps {
-  searchParams?: { [key: string]: string | undefined }
+  searchParams: { [key: string]: string | undefined }
 }
 
 export default async function DashboardPage(props: DashboardPageProps) {
-  const allBoards = props.searchParams
+  const allBoards = props.searchParams.search
     ? await db
         .select()
         .from(boards)
-        .where(like(boards.name, `%${props.searchParams.query}%`))
+        .where(like(boards.name, `%${props.searchParams.search}%`))
     : await db.query.boards.findMany()
 
   return (

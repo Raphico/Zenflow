@@ -7,8 +7,8 @@ import { Input } from "./ui/input"
 export function SearchBoards() {
   const router = useRouter()
 
-  const handleSearch = debounce((query: string) => {
-    router.push(`/app/dashboard?query=${query}`, { scroll: false })
+  const handleSearch = debounce((search: string) => {
+    router.push(`/app/dashboard?search=${search}`, { scroll: false })
   }, 300)
 
   return (
