@@ -4,6 +4,7 @@ import { eq } from "drizzle-orm"
 import { boards } from "@/db/schema"
 
 import { PageHeader, PageHeaderHeading } from "@/components/page-header"
+import { notFound } from "next/navigation"
 
 interface BoardPageProps {
   params: {
@@ -33,9 +34,15 @@ export default async function BoardPage({ params }: BoardPageProps) {
     where: eq(boards.id, params.boardId),
   })
 
+  if (!board) {
+    return notFound()
+  }
+
   return (
-    <PageHeader>
-      <PageHeaderHeading>{board?.name}</PageHeaderHeading>
-    </PageHeader>
+    <div className="mx-auto w-full max-w-7xl space-y-6">
+      <PageHeader>
+        <PageHeaderHeading>{board?.name}</PageHeaderHeading>
+      </PageHeader>
+    </div>
   )
 }
