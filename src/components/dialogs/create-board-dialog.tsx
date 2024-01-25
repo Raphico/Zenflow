@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import { useRouter } from "next/navigation"
 
 import { boardSchema } from "@/lib/validations/board"
 import { zodResolver } from "@hookform/resolvers/zod"
@@ -35,6 +36,7 @@ type Inputs = z.infer<typeof boardSchema>
 export function CreateBoardDialog() {
   const [isPending, startTransition] = React.useTransition()
   const [open, setOpen] = React.useState(false)
+  const router = useRouter()
 
   const form = useForm<Inputs>({
     resolver: zodResolver(boardSchema),
@@ -46,9 +48,12 @@ export function CreateBoardDialog() {
   const onSubmit = (values: Inputs) => {
     startTransition(async () => {
       try {
-        await createBoard({
+        const newBoard = await createBoard({
           name: values.name,
         })
+
+        router.push(`/app/board/${newBoard.boardId}`)
+
         toast.success(`${values.name} Created!`)
         setOpen(false)
       } catch (error) {

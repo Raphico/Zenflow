@@ -19,11 +19,15 @@ export async function createBoard(rawInputs: z.infer<typeof boardSchema>) {
     throw new Error("Board already exists")
   }
 
-  await db.insert(boards).values({
+  const newBoard = await db.insert(boards).values({
     name: inputs.name,
   })
 
   revalidatePath("/dashboard")
+
+  return {
+    boardId: newBoard.insertId,
+  }
 }
 
 export async function deleteBoard(boardId: number) {

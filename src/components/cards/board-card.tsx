@@ -5,6 +5,7 @@ import { Card, CardContent, CardFooter, CardHeader } from "../ui/card"
 import { formatDate } from "@/lib/utils"
 import { DeleteBoardDialog } from "../dialogs/delete-board-dialog"
 import { EditBoardDialog } from "../dialogs/edit-board-dialog"
+import Link from "next/link"
 
 interface BoardCardProps {
   board: Board
@@ -19,16 +20,18 @@ export function BoardCard({ board }: BoardCardProps) {
           <DeleteBoardDialog board={{ id: board.id, name: board.name }} />
         </div>
       </CardHeader>
-      <CardContent>
-        <h3 className="text-center text-xl font-bold">{board.name}</h3>
-      </CardContent>
-      <CardFooter>
-        {board.createdAt && (
-          <p className="text-[12px] text-muted-foreground">
-            {formatDate(board.createdAt)}
-          </p>
-        )}
-      </CardFooter>
+      <Link href={`/app/board/${board.id}`}>
+        <CardContent>
+          <h3 className="text-center text-xl font-bold">{board.name}</h3>
+        </CardContent>
+        <CardFooter>
+          {board.createdAt && (
+            <p className="text-[12px] text-muted-foreground">
+              {formatDate(board.createdAt)}
+            </p>
+          )}
+        </CardFooter>
+      </Link>
     </Card>
   )
 }
