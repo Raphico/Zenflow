@@ -27,8 +27,8 @@ A task manager web application built with Next.js 14
 - [ ] Task Actions (Edit, Delete, Mark as Done, Duplicate, etc)
 - [ ] Create New Board Column Feature
 - [ ] Column Actions (Edit and Delete) for Boards
-- [ ] Create New Board Capability
-- [ ] Board Actions (Edit and Delete)
+- [x] Create New Board Capability
+- [x] Board Actions (Edit and Delete)
 - [ ] Task Search, Filtering, and Sorting Functionality
 - [ ] Integrate Analytics Page
 - [ ] Integrate stripe
