@@ -1,7 +1,7 @@
 import { type Metadata } from "next"
 import { db } from "@/db"
 import { boards } from "@/db/schema"
-import { like } from "drizzle-orm"
+import { and, eq, like } from "drizzle-orm"
 
 import {
   PageHeader,
@@ -11,6 +11,7 @@ import {
 import { SearchBoards } from "@/components/search-boards"
 import { BoardCard } from "@/components/cards/board-card"
 import { CreateBoardDialog } from "@/components/dialogs/create-board-dialog"
+import { getCachedUser } from "@/lib/fetchers/auth"
 
 export const metadata: Metadata = {
   title: "Dashboard",
@@ -22,12 +23,20 @@ interface DashboardPageProps {
 }
 
 export default async function DashboardPage(props: DashboardPageProps) {
+  const user = await getCachedUser()
+
+  if (!user) return null
+
   const allBoards = props.searchParams.search
-    ? await db
-        .select()
-        .from(boards)
-        .where(like(boards.name, `%${props.searchParams.search}%`))
-    : await db.query.boards.findMany()
+    ? await db.query.boards.findMany({
+        where: and(
+          eq(boards.userId, user.id),
+          like(boards.name, `%${props.searchParams.search}%`)
+        ),
+      })
+    : await db.query.boards.findMany({
+        where: eq(boards.userId, user.id),
+      })
 
   return (
     <div className="mx-auto w-full max-w-4xl space-y-6">
@@ -42,7 +51,7 @@ export default async function DashboardPage(props: DashboardPageProps) {
         {allBoards.map((board) => (
           <BoardCard key={board.id} board={board} />
         ))}
-        <CreateBoardDialog />
+        <CreateBoardDialog userId={user.id} />
       </section>
     </div>
   )

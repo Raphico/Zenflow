@@ -33,7 +33,11 @@ import { catchError } from "@/lib/utils"
 
 type Inputs = z.infer<typeof boardSchema>
 
-export function CreateBoardDialog() {
+interface CreateBoardDialogProps {
+  userId: string
+}
+
+export function CreateBoardDialog({ userId }: CreateBoardDialogProps) {
   const [isPending, startTransition] = React.useTransition()
   const [open, setOpen] = React.useState(false)
   const router = useRouter()
@@ -49,6 +53,7 @@ export function CreateBoardDialog() {
     startTransition(async () => {
       try {
         const newBoard = await createBoard({
+          userId,
           name: values.name,
         })
 

@@ -11,6 +11,7 @@ import {
 import { relations } from "drizzle-orm"
 
 export const boards = mysqlTable("boards", {
+  userId: varchar("userId", { length: 191 }).notNull(),
   id: serial("id").primaryKey(),
   name: varchar("name", { length: 35 }).notNull().unique(),
   createdAt: timestamp("createdAt").defaultNow(),
@@ -21,7 +22,6 @@ export type Board = typeof boards.$inferSelect
 
 export const tasks = mysqlTable("tasks", {
   id: serial("id").primaryKey(),
-  userId: varchar("userId", { length: 191 }).notNull(),
   title: varchar("title", { length: 20 }).notNull(),
   description: varchar("description", { length: 150 }),
   priority: mysqlEnum("priority", ["P1", "P2", "P3", "P4"]).default("P4"),

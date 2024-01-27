@@ -4,12 +4,18 @@ import { db } from "@/db"
 import { eq } from "drizzle-orm"
 import { boards, tasks } from "@/db/schema"
 
-import type { z } from "zod"
+import { z } from "zod"
 import { boardSchema, updateBoardSchema } from "../validations/board"
 import { revalidatePath } from "next/cache"
 
-export async function createBoard(rawInputs: z.infer<typeof boardSchema>) {
-  const inputs = boardSchema.parse(rawInputs)
+const extendedBoardSchema = boardSchema.extend({
+  userId: z.string(),
+})
+
+export async function createBoard(
+  rawInputs: z.infer<typeof extendedBoardSchema>
+) {
+  const inputs = extendedBoardSchema.parse(rawInputs)
 
   const boardExits = await db.query.boards.findFirst({
     where: eq(boards.name, inputs.name),
@@ -20,6 +26,7 @@ export async function createBoard(rawInputs: z.infer<typeof boardSchema>) {
   }
 
   const newBoard = await db.insert(boards).values({
+    userId: inputs.userId,
     name: inputs.name,
   })
 

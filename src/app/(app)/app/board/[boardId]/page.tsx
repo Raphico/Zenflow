@@ -1,10 +1,11 @@
 import type { Metadata } from "next"
 import { db } from "@/db"
-import { eq } from "drizzle-orm"
+import { eq, and } from "drizzle-orm"
 import { boards } from "@/db/schema"
+import { notFound, redirect } from "next/navigation"
+import { getCachedUser } from "@/lib/fetchers/auth"
 
 import { PageHeader, PageHeaderHeading } from "@/components/page-header"
-import { notFound } from "next/navigation"
 
 interface BoardPageProps {
   params: {
@@ -30,8 +31,12 @@ export async function generateMetadata({
 }
 
 export default async function BoardPage({ params }: BoardPageProps) {
+  const user = await getCachedUser()
+
+  if (!user) redirect("/sign-in")
+
   const board = await db.query.boards.findFirst({
-    where: eq(boards.id, params.boardId),
+    where: and(eq(boards.userId, user.id), eq(boards.id, params.boardId)),
   })
 
   if (!board) {
