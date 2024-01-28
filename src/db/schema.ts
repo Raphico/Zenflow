@@ -20,14 +20,21 @@ export const boards = mysqlTable("boards", {
 
 export type Board = typeof boards.$inferSelect
 
+export const statuses = mysqlTable("statuses", {
+  id: serial("id").primaryKey(),
+  name: varchar("title", { length: 20 }).notNull(),
+  boardId: int("boardId").notNull(),
+  createdAt: timestamp("createdAt").defaultNow(),
+  updatedAt: timestamp("updatedAt").defaultNow(),
+})
+
 export const tasks = mysqlTable("tasks", {
   id: serial("id").primaryKey(),
   title: varchar("title", { length: 20 }).notNull(),
   description: varchar("description", { length: 150 }),
   priority: mysqlEnum("priority", ["P1", "P2", "P3", "P4"]).default("P4"),
-  status: varchar("status", { length: 25 }).notNull(),
   tags: varchar("tags", { length: 25 }),
-  boardId: int("boardId").notNull(),
+  statusId: int("statusId").notNull(),
   dueDate: datetime("dueDate"),
   createdAt: timestamp("createdAt").defaultNow(),
   updatedAt: timestamp("updatedAt").onUpdateNow(),
@@ -45,15 +52,23 @@ export const subtasks = mysqlTable("subtasks", {
 
 // relationships
 export const boardsRelations = relations(boards, ({ many }) => ({
+  statuses: many(statuses),
+}))
+
+export const statusesRelations = relations(statuses, ({ one, many }) => ({
   tasks: many(tasks),
+  board: one(boards, {
+    fields: [statuses.boardId],
+    references: [boards.id],
+  }),
 }))
 
 export const tasksRelations = relations(tasks, ({ one, many }) => ({
-  board: one(boards, {
-    fields: [tasks.boardId],
-    references: [boards.id],
-  }),
   subtasks: many(subtasks),
+  status: one(statuses, {
+    fields: [tasks.statusId],
+    references: [statuses.id],
+  }),
 }))
 
 export const subtasksRelations = relations(subtasks, ({ one }) => ({
