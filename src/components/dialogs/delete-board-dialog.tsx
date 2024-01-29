@@ -27,7 +27,7 @@ interface DeleteBoardDialogProps {
 export function DeleteBoardDialog({ board }: DeleteBoardDialogProps) {
   const [isPending, startTransition] = React.useTransition()
 
-  const handleDeleteUser = () => {
+  const handleDeleteBoard = () => {
     startTransition(async () => {
       try {
         await deleteBoard(board.id)
@@ -62,7 +62,7 @@ export function DeleteBoardDialog({ board }: DeleteBoardDialogProps) {
           <AlertDialogCancel>Cancel</AlertDialogCancel>
           <AlertDialogAction
             disabled={isPending}
-            onClick={handleDeleteUser}
+            onClick={handleDeleteBoard}
             className={buttonVariants({ variant: "destructive" })}
           >
             {isPending && (
