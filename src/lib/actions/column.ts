@@ -15,7 +15,7 @@ export async function createColumn(
   const inputs = createColumnSchema.parse(rawInputs)
 
   const columnExists = await db.query.statuses.findFirst({
-    where: eq(statuses.name, inputs.name),
+    where: eq(statuses.title, inputs.name),
   })
 
   if (columnExists) {
@@ -24,7 +24,7 @@ export async function createColumn(
 
   await db.insert(statuses).values({
     boardId: inputs.boardId,
-    name: inputs.name,
+    title: inputs.name,
   })
 
   revalidatePath(`/app/board/${inputs.boardId}`)
