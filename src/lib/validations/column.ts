@@ -8,3 +8,9 @@ export const createColumnSchema = z.object({
   boardId: z.number(),
   name: columnSchema.shape.name,
 })
+
+export const updateColumnSchema = z.object({
+  boardId: createColumnSchema.shape.boardId,
+  id: z.number(),
+  name: columnSchema.shape.name,
+})

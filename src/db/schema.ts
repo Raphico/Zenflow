@@ -28,6 +28,8 @@ export const statuses = mysqlTable("statuses", {
   updatedAt: timestamp("updatedAt").defaultNow(),
 })
 
+export type Status = typeof statuses.$inferSelect
+
 export const tasks = mysqlTable("tasks", {
   id: serial("id").primaryKey(),
   title: varchar("title", { length: 20 }).notNull(),
