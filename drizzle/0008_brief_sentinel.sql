@@ -1,0 +1,1 @@
+ALTER TABLE `statuses` ADD CONSTRAINT `statuses_title_unique` UNIQUE(`title`);

@@ -22,7 +22,7 @@ export type Board = typeof boards.$inferSelect
 
 export const statuses = mysqlTable("statuses", {
   id: serial("id").primaryKey(),
-  name: varchar("title", { length: 20 }).notNull(),
+  title: varchar("title", { length: 20 }).notNull().unique(),
   boardId: int("boardId").notNull(),
   createdAt: timestamp("createdAt").defaultNow(),
   updatedAt: timestamp("updatedAt").defaultNow(),
