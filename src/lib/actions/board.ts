@@ -2,7 +2,7 @@
 
 import { db } from "@/db"
 import { eq } from "drizzle-orm"
-import { boards, tasks } from "@/db/schema"
+import { boards, statuses } from "@/db/schema"
 
 import { z } from "zod"
 import { boardSchema, updateBoardSchema } from "../validations/board"
@@ -17,11 +17,11 @@ export async function createBoard(
 ) {
   const inputs = extendedBoardSchema.parse(rawInputs)
 
-  const boardExits = await db.query.boards.findFirst({
+  const boardExists = await db.query.boards.findFirst({
     where: eq(boards.name, inputs.name),
   })
 
-  if (boardExits) {
+  if (boardExists) {
     throw new Error("Board already exists")
   }
 
@@ -51,8 +51,8 @@ export async function deleteBoard(boardId: number) {
 
   await db.delete(boards).where(eq(boards.id, boardId))
 
-  // Delete all tasks of this board
-  await db.delete(tasks).where(eq(tasks.boardId, boardId))
+  // Delete all statues of this board
+  await db.delete(statuses).where(eq(statuses.boardId, boardId))
 
   revalidatePath("/app/dashboard")
 }
