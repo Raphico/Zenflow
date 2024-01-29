@@ -44,7 +44,7 @@ export function DeleteBoardDialog({ board }: DeleteBoardDialogProps) {
       <AlertDialogTrigger asChild>
         <Button variant="ghost" size="icon">
           <Icons.delete
-            className="h-4 w-4 text-muted-foreground"
+            className="h-4 w-4 text-destructive"
             aria-hidden="true"
           />
           <span className="sr-only">Delete Board</span>

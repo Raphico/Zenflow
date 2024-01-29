@@ -15,7 +15,7 @@ export function BoardCard({ board }: BoardCardProps) {
   return (
     <Card className="h-44">
       <CardHeader className="flex flex-row items-center justify-end pt-4">
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1">
           <EditBoardDialog board={{ id: board.id, name: board.name }} />
           <DeleteBoardDialog board={{ id: board.id, name: board.name }} />
         </div>
