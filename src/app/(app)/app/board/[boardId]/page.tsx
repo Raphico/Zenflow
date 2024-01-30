@@ -11,7 +11,7 @@ import { PageHeader, PageHeaderHeading } from "@/components/page-header"
 import {
   BoardStatuses,
   BoardStatusesSkeleton,
-} from "./_components/board-statuses"
+} from "../../../../../components/board-statuses"
 import { EditBoardDialog } from "@/components/dialogs/edit-board-dialog"
 
 interface BoardPageProps {
