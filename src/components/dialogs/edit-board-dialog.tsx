@@ -16,20 +16,12 @@ import {
   DialogTitle,
   DialogDescription,
 } from "../ui/dialog"
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "../ui/form"
-import { Input } from "../ui/input"
 import { Button } from "../ui/button"
 import { Icons } from "../icons"
 import { updateBoard } from "@/lib/actions/board"
 import { toast } from "sonner"
 import { catchError } from "@/lib/utils"
+import { BoardForm } from "../forms/board-form"
 
 interface EditBoardDialogProps {
   board: Pick<Board, "id" | "name">
@@ -81,36 +73,12 @@ export function EditBoardDialog({ board }: EditBoardDialogProps) {
             Update the name of your board to better reflect its purpose.
           </DialogDescription>
         </DialogHeader>
-        <Form {...form}>
-          <form className="grid gap-4" onSubmit={form.handleSubmit(onSubmit)}>
-            <FormField
-              control={form.control}
-              name="name"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Board name</FormLabel>
-                  <FormControl>
-                    <Input
-                      placeholder="i.e.Marketing Todo"
-                      autoComplete="off"
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <Button disabled={isPending}>
-              {isPending && (
-                <Icons.spinner
-                  className="mr-2 h-4 w-4 animate-spin"
-                  aria-hidden="true"
-                />
-              )}
-              Update Board
-            </Button>
-          </form>
-        </Form>
+        <BoardForm
+          form={form}
+          isPending={isPending}
+          onSubmit={onSubmit}
+          type="Update"
+        />
       </DialogContent>
     </Dialog>
   )

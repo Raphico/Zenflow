@@ -15,15 +15,7 @@ import {
   DialogContent,
   DialogTitle,
 } from "../ui/dialog"
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "../ui/form"
-import { Input } from "../ui/input"
+import { ColumnForm } from "../forms/column-form"
 import { Button } from "../ui/button"
 import { Icons } from "../icons"
 import { toast } from "sonner"
@@ -76,36 +68,12 @@ export function EditColumnDialog({ boardId, column }: EditColumnDialogProps) {
         <DialogHeader>
           <DialogTitle>Edit column</DialogTitle>
         </DialogHeader>
-        <Form {...form}>
-          <form className="grid gap-4" onSubmit={form.handleSubmit(onSubmit)}>
-            <FormField
-              control={form.control}
-              name="name"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>column name</FormLabel>
-                  <FormControl>
-                    <Input
-                      placeholder="i.e.Marketing Todo"
-                      autoComplete="off"
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <Button disabled={isPending}>
-              {isPending && (
-                <Icons.spinner
-                  className="mr-2 h-4 w-4 animate-spin"
-                  aria-hidden="true"
-                />
-              )}
-              Update column
-            </Button>
-          </form>
-        </Form>
+        <ColumnForm
+          form={form}
+          isPending={isPending}
+          onSubmit={onSubmit}
+          type="Update"
+        />
       </DialogContent>
     </Dialog>
   )
