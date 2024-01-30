@@ -22,7 +22,7 @@ export type Board = typeof boards.$inferSelect
 
 export const statuses = mysqlTable("statuses", {
   id: serial("id").primaryKey(),
-  title: varchar("title", { length: 20 }).notNull().unique(),
+  title: varchar("title", { length: 35 }).notNull().unique(),
   boardId: int("boardId").notNull(),
   createdAt: timestamp("createdAt").defaultNow(),
   updatedAt: timestamp("updatedAt").defaultNow(),
@@ -32,7 +32,7 @@ export type Status = typeof statuses.$inferSelect
 
 export const tasks = mysqlTable("tasks", {
   id: serial("id").primaryKey(),
-  title: varchar("title", { length: 20 }).notNull(),
+  title: varchar("title", { length: 35 }).notNull(),
   description: varchar("description", { length: 150 }),
   priority: mysqlEnum("priority", ["P1", "P2", "P3", "P4"]).default("P4"),
   tags: varchar("tags", { length: 25 }),
@@ -44,7 +44,7 @@ export const tasks = mysqlTable("tasks", {
 
 export const subtasks = mysqlTable("subtasks", {
   id: serial("id").primaryKey(),
-  title: varchar("title", { length: 20 }).notNull(),
+  title: varchar("title", { length: 35 }).notNull(),
   done: boolean("done").default(false),
   dueDate: datetime("dueDate"),
   taskId: int("taskId").notNull(),
