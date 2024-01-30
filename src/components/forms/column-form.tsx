@@ -24,7 +24,7 @@ interface ColumnFormProps {
   onSubmit: (data: Inputs) => void
   form: UseFormReturn<
     {
-      title: string
+      name: string
     },
     unknown,
     undefined
