@@ -4,6 +4,7 @@ import { type ClassValue, clsx } from "clsx"
 import { toast } from "sonner"
 import { twMerge } from "tailwind-merge"
 import { z } from "zod"
+import { isToday, isTomorrow, format } from "date-fns"
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
@@ -15,6 +16,16 @@ export function absoluteUrl(path: string) {
 
 export function truncate(text: string, maxLength: number) {
   return text.length <= maxLength ? text : `${text.slice(0, maxLength)}...`
+}
+
+export function getDueDate(dueDate: Date) {
+  if (isToday(dueDate)) {
+    return "Due today"
+  } else if (isTomorrow(dueDate)) {
+    return "Due tomorrow"
+  } else {
+    return `Due on ${format(dueDate, "MMM d")}`
+  }
 }
 
 type DebounceFunction<T extends unknown[]> = (...args: T) => void

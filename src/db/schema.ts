@@ -35,12 +35,15 @@ export const tasks = mysqlTable("tasks", {
   title: varchar("title", { length: 35 }).notNull(),
   description: varchar("description", { length: 150 }),
   priority: mysqlEnum("priority", ["P1", "P2", "P3", "P4"]).default("P4"),
-  tags: varchar("tags", { length: 25 }),
+  done: boolean("done").default(false),
+  tag: varchar("tag", { length: 25 }),
   statusId: int("statusId").notNull(),
   dueDate: datetime("dueDate"),
   createdAt: timestamp("createdAt").defaultNow(),
   updatedAt: timestamp("updatedAt").onUpdateNow(),
 })
+
+export type Task = typeof tasks.$inferSelect
 
 export const subtasks = mysqlTable("subtasks", {
   id: serial("id").primaryKey(),

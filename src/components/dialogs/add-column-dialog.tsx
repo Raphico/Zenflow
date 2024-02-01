@@ -57,7 +57,7 @@ export function AddColumnDialog({ boardId }: AddColumnDialogProps) {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button variant="secondary" className="w-full">
+        <Button variant="secondary" className="w-[18em]">
           <Icons.plus className="mr-2 h-4 w-4" aria-hidden="true" />
           Add column
         </Button>

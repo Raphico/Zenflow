@@ -71,6 +71,20 @@
       "when": 1706658843868,
       "tag": "0009_tense_selene",
       "breakpoints": true
+    },
+    {
+      "idx": 10,
+      "version": "5",
+      "when": 1706697071725,
+      "tag": "0010_chubby_johnny_storm",
+      "breakpoints": true
+    },
+    {
+      "idx": 11,
+      "version": "5",
+      "when": 1706704927579,
+      "tag": "0011_yielding_captain_cross",
+      "breakpoints": true
     }
   ]
 }

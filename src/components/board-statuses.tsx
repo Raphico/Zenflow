@@ -2,10 +2,12 @@ import { db } from "@/db"
 import { eq } from "drizzle-orm"
 import { statuses } from "@/db/schema"
 
-import { Skeleton } from "@/components/ui/skeleton"
-import { AddColumnDialog } from "@/components/dialogs/add-column-dialog"
-import { EditColumnDialog } from "@/components/dialogs/edit-column-dialog"
-import { DeleteColumnDialog } from "@/components/dialogs/delete-column-dialog"
+import { Skeleton } from "./ui/skeleton"
+import { AddColumnDialog } from "./dialogs/add-column-dialog"
+import { EditColumnDialog } from "./dialogs/edit-column-dialog"
+import { DeleteColumnDialog } from "./dialogs/delete-column-dialog"
+import { AddTaskDialog } from "./dialogs/add-task-dialog"
+import { TaskCard } from "./cards/task-card"
 
 interface BoardStatusesProps {
   boardId: number
@@ -20,12 +22,19 @@ export async function BoardStatuses({ boardId }: BoardStatusesProps) {
     orderBy: statuses.createdAt,
   })
 
+  const availableStatuses = columns.map((column) => ({
+    id: column.id,
+    title: column.title,
+  }))
+
   return (
-    <div className="grid flex-1 auto-cols-[18em] grid-flow-col gap-8 pt-16">
+    <div className="flex flex-1 gap-12 pt-16">
       {columns.map((column) => (
-        <section key={column.id} className="grid gap-4">
-          <div className="flex items-center justify-between">
-            <h3 className="text-sm font-bold">{column.title}</h3>
+        <section key={column.id} className="flex w-[18em] flex-col gap-4">
+          <header className="flex items-center justify-between">
+            <h3 className="text-sm font-bold">
+              {column.title}({column.tasks.length})
+            </h3>
             <div className="flex items-center gap-1">
               <EditColumnDialog
                 boardId={boardId}
@@ -36,7 +45,23 @@ export async function BoardStatuses({ boardId }: BoardStatusesProps) {
                 column={{ id: column.id, title: column.title }}
               />
             </div>
-          </div>
+          </header>
+
+          {column.tasks.length > 0 && (
+            <div className="flex flex-col gap-4">
+              {column.tasks.map((task) => (
+                <TaskCard key={task.id} task={task} />
+              ))}
+            </div>
+          )}
+
+          <footer className="grid">
+            <AddTaskDialog
+              boardId={boardId}
+              currentStatus={column.title}
+              availableStatuses={availableStatuses}
+            />
+          </footer>
         </section>
       ))}
 
@@ -47,10 +72,10 @@ export async function BoardStatuses({ boardId }: BoardStatusesProps) {
 
 export function BoardStatusesSkeleton() {
   return (
-    <div className="grid flex-1 auto-cols-[20em] grid-flow-col gap-8">
-      <Skeleton className="h-full w-full" />
-      <Skeleton className="h-full w-full" />
-      <Skeleton className="h-full w-full" />
+    <div className="grid flex-1 auto-cols-[18em] grid-flow-col gap-8 pt-16">
+      <Skeleton className="h-60 w-full" />
+      <Skeleton className="h-60 w-full" />
+      <Skeleton className="h-60 w-full" />
     </div>
   )
 }

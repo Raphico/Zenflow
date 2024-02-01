@@ -1,5 +1,6 @@
 import {
   AlertTriangle,
+  CalendarDays,
   CircleUserRound,
   Check,
   ChevronLeft,
@@ -34,6 +35,7 @@ import { MoonIcon } from "@radix-ui/react-icons"
 
 export const Icons = {
   analytics: LineChart,
+  calendar: CalendarDays,
   copy: Copy,
   chevronLeft: ChevronLeft,
   chevronRight: ChevronRight,
