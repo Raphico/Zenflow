@@ -30,7 +30,10 @@ export async function BoardStatuses({ boardId }: BoardStatusesProps) {
   return (
     <div className="flex flex-1 gap-12 pt-16">
       {columns.map((column) => (
-        <section key={column.id} className="flex w-[18em] flex-col gap-4">
+        <section
+          key={column.id}
+          className="flex w-[18em] shrink-0 flex-col gap-4"
+        >
           <header className="flex items-center justify-between">
             <h3 className="text-sm font-bold">
               {column.title}({column.tasks.length})

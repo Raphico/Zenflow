@@ -14,7 +14,7 @@ export default async function DashboardLayout({
   }
 
   return (
-    <div className="flex min-h-screen flex-col">
+    <div className="flex min-h-screen w-full flex-col overflow-x-hidden">
       <header className="container sticky top-0 z-50 flex h-14 w-full items-center px-4">
         <Sidebar
           user={{
@@ -24,7 +24,7 @@ export default async function DashboardLayout({
           items={dashboardConfig.sidebarNav}
         />
       </header>
-      <main className="flex flex-1 flex-col overflow-x-auto px-8 py-2">
+      <main className="flex flex-1 flex-col overflow-x-auto overscroll-contain px-8 py-2">
         {children}
       </main>
     </div>
