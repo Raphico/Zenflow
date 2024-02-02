@@ -39,7 +39,7 @@ export default async function DashboardPage(props: DashboardPageProps) {
       })
 
   return (
-    <div className="mx-auto w-full max-w-4xl space-y-6">
+    <div className="mx-auto w-full max-w-4xl space-y-6 px-8 py-2">
       <PageHeader>
         <PageHeaderHeading>My Boards</PageHeaderHeading>
         <PageHeaderDescription>

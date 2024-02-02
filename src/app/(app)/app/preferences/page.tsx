@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 
 export default function PreferencePage() {
   return (
-    <div className="mx-auto w-full max-w-5xl">
+    <div className="mx-auto w-full max-w-5xl px-8 py-2 ">
       <PageHeader>
         <PageHeaderHeading>Preferences</PageHeaderHeading>
         <PageHeaderDescription>

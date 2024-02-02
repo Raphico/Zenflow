@@ -8,7 +8,7 @@ import { Skeleton } from "@/components/ui/skeleton"
 
 export default function AccountLoading() {
   return (
-    <div className="mx-auto w-full max-w-5xl">
+    <div className="mx-auto w-full max-w-5xl px-8 py-2">
       <PageHeader>
         <PageHeaderHeading>Account</PageHeaderHeading>
         <PageHeaderDescription>Manage account settings</PageHeaderDescription>

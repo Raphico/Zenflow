@@ -51,8 +51,8 @@ export default async function BoardPage({ params }: BoardPageProps) {
   }
 
   return (
-    <div className="mx-auto w-full max-w-7xl">
-      <div className="fixed flex items-center gap-2">
+    <div className="mx-auto flex w-full max-w-7xl flex-1 flex-col">
+      <div className="flex w-full items-center gap-2 px-8 pt-2">
         <PageHeader>
           <PageHeaderHeading>{board.name}</PageHeaderHeading>
         </PageHeader>

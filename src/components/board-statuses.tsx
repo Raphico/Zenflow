@@ -28,44 +28,46 @@ export async function BoardStatuses({ boardId }: BoardStatusesProps) {
   }))
 
   return (
-    <div className="flex flex-1 gap-12 pt-16">
-      {columns.map((column) => (
-        <section
-          key={column.id}
-          className="flex w-[18em] shrink-0 flex-col gap-4"
-        >
-          <header className="flex items-center justify-between">
-            <h3 className="text-sm font-bold">
-              {column.title}({column.tasks.length})
-            </h3>
-            <div className="flex items-center gap-1">
-              <EditColumnDialog
-                column={{ id: column.id, title: column.title }}
+    <div className="flex flex-1 overflow-x-auto">
+      <div className="flex gap-12 px-8 pb-16 pt-6">
+        {columns.map((column) => (
+          <section
+            key={column.id}
+            className="flex w-[18em] shrink-0 flex-col gap-4"
+          >
+            <header className="flex items-center justify-between">
+              <h3 className="text-sm font-bold">
+                {column.title}({column.tasks.length})
+              </h3>
+              <div className="flex items-center gap-1">
+                <EditColumnDialog
+                  column={{ id: column.id, title: column.title }}
+                />
+                <DeleteColumnDialog
+                  column={{ id: column.id, title: column.title }}
+                />
+              </div>
+            </header>
+
+            {column.tasks.length > 0 && (
+              <div className="flex flex-col gap-4">
+                {column.tasks.map((task) => (
+                  <TaskCard key={task.id} task={task} />
+                ))}
+              </div>
+            )}
+
+            <footer className="grid">
+              <AddTaskDialog
+                currentStatus={column.title}
+                availableStatuses={availableStatuses}
               />
-              <DeleteColumnDialog
-                column={{ id: column.id, title: column.title }}
-              />
-            </div>
-          </header>
+            </footer>
+          </section>
+        ))}
 
-          {column.tasks.length > 0 && (
-            <div className="flex flex-col gap-4">
-              {column.tasks.map((task) => (
-                <TaskCard key={task.id} task={task} />
-              ))}
-            </div>
-          )}
-
-          <footer className="grid">
-            <AddTaskDialog
-              currentStatus={column.title}
-              availableStatuses={availableStatuses}
-            />
-          </footer>
-        </section>
-      ))}
-
-      <AddColumnDialog boardId={boardId} />
+        <AddColumnDialog boardId={boardId} />
+      </div>
     </div>
   )
 }
