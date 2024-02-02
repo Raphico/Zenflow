@@ -4,7 +4,7 @@ import { type ClassValue, clsx } from "clsx"
 import { toast } from "sonner"
 import { twMerge } from "tailwind-merge"
 import { z } from "zod"
-import { isToday, isTomorrow, format } from "date-fns"
+import { isToday, isTomorrow, isThisWeek, format } from "date-fns"
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
@@ -23,6 +23,8 @@ export function getDueDate(dueDate: Date) {
     return "Due today"
   } else if (isTomorrow(dueDate)) {
     return "Due tomorrow"
+  } else if (isThisWeek(dueDate)) {
+    return `Due on ${format(dueDate, "EEEE")}`
   } else {
     return `Due on ${format(dueDate, "MMM d")}`
   }
