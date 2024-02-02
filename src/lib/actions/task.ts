@@ -33,7 +33,7 @@ export async function addTask(rawInputs: z.infer<typeof updateTaskSchema>) {
       await Promise.all(subtaskPromises)
     }
 
-    revalidatePath(`/app/board/${inputs.boardId}`)
+    revalidatePath(`/app/board`)
   } catch (error) {
     throw error instanceof Error
       ? error

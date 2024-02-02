@@ -43,7 +43,6 @@ export const taskSchema = z.object({
 })
 
 export const updateTaskSchema = z.object({
-  boardId: z.number(),
   statusId: z.number(),
   title: taskSchema.shape.title,
   dueDate: taskSchema.shape.dueDate,

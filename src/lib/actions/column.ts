@@ -27,7 +27,7 @@ export async function createColumn(
     title: inputs.name,
   })
 
-  revalidatePath(`/app/board/${inputs.boardId}`)
+  revalidatePath(`/app/board`)
 }
 
 export async function updateColumn(
@@ -53,16 +53,10 @@ export async function updateColumn(
     })
     .where(eq(statuses.id, inputs.id))
 
-  revalidatePath(`/app/board/${inputs.boardId}`)
+  revalidatePath(`/app/board`)
 }
 
-export async function deleteColumn({
-  boardId,
-  columnId,
-}: {
-  boardId: number
-  columnId: number
-}) {
+export async function deleteColumn(columnId: number) {
   const board = await db.query.statuses.findFirst({
     where: eq(statuses.id, columnId),
     columns: {
@@ -79,5 +73,5 @@ export async function deleteColumn({
   // Delete all tasks of this column
   await db.delete(tasks).where(eq(tasks.statusId, columnId))
 
-  revalidatePath(`/app/board/${boardId}`)
+  revalidatePath(`/app/board`)
 }

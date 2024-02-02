@@ -21,13 +21,11 @@ type Inputs = z.infer<typeof taskSchema>
 interface AddTaskDialog {
   currentStatus: string
   availableStatuses: Pick<Status, "id" | "title">[]
-  boardId: number
 }
 
 export function AddTaskDialog({
   currentStatus,
   availableStatuses,
-  boardId,
 }: AddTaskDialog) {
   const [isPending, startTransition] = React.useTransition()
   const [open, setOpen] = React.useState(false)
@@ -54,7 +52,6 @@ export function AddTaskDialog({
         if (!statusId) throw new Error("Status id not found")
 
         await addTask({
-          boardId,
           statusId,
           title: values.title,
           description: values.description,
