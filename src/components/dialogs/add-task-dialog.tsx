@@ -65,6 +65,7 @@ export function AddTaskDialog({
         })
 
         setOpen(false)
+        form.reset()
         toast.success("Task added!")
       } catch (error) {
         catchError(error)

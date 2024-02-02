@@ -13,9 +13,6 @@ export const taskSchema = z.object({
   priority: z.enum(["P1", "P2", "P3", "P4"]),
   tag: z
     .string()
-    .min(1, {
-      message: "Tag cannot be empty",
-    })
     .max(25, {
       message: "Tag cannot exceed 25 characters",
     })

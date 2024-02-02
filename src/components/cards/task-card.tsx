@@ -17,9 +17,11 @@ export function TaskCard({ task }: TaskCardProps) {
   return (
     <Card className="rounded-sm">
       <CardHeader className="items-start justify-start p-4">
-        <span className="rounded-md border px-4 py-1 text-[12px]">
-          {task.tag}
-        </span>
+        {task.tag && (
+          <span className="rounded-md border px-4 py-1 text-[12px]">
+            {task.tag}
+          </span>
+        )}
       </CardHeader>
       <CardContent className="p-4 pt-0">
         <CardTitle className="text-lg font-bold">{task.title}</CardTitle>
