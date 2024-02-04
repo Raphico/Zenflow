@@ -42,7 +42,7 @@ export const taskSchema = z.object({
   ),
 })
 
-export const updateTaskSchema = z.object({
+export const addTaskSchema = z.object({
   statusId: z.number(),
   title: taskSchema.shape.title,
   dueDate: taskSchema.shape.dueDate,

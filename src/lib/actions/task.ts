@@ -4,26 +4,30 @@ import { db } from "@/db"
 import { subtasks, tasks } from "@/db/schema"
 
 import type { z } from "zod"
-import { updateTaskSchema } from "../validations/task"
+import { addTaskSchema } from "../validations/task"
 import { revalidatePath } from "next/cache"
 
-export async function addTask(rawInputs: z.infer<typeof updateTaskSchema>) {
+export async function addTask(rawInputs: z.infer<typeof addTaskSchema>) {
   try {
-    const inputs = updateTaskSchema.parse(rawInputs)
+    const inputs = addTaskSchema.parse(rawInputs)
 
-    const newTask = await db.insert(tasks).values({
-      statusId: inputs.statusId,
-      title: inputs.title,
-      description: inputs.description,
-      dueDate: inputs.dueDate,
-      priority: inputs.priority,
-      tag: inputs.tag,
-    })
+    // ensuring that all database operations are part of a single transaction to prevent partial updates and improve consistency
+    await db.transaction(async (tx) => {
+      const task = await tx
+        .insert(tasks)
+        .values({
+          statusId: inputs.statusId,
+          title: inputs.title,
+          description: inputs.description,
+          dueDate: inputs.dueDate,
+          priority: inputs.priority,
+          tag: inputs.tag,
+        })
+        .execute()
 
-    if (newTask && inputs.subtasks && inputs.subtasks.length > 0) {
       const subtaskPromises = inputs.subtasks.map(async (subtask) => {
-        await db.insert(subtasks).values({
-          taskId: parseInt(newTask.insertId),
+        await tx.insert(subtasks).values({
+          taskId: parseInt(task.insertId),
           title: subtask.title,
           done: subtask.done,
           dueDate: subtask.dueDate,
@@ -31,7 +35,7 @@ export async function addTask(rawInputs: z.infer<typeof updateTaskSchema>) {
       })
 
       await Promise.all(subtaskPromises)
-    }
+    })
 
     revalidatePath(`/app/board`)
   } catch (error) {
