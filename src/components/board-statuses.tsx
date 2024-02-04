@@ -33,7 +33,7 @@ export async function BoardStatuses({ boardId }: BoardStatusesProps) {
         {columns.map((column) => (
           <section
             key={column.id}
-            className="flex w-[18em] shrink-0 flex-col gap-4"
+            className="flex w-80 shrink-0 flex-col gap-4"
           >
             <header className="flex items-center justify-between">
               <h3 className="text-sm font-bold">
@@ -74,10 +74,10 @@ export async function BoardStatuses({ boardId }: BoardStatusesProps) {
 
 export function BoardStatusesSkeleton() {
   return (
-    <div className="grid flex-1 auto-cols-[18em] grid-flow-col gap-8 pt-16">
-      <Skeleton className="h-60 w-full" />
-      <Skeleton className="h-60 w-full" />
-      <Skeleton className="h-60 w-full" />
+    <div className="grid auto-cols-[20rem] grid-flow-col gap-8 px-8 pt-6">
+      <Skeleton className="h-80 w-full" />
+      <Skeleton className="h-80 w-full" />
+      <Skeleton className="h-80 w-full" />
     </div>
   )
 }

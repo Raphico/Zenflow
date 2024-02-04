@@ -72,7 +72,7 @@ export function AddTaskDialog({
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger>
+      <DialogTrigger asChild>
         <Button variant="ghost" className="w-full text-muted-foreground">
           <Icons.plus className="mr-2 h-4 w-4" aria-hidden="true" />
           Add Task
