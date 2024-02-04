@@ -7,7 +7,7 @@ import { eq } from "drizzle-orm"
 import { db } from "@/db"
 
 import { createColumnSchema, updateColumnSchema } from "../validations/column"
-import type { z } from "zod"
+import { z } from "zod"
 
 export async function createColumn(
   rawInputs: z.infer<typeof createColumnSchema>
@@ -27,13 +27,17 @@ export async function createColumn(
     title: inputs.name,
   })
 
-  revalidatePath(`/app/board`)
+  revalidatePath(`/app/board/${inputs.boardId}`)
 }
 
+const extendedUpdateColumnSchema = updateColumnSchema.extend({
+  boardId: z.number(),
+})
+
 export async function updateColumn(
-  rawInputs: z.infer<typeof updateColumnSchema>
+  rawInputs: z.infer<typeof extendedUpdateColumnSchema>
 ) {
-  const inputs = updateColumnSchema.parse(rawInputs)
+  const inputs = extendedUpdateColumnSchema.parse(rawInputs)
 
   const column = await db.query.statuses.findFirst({
     where: eq(statuses.id, inputs.id),
@@ -53,10 +57,16 @@ export async function updateColumn(
     })
     .where(eq(statuses.id, inputs.id))
 
-  revalidatePath(`/app/board`)
+  revalidatePath(`/app/board/${inputs.boardId}`)
 }
 
-export async function deleteColumn(columnId: number) {
+export async function deleteColumn({
+  boardId,
+  columnId,
+}: {
+  boardId: number
+  columnId: number
+}) {
   const board = await db.query.statuses.findFirst({
     where: eq(statuses.id, columnId),
     columns: {
@@ -73,5 +83,5 @@ export async function deleteColumn(columnId: number) {
   // Delete all tasks of this column
   await db.delete(tasks).where(eq(tasks.statusId, columnId))
 
-  revalidatePath(`/app/board`)
+  revalidatePath(`/app/board/${boardId}`)
 }

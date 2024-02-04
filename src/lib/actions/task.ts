@@ -3,13 +3,19 @@
 import { db } from "@/db"
 import { subtasks, tasks } from "@/db/schema"
 
-import type { z } from "zod"
+import { z } from "zod"
 import { addTaskSchema } from "../validations/task"
 import { revalidatePath } from "next/cache"
 
-export async function addTask(rawInputs: z.infer<typeof addTaskSchema>) {
+const extendedAddTaskSchema = addTaskSchema.extend({
+  boardId: z.number(),
+})
+
+export async function addTask(
+  rawInputs: z.infer<typeof extendedAddTaskSchema>
+) {
   try {
-    const inputs = addTaskSchema.parse(rawInputs)
+    const inputs = extendedAddTaskSchema.parse(rawInputs)
 
     // ensuring that all database operations are part of a single transaction to prevent partial updates and improve consistency
     await db.transaction(async (tx) => {
@@ -37,7 +43,7 @@ export async function addTask(rawInputs: z.infer<typeof addTaskSchema>) {
       await Promise.all(subtaskPromises)
     })
 
-    revalidatePath(`/app/board`)
+    revalidatePath(`/app/board/${inputs.boardId}`)
   } catch (error) {
     throw error instanceof Error
       ? error

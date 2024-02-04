@@ -23,12 +23,13 @@ import { catchError } from "@/lib/utils"
 import { updateColumn } from "@/lib/actions/column"
 
 interface EditColumnDialogProps {
+  boardId: number
   column: Pick<Status, "id" | "title">
 }
 
 type Inputs = z.infer<typeof columnSchema>
 
-export function EditColumnDialog({ column }: EditColumnDialogProps) {
+export function EditColumnDialog({ boardId, column }: EditColumnDialogProps) {
   const [isPending, startTransition] = React.useTransition()
   const [open, setOpen] = React.useState(false)
 
@@ -43,6 +44,7 @@ export function EditColumnDialog({ column }: EditColumnDialogProps) {
     startTransition(async () => {
       try {
         await updateColumn({
+          boardId,
           id: column.id,
           name: values.name,
         })

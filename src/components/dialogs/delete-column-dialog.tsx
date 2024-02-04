@@ -21,16 +21,20 @@ import { deleteColumn } from "@/lib/actions/column"
 import { toast } from "sonner"
 
 interface DeleteColumnDialogProps {
+  boardId: number
   column: Pick<Status, "id" | "title">
 }
 
-export function DeleteColumnDialog({ column }: DeleteColumnDialogProps) {
+export function DeleteColumnDialog({
+  column,
+  boardId,
+}: DeleteColumnDialogProps) {
   const [isPending, startTransition] = React.useTransition()
 
   const handleDeleteColumn = () => {
     startTransition(async () => {
       try {
-        await deleteColumn(column.id)
+        await deleteColumn({ boardId, columnId: column.id })
 
         toast.success("Column Deleted!")
       } catch (error) {

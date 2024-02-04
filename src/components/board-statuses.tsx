@@ -41,9 +41,11 @@ export async function BoardStatuses({ boardId }: BoardStatusesProps) {
               </h3>
               <div className="flex items-center gap-1">
                 <EditColumnDialog
+                  boardId={boardId}
                   column={{ id: column.id, title: column.title }}
                 />
                 <DeleteColumnDialog
+                  boardId={boardId}
                   column={{ id: column.id, title: column.title }}
                 />
               </div>
@@ -59,6 +61,7 @@ export async function BoardStatuses({ boardId }: BoardStatusesProps) {
 
             <footer className="grid">
               <AddTaskDialog
+                boardId={boardId}
                 currentStatus={column.title}
                 availableStatuses={availableStatuses}
               />
