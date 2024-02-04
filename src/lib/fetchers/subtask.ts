@@ -10,7 +10,7 @@ export async function getSubtasks(taskId: number) {
   try {
     return await cache(
       async () => {
-        return db.query.subtasks.findMany({
+        return await db.query.subtasks.findMany({
           where: eq(subtasks.taskId, taskId),
         })
       },
