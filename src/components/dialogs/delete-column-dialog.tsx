@@ -47,7 +47,7 @@ export function DeleteColumnDialog({
     <AlertDialog>
       <AlertDialogTrigger asChild>
         <Button variant="ghost" className="text-destructive" size="icon">
-          <Icons.delete className="h-4 w-4" aria-hidden="true" />
+          <Icons.delete className="h-4 w-4 opacity-70" aria-hidden="true" />
           <span className="sr-only">Delete Column</span>
         </Button>
       </AlertDialogTrigger>

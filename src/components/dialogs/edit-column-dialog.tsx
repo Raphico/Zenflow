@@ -60,7 +60,7 @@ export function EditColumnDialog({ boardId, column }: EditColumnDialogProps) {
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button variant="ghost" size="icon">
-          <Icons.edit className="h-4 w-4" aria-hidden="true" />
+          <Icons.edit className="h-4 w-4 opacity-70" aria-hidden="true" />
           <span className="sr-only">Edit Column</span>
         </Button>
       </DialogTrigger>
