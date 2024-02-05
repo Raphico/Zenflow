@@ -20,7 +20,7 @@ type Inputs = z.infer<typeof taskSchema>
 
 interface AddTaskDialogProps {
   boardId: number
-  currentStatus: string
+  currentStatus: number
   availableStatuses: Pick<Status, "id" | "title">[]
 }
 
@@ -37,7 +37,7 @@ export function AddTaskDialog({
     defaultValues: {
       title: "Untitled Task",
       description: "",
-      status: currentStatus,
+      statusId: currentStatus,
       priority: "P4",
       tag: "",
       subtasks: [],
@@ -47,15 +47,9 @@ export function AddTaskDialog({
   const onSubmit = (values: Inputs) => {
     startTransition(async () => {
       try {
-        const statusId = availableStatuses.find(
-          (status) => status.title === values.status
-        )?.id
-
-        if (!statusId) throw new Error("Status id not found")
-
         await addTask({
           boardId,
-          statusId,
+          statusId: values.statusId,
           title: values.title,
           description: values.description,
           dueDate: values.dueDate,
@@ -65,8 +59,8 @@ export function AddTaskDialog({
         })
 
         setOpen(false)
-        form.reset()
         toast.success("Task added!")
+        form.reset()
       } catch (error) {
         catchError(error)
       }

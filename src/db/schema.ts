@@ -34,11 +34,13 @@ export const tasks = mysqlTable("tasks", {
   id: serial("id").primaryKey(),
   title: varchar("title", { length: 35 }).notNull(),
   description: varchar("description", { length: 150 }),
-  priority: mysqlEnum("priority", ["P1", "P2", "P3", "P4"]).default("P4"),
-  done: boolean("done").default(false),
+  priority: mysqlEnum("priority", ["P1", "P2", "P3", "P4"])
+    .default("P4")
+    .notNull(),
+  dueDate: datetime("dueDate"),
+  done: boolean("done").default(false).notNull(),
   tag: varchar("tag", { length: 25 }),
   statusId: int("statusId").notNull(),
-  dueDate: datetime("dueDate"),
   createdAt: timestamp("createdAt").defaultNow(),
   updatedAt: timestamp("updatedAt").onUpdateNow(),
 })
@@ -48,7 +50,7 @@ export type Task = typeof tasks.$inferSelect
 export const subtasks = mysqlTable("subtasks", {
   id: serial("id").primaryKey(),
   title: varchar("title", { length: 35 }).notNull(),
-  done: boolean("done").default(false),
+  done: boolean("done").default(false).notNull(),
   dueDate: datetime("dueDate"),
   taskId: int("taskId").notNull(),
   createdAt: timestamp("createdAt").defaultNow(),

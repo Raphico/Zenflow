@@ -3,7 +3,7 @@
 import * as React from "react"
 import type { Status, Task } from "@/db/schema"
 
-import { taskSchema } from "@/lib/validations/task"
+import { type SubTask, taskSchema } from "@/lib/validations/task"
 import type { z } from "zod"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
@@ -19,13 +19,17 @@ import { catchError } from "@/lib/utils"
 type Inputs = z.infer<typeof taskSchema>
 
 interface AddTaskDialog {
+  boardId: number
   task: Task
-  currentStatus: string
+  subtasks: SubTask[]
+  currentStatus: number
   availableStatuses: Pick<Status, "id" | "title">[]
 }
 
 export function EditTaskDialog({
+  boardId,
   task,
+  subtasks,
   currentStatus,
   availableStatuses,
 }: AddTaskDialog) {
@@ -35,27 +39,23 @@ export function EditTaskDialog({
   const form = useForm<Inputs>({
     resolver: zodResolver(taskSchema),
     defaultValues: {
-      title: task.title || "",
+      title: task.title,
       description: task.description || "",
-      status: currentStatus,
-      priority: task.priority || "P4",
+      dueDate: task.dueDate || undefined,
+      statusId: currentStatus,
+      priority: task.priority,
       tag: task.tag || "",
-      subtasks: [],
+      subtasks,
     },
   })
 
   const onSubmit = (values: Inputs) => {
     startTransition(async () => {
       try {
-        const statusId = availableStatuses.find(
-          (status) => status.title === values.status
-        )?.id
-
-        if (!statusId) throw new Error("Status id not found")
-
         await updateTask({
+          boardId,
           id: task.id,
-          statusId,
+          statusId: values.statusId,
           title: values.title,
           description: values.description,
           dueDate: values.dueDate,
@@ -65,7 +65,6 @@ export function EditTaskDialog({
         })
 
         setOpen(false)
-        form.reset()
         toast.success("Task updated!")
       } catch (error) {
         catchError(error)
@@ -75,9 +74,9 @@ export function EditTaskDialog({
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger>
+      <DialogTrigger asChild>
         <Button variant="ghost" size="icon">
-          <Icons.plus className="h-4 w-4" aria-hidden="true" />
+          <Icons.edit className="h-4 w-4 opacity-70" aria-hidden="true" />
           <span className="sr-only">Edit Task</span>
         </Button>
       </DialogTrigger>

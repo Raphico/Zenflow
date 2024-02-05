@@ -1,13 +1,19 @@
+import { Suspense } from "react"
 import { db } from "@/db"
 import { eq } from "drizzle-orm"
 import { statuses } from "@/db/schema"
 
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "./ui/card"
+import { Checkbox } from "./ui/checkbox"
+import { Subtasks, SubtasksSkeleton } from "./subtasks"
+import { Icons } from "./icons"
 import { Skeleton } from "./ui/skeleton"
 import { AddColumnDialog } from "./dialogs/add-column-dialog"
 import { EditColumnDialog } from "./dialogs/edit-column-dialog"
 import { DeleteColumnDialog } from "./dialogs/delete-column-dialog"
 import { AddTaskDialog } from "./dialogs/add-task-dialog"
-import { TaskCard } from "./cards/task-card"
+import { getDueDate } from "@/lib/utils"
+import { TaskActions } from "./task-actions"
 
 interface BoardStatusesProps {
   boardId: number
@@ -54,7 +60,55 @@ export async function BoardStatuses({ boardId }: BoardStatusesProps) {
             {column.tasks.length > 0 && (
               <div className="flex flex-col gap-4">
                 {column.tasks.map((task) => (
-                  <TaskCard key={task.id} task={task} />
+                  <Card key={task.id} className="rounded-sm">
+                    <CardHeader className="flex-row items-center justify-between p-4">
+                      <Checkbox className="rounded-full" />
+
+                      <Suspense fallback={<SubtasksSkeleton />}>
+                        <TaskActions
+                          boardId={boardId}
+                          availableStatuses={availableStatuses}
+                          currentStatus={column.id}
+                          task={task}
+                        />
+                      </Suspense>
+                    </CardHeader>
+                    <CardContent className="p-4 pt-0">
+                      <CardTitle className="text-lg font-bold">
+                        {task.title}
+                      </CardTitle>
+                    </CardContent>
+                    <CardFooter className="justify-between p-4 pt-0">
+                      <span className="text-[12px] font-semibold">
+                        {task.priority}
+                      </span>
+
+                      <div className="flex items-center gap-4">
+                        {task.dueDate && (
+                          <div className="flex items-center gap-1 text-muted-foreground">
+                            <Icons.calendar
+                              className="h-3 w-3"
+                              aria-label="Due Date"
+                            />
+                            <span className="text-[12px]">
+                              {getDueDate(task.dueDate)}
+                            </span>
+                          </div>
+                        )}
+
+                        {task.tag && (
+                          <div className="flex items-center gap-1 text-muted-foreground">
+                            <Icons.tag className="h-3 w-3" aria-label="Tag" />
+                            <span className="text-[12px]">{task.tag}</span>
+                          </div>
+                        )}
+
+                        <Suspense fallback={<SubtasksSkeleton />}>
+                          <Subtasks taskId={task.id} />
+                        </Suspense>
+                      </div>
+                    </CardFooter>
+                  </Card>
                 ))}
               </div>
             )}
@@ -62,7 +116,7 @@ export async function BoardStatuses({ boardId }: BoardStatusesProps) {
             <footer className="grid">
               <AddTaskDialog
                 boardId={boardId}
-                currentStatus={column.title}
+                currentStatus={column.id}
                 availableStatuses={availableStatuses}
               />
             </footer>

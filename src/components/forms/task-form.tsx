@@ -2,7 +2,7 @@
 
 import { useFieldArray, type UseFormReturn } from "react-hook-form"
 import type { z } from "zod"
-import type { taskSchema } from "@/lib/validations/task"
+import type { SubTask, taskSchema } from "@/lib/validations/task"
 import type { Status } from "@/db/schema"
 
 import {
@@ -41,16 +41,12 @@ interface TaskFormProps {
   form: UseFormReturn<
     {
       title: string
-      subtasks: {
-        title: string
-        done: boolean
-        dueDate?: Date | undefined
-      }[]
-      status: string
-      dueDate?: Date | undefined
       priority: "P1" | "P2" | "P3" | "P4"
-      tag?: string | undefined
+      statusId: number
+      subtasks: SubTask[]
       description?: string | undefined
+      dueDate?: Date | undefined
+      tag?: string | undefined
     },
     unknown,
     undefined
@@ -138,13 +134,16 @@ export function TaskForm({
 
         <FormField
           control={form.control}
-          name="status"
+          name="statusId"
           render={({ field }) => (
             <FormItem className="flex w-full items-center gap-12">
               <FormLabel className="text-nowrap text-muted-foreground">
                 Status
               </FormLabel>
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
+              <Select
+                onValueChange={field.onChange}
+                defaultValue={field.value.toString()}
+              >
                 <FormControl>
                   <SelectTrigger
                     className={cn(
@@ -158,7 +157,7 @@ export function TaskForm({
                 <SelectContent>
                   <SelectGroup>
                     {availableStatuses.map((status) => (
-                      <SelectItem key={status.id} value={status.title}>
+                      <SelectItem key={status.id} value={status.id.toString()}>
                         {status.title}
                       </SelectItem>
                     ))}
