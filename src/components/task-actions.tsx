@@ -1,10 +1,10 @@
 import type { Status, Task } from "@/db/schema"
+import type { SubTask } from "@/lib/validations/task"
 
 import { EditTaskDialog } from "./dialogs/edit-task-dialog"
+import { DeleteTaskDialog } from "./dialogs/delete-task-dialog"
 import { Skeleton } from "./ui/skeleton"
-import type { SubTask } from "@/lib/validations/task"
 import { getSubtasks } from "@/lib/fetchers/subtask"
-import { Icons } from "./icons"
 
 interface TaskActionsProps {
   boardId: number
@@ -30,9 +30,9 @@ export async function TaskActions({
         task={task}
         subtasks={subtasks}
       />
-      <Icons.delete
-        className="h-4 w-4 text-destructive opacity-50"
-        aria-hidden="true"
+      <DeleteTaskDialog
+        boardId={boardId}
+        task={{ id: task.id, title: task.title }}
       />
     </div>
   )

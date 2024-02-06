@@ -24,7 +24,7 @@ A task manager web application built with Next.js 14
 - [x] Account and Preference Settings Setup
 - [x] Create New Task Functionality
 - [x] Implement Tasks Board View
-- [ ] Task Actions (Edit, Delete, Mark as Done, etc)
+- [x] Task Actions (Edit, Delete, Mark as Done, etc)
 - [ ] Drag and drop task functionality
 - [x] Create New Board Column Feature
 - [x] Column Actions (Edit and Delete) for Boards

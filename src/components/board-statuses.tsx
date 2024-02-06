@@ -1,18 +1,18 @@
 import { Suspense } from "react"
 import { db } from "@/db"
 import { eq } from "drizzle-orm"
-import { statuses } from "@/db/schema"
+import { statuses, tasks } from "@/db/schema"
 
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "./ui/card"
-import { Checkbox } from "./ui/checkbox"
 import { Subtasks, SubtasksSkeleton } from "./subtasks"
+import { TaskDoneCheckbox } from "./forms/task-done-checkbox"
 import { Icons } from "./icons"
 import { Skeleton } from "./ui/skeleton"
 import { AddColumnDialog } from "./dialogs/add-column-dialog"
 import { EditColumnDialog } from "./dialogs/edit-column-dialog"
 import { DeleteColumnDialog } from "./dialogs/delete-column-dialog"
 import { AddTaskDialog } from "./dialogs/add-task-dialog"
-import { getDueDate } from "@/lib/utils"
+import { cn, getDueDate } from "@/lib/utils"
 import { TaskActions } from "./task-actions"
 
 interface BoardStatusesProps {
@@ -23,7 +23,9 @@ export async function BoardStatuses({ boardId }: BoardStatusesProps) {
   const columns = await db.query.statuses.findMany({
     where: eq(statuses.boardId, boardId),
     with: {
-      tasks: true,
+      tasks: {
+        orderBy: [tasks.done],
+      },
     },
     orderBy: statuses.createdAt,
   })
@@ -60,10 +62,19 @@ export async function BoardStatuses({ boardId }: BoardStatusesProps) {
             {column.tasks.length > 0 && (
               <div className="flex flex-col gap-4">
                 {column.tasks.map((task) => (
-                  <Card key={task.id} className="rounded-sm">
+                  <Card
+                    key={task.id}
+                    className={cn("rounded-sm", {
+                      "opacity-80": task.done,
+                    })}
+                  >
                     <CardHeader className="flex-row items-center justify-between p-4">
-                      <Checkbox className="rounded-full" />
-
+                      <TaskDoneCheckbox
+                        key={task.id}
+                        taskId={task.id}
+                        boardId={boardId}
+                        isDone={task.done}
+                      />
                       <Suspense fallback={<SubtasksSkeleton />}>
                         <TaskActions
                           boardId={boardId}

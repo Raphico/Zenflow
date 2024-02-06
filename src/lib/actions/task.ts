@@ -125,3 +125,53 @@ export async function updateTask(
       : new Error("Something went wrong, please try again.")
   }
 }
+
+export async function deleteTask({
+  taskId,
+  boardId,
+}: {
+  taskId: number
+  boardId: number
+}) {
+  const taskExists = await db.query.tasks.findFirst({
+    where: eq(tasks.id, taskId),
+  })
+
+  if (!taskExists) {
+    throw new Error("Task doesn't exists!")
+  }
+
+  await db.delete(tasks).where(eq(tasks.id, taskId))
+
+  // Delete all statues of this board
+  await db.delete(subtasks).where(eq(subtasks.taskId, taskId))
+
+  revalidatePath(`/app/board/${boardId}`)
+}
+
+export async function updateTaskDone({
+  taskId,
+  boardId,
+  isDone,
+}: {
+  taskId: number
+  boardId: number
+  isDone: boolean
+}) {
+  const taskExists = await db.query.tasks.findFirst({
+    where: eq(tasks.id, taskId),
+  })
+
+  if (!taskExists) {
+    throw new Error("Task doesn't exists!")
+  }
+
+  await db
+    .update(tasks)
+    .set({
+      done: !isDone,
+    })
+    .where(eq(tasks.id, taskId))
+
+  revalidatePath(`/app/board/${boardId}`)
+}
