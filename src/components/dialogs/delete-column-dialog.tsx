@@ -22,11 +22,11 @@ import { toast } from "sonner"
 
 interface DeleteColumnDialogProps {
   boardId: number
-  column: Pick<Status, "id" | "title">
+  status: Pick<Status, "id" | "title">
 }
 
 export function DeleteColumnDialog({
-  column,
+  status,
   boardId,
 }: DeleteColumnDialogProps) {
   const [isPending, startTransition] = React.useTransition()
@@ -34,7 +34,7 @@ export function DeleteColumnDialog({
   const handleDeleteColumn = () => {
     startTransition(async () => {
       try {
-        await deleteColumn({ boardId, columnId: column.id })
+        await deleteColumn({ boardId, columnId: status.id })
 
         toast.success("Column Deleted!")
       } catch (error) {
@@ -55,7 +55,7 @@ export function DeleteColumnDialog({
         <AlertDialogHeader>
           <AlertDialogTitle>Delete </AlertDialogTitle>
           <AlertDialogDescription>
-            This will permanently delete {column.title} and all its tasks. This
+            This will permanently delete {status.title} and all its tasks. This
             can&apos;t be undone.
           </AlertDialogDescription>
         </AlertDialogHeader>

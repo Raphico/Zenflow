@@ -24,19 +24,19 @@ import { updateColumn } from "@/lib/actions/column"
 
 interface EditColumnDialogProps {
   boardId: number
-  column: Pick<Status, "id" | "title">
+  status: Pick<Status, "id" | "title">
 }
 
 type Inputs = z.infer<typeof columnSchema>
 
-export function EditColumnDialog({ boardId, column }: EditColumnDialogProps) {
+export function EditColumnDialog({ boardId, status }: EditColumnDialogProps) {
   const [isPending, startTransition] = React.useTransition()
   const [open, setOpen] = React.useState(false)
 
   const form = useForm<Inputs>({
     resolver: zodResolver(columnSchema),
     defaultValues: {
-      name: column.title,
+      name: status.title,
     },
   })
 
@@ -45,7 +45,7 @@ export function EditColumnDialog({ boardId, column }: EditColumnDialogProps) {
       try {
         await updateColumn({
           boardId,
-          id: column.id,
+          id: status.id,
           name: values.name,
         })
         toast.success(`${values.name} updated!`)
