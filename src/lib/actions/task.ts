@@ -27,7 +27,7 @@ export async function addTask(rawInputs: z.infer<typeof extendedTaskSchema>) {
           description: inputs.description,
           dueDate: inputs.dueDate,
           priority: inputs.priority,
-          tag: inputs.tag,
+          tag: inputs.tag || null,
         })
         .execute()
 
@@ -80,7 +80,7 @@ export async function updateTask(
           title: inputs.title,
           description: inputs.description,
           dueDate: inputs.dueDate,
-          tag: inputs.tag,
+          tag: inputs.tag || null,
           priority: inputs.priority,
           statusId: inputs.statusId,
         })
