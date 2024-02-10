@@ -14,7 +14,7 @@ export const boards = mysqlTable("boards", {
   userId: varchar("userId", { length: 191 }).notNull(),
   id: serial("id").primaryKey(),
   name: varchar("name", { length: 35 }).notNull().unique(),
-  createdAt: timestamp("createdAt").defaultNow(),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
   updatedAt: timestamp("updatedAt").defaultNow(),
 })
 
@@ -24,7 +24,7 @@ export const statuses = mysqlTable("statuses", {
   id: serial("id").primaryKey(),
   title: varchar("title", { length: 35 }).notNull().unique(),
   boardId: int("boardId").notNull(),
-  createdAt: timestamp("createdAt").defaultNow(),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
   updatedAt: timestamp("updatedAt").defaultNow(),
 })
 
@@ -41,7 +41,7 @@ export const tasks = mysqlTable("tasks", {
   done: boolean("done").default(false).notNull(),
   tag: varchar("tag", { length: 25 }),
   statusId: int("statusId").notNull(),
-  createdAt: timestamp("createdAt").defaultNow(),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
   updatedAt: timestamp("updatedAt").onUpdateNow(),
 })
 
@@ -53,7 +53,7 @@ export const subtasks = mysqlTable("subtasks", {
   done: boolean("done").default(false).notNull(),
   dueDate: datetime("dueDate"),
   taskId: int("taskId").notNull(),
-  createdAt: timestamp("createdAt").defaultNow(),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
   updatedAt: timestamp("updatedAt").onUpdateNow(),
 })
 

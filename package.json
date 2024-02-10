@@ -46,6 +46,7 @@
     "react-hook-form": "^7.49.3",
     "react-textarea-autosize": "^8.5.3",
     "react-wrap-balancer": "^1.1.0",
+    "recharts": "^2.12.0",
     "rehype-autolink-headings": "^7.1.0",
     "rehype-slug": "^6.0.0",
     "remark-gfm": "^4.0.0",

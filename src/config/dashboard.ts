@@ -10,7 +10,6 @@ export const dashboardConfig: DashboardConfig = {
     {
       title: "Analytics",
       href: "/app/analytics",
-      disabled: true,
       icon: "analytics",
     },
     {

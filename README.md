@@ -31,7 +31,7 @@ A task manager web application built with Next.js 14
 - [x] Create New Board Capability
 - [x] Board Actions (Edit and Delete)
 - [ ] Task Search, Filtering, and Sorting Functionality
-- [ ] Integrate Analytics Page
+- [x] Add Analytics Page
 - [ ] Integrate stripe
 
 ## Running Locally

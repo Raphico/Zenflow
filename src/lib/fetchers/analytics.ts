@@ -2,7 +2,7 @@
 
 import { db } from "@/db"
 import { statuses, tasks } from "@/db/schema"
-import { desc, sql, sum, gte, and, lte, eq } from "drizzle-orm"
+import { desc, sql, gte, and, lte, eq } from "drizzle-orm"
 import { endOfWeek, startOfWeek } from "date-fns"
 
 const startDate = startOfWeek(new Date())
@@ -13,8 +13,7 @@ export async function getTaskCompletionRates() {
     return await db
       .select({
         createdAt: tasks.createdAt,
-        count: sql<number>`count(*)`,
-        completedTasks: sum(tasks.done),
+        completedTasks: sql<number>`sum(tasks.done)`,
       })
       .from(tasks)
       .where(
@@ -50,7 +49,6 @@ export async function getTaskDistributionByStatus() {
   try {
     return await db
       .select({
-        createdAt: statuses.createdAt,
         title: statuses.title,
         count: sql<number>`count(*)`,
       })
