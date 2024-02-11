@@ -67,6 +67,7 @@ export const Icons = {
   plus: Plus,
   user: CircleUserRound,
   view: Columns2,
+  warning: AlertTriangle,
   menu: ({ ...props }: LucideProps) => (
     <svg
       viewBox="0 0 49 38"
@@ -77,9 +78,9 @@ export const Icons = {
       <path
         d="M3 3H45.6667M3 19H29.6667M3 35H16.3333"
         stroke="currentColor"
-        stroke-width="5.33333"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="5.33333"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>
   ),

@@ -26,7 +26,6 @@ export const siteConfig: SiteConfig = {
     {
       title: "Pricing",
       href: "/pricing",
-      disabled: true,
     },
   ],
   footerNav: [

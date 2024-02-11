@@ -26,7 +26,6 @@ export const dashboardConfig: DashboardConfig = {
       title: "Billing",
       href: "/app/billing",
       icon: "dollar",
-      disabled: true,
     },
   ],
 }
