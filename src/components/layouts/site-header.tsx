@@ -6,6 +6,7 @@ import Link from "next/link"
 import { cn } from "@/lib/utils"
 import { usePathname } from "next/navigation"
 import { buttonVariants } from "@/components/ui/button"
+import { MobileNav } from "./mobile-nav"
 
 export function SiteHeader() {
   const pathname = usePathname()
@@ -13,7 +14,7 @@ export function SiteHeader() {
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-14 items-center justify-between">
-        <div className="flex items-center gap-6">
+        <div className="hidden items-center gap-6 sm:flex">
           <Link href="/" className="flex items-center gap-2">
             <Icons.logo className="h-6 w-6" aria-hidden="true" />
             <span className="hidden text-lg font-bold lg:inline-block">
@@ -41,6 +42,8 @@ export function SiteHeader() {
             })}
           </nav>
         </div>
+
+        <MobileNav />
 
         <Link href="/sign-in" className={cn(buttonVariants({ size: "sm" }))}>
           Sign In

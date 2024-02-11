@@ -67,6 +67,22 @@ export const Icons = {
   plus: Plus,
   user: CircleUserRound,
   view: Columns2,
+  menu: ({ ...props }: LucideProps) => (
+    <svg
+      viewBox="0 0 49 38"
+      fill="currentColor"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}
+    >
+      <path
+        d="M3 3H45.6667M3 19H29.6667M3 35H16.3333"
+        stroke="currentColor"
+        stroke-width="5.33333"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+    </svg>
+  ),
   google: ({ ...props }: LucideProps) => (
     <svg role="img" viewBox="0 0 24 24" {...props}>
       <path
