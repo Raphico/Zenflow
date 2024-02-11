@@ -49,6 +49,7 @@ export function MobileNav() {
                       item.disabled && "pointer-events-none opacity-60",
                       isActive ? "text-foreground" : "text-muted-foreground"
                     )}
+                    onClick={toggleNav}
                   >
                     {item.title}
                   </Link>
