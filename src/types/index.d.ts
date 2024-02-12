@@ -30,3 +30,9 @@ type SidebarNavItem = NavItem & { icon: keyof typeof Icons }
 export type DashboardConfig = {
   sidebarNav: SidebarNavItem[]
 }
+
+export type SubscriptionConfig = {
+  name: string
+  features: string[]
+  price: number
+}
