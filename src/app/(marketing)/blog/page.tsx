@@ -29,7 +29,7 @@ export default function BlogPage() {
     )
 
   return (
-    <section className="container max-w-5xl py-8 lg:py-12">
+    <section className="container max-w-5xl py-12 lg:py-16">
       <PageHeader>
         <PageHeaderHeading size="lg">
           Productivity Hub: Tips & Insights

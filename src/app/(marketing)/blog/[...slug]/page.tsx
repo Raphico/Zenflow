@@ -94,7 +94,7 @@ export default function PostPage({ params }: PostPageProps) {
   )
 
   return (
-    <article className="container mx-auto grid max-w-3xl gap-8 py-8 lg:py-12">
+    <article className="container mx-auto grid max-w-3xl gap-8 py-12 lg:py-16">
       <div className="space-y-4">
         <div className="flex items-center gap-2 text-sm text-muted-foreground">
           <p>{formatDate(post.publishedAt)}</p>

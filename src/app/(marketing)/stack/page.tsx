@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 
 export default function StackPage() {
   return (
-    <section className="container max-w-5xl space-y-8 py-8 lg:py-12">
+    <section className="container max-w-5xl space-y-8 py-12 lg:py-16">
       <PageHeader>
         <PageHeaderHeading size="lg">Tech Stack</PageHeaderHeading>
         <PageHeaderDescription size="lg">

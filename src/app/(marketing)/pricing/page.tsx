@@ -16,8 +16,8 @@ export const metadata: Metadata = {
 
 export default function PricingPage() {
   return (
-    <div className="container flex max-w-6xl flex-col items-center justify-center space-y-10 py-8 lg:py-12">
-      <PageHeader>
+    <div className="container flex max-w-6xl flex-col items-center justify-center space-y-10 py-12 lg:py-16">
+      <PageHeader className="text-center">
         <PageHeaderHeading size="lg">
           Discover the right plan for you
         </PageHeaderHeading>
@@ -65,7 +65,7 @@ export default function PricingPage() {
         ))}
       </section>
 
-      <p className="text-muted-foreground">
+      <p className="text-center text-muted-foreground">
         Zenflow is a demo app.{" "}
         <strong className="font-semibold">
           You can test the upgrade and won&apos;t be charged.
