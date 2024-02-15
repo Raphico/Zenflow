@@ -31,8 +31,18 @@ export type DashboardConfig = {
   sidebarNav: SidebarNavItem[]
 }
 
-export type SubscriptionConfig = {
-  name: string
+export type SubscriptionPlan = {
+  name: "Free" | "Pro"
   features: string[]
   price: number
+  stripePriceId: string
+}
+
+export interface UserSubscriptionPlan extends SubscriptionPlan {
+  stripeSubscriptionId?: string | null
+  stripeCurrentPeriodEnd?: string | null
+  stripeCustomerId?: string | null
+  isSubscribed: boolean
+  isCanceled: boolean
+  isActive: boolean
 }

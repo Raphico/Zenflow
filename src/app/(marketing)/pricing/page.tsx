@@ -5,7 +5,7 @@ import { PageHeader, PageHeaderHeading } from "@/components/page-header"
 import { buttonVariants } from "@/components/ui/button"
 import { Icons } from "@/components/icons"
 import { cn, formatPrice } from "@/lib/utils"
-import { subscriptionConfig } from "@/config/subscription"
+import { subscriptionPlans } from "@/config/subscription"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 
 export const metadata: Metadata = {
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 
 export default function PricingPage() {
   return (
-    <div className="container flex max-w-6xl flex-col items-center justify-center space-y-10 py-12 lg:py-16">
+    <div className="container flex max-w-4xl flex-col space-y-10 py-12 lg:py-16">
       <PageHeader className="text-center">
         <PageHeaderHeading size="lg">
           Discover the right plan for you
@@ -24,7 +24,7 @@ export default function PricingPage() {
       </PageHeader>
 
       <section className="grid gap-10 sm:grid-cols-2">
-        {subscriptionConfig.map((plan, i) => (
+        {subscriptionPlans.map((plan, i) => (
           <Card
             key={plan.name}
             className={`${i === 1 && "border-primary shadow-md"} `}

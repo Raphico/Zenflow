@@ -28,3 +28,10 @@ export const changePasswordSchema = z.object({
         "Password must be at least 8 characters long and must contain at least one letter, one number, and one special character",
     }),
 })
+
+export const userPrivateMetadataSchema = z.object({
+  stripePriceId: z.string().optional().nullable(),
+  stripeSubscriptionId: z.string().optional().nullable(),
+  stripeCustomerId: z.string().optional().nullable(),
+  stripeCurrentPeriodEnd: z.string().optional().nullable(),
+})

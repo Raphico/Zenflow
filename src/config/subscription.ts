@@ -1,6 +1,6 @@
-import type { SubscriptionConfig } from "@/types"
+import type { SubscriptionPlan } from "@/types"
 
-export const subscriptionConfig: SubscriptionConfig[] = [
+export const subscriptionPlans: SubscriptionPlan[] = [
   {
     name: "Free",
     features: [
@@ -9,6 +9,7 @@ export const subscriptionConfig: SubscriptionConfig[] = [
       "Up to 5 tasks per column",
     ],
     price: 0,
+    stripePriceId: "",
   },
   {
     name: "Pro",
@@ -16,9 +17,9 @@ export const subscriptionConfig: SubscriptionConfig[] = [
       "Unlimited Board Creations",
       "Unlimited Columns per Board",
       "Unlimited Tasks Creation",
-      "Access to Analytics",
       "Premium Support",
     ],
     price: 9.99,
+    stripePriceId: "",
   },
 ]
