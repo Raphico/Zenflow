@@ -54,16 +54,18 @@ export default async function DashboardPage(props: DashboardPageProps) {
           Here&apos;s a quick overview of your boards
         </PageHeaderDescription>
       </PageHeader>
-      <Alert>
-        <Icons.rocket className="size-4" aria-hidden="true" />
-        <AlertTitle>Heads up!</AlertTitle>
-        <AlertDescription>
-          You are currently on the{" "}
-          <span className="font-semibold">{subscriptionPlan?.name}</span> plan.
-          You can create up to{" "}
-          <span className="font-semibold">{maxBoardCount}</span> boards
-        </AlertDescription>
-      </Alert>
+      {!subscriptionPlan?.isSubscribed && !subscriptionPlan?.isActive && (
+        <Alert>
+          <Icons.rocket className="size-4" aria-hidden="true" />
+          <AlertTitle>Heads up!</AlertTitle>
+          <AlertDescription>
+            You are currently on the{" "}
+            <span className="font-semibold">{subscriptionPlan?.name}</span>{" "}
+            plan. You can create up to{" "}
+            <span className="font-semibold">{maxBoardCount}</span> boards
+          </AlertDescription>
+        </Alert>
+      )}
       <SearchBoards />
       <section className="grid gap-4 pb-5 sm:grid-cols-3">
         {searchedBoards.map((board) => (
