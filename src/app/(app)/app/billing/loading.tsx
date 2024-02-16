@@ -49,8 +49,8 @@ export default function BillingLoading() {
         </h2>
 
         <div className="grid gap-10 sm:grid-cols-2">
-          <Skeleton className="h-[381.6px] w-[396px]" />
-          <Skeleton className="h-[381.6px] w-[396px]" />
+          <Skeleton className="h-[381.6px] w-full sm:w-[396px]" />
+          <Skeleton className="h-[381.6px] w-full sm:w-[396px]" />
         </div>
       </section>
     </div>
