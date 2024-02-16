@@ -1,7 +1,5 @@
 import { type Metadata } from "next"
-import { db } from "@/db"
-import { boards } from "@/db/schema"
-import { and, eq, like } from "drizzle-orm"
+import { redirect } from "next/navigation"
 
 import {
   PageHeader,
@@ -12,6 +10,14 @@ import { SearchBoards } from "@/components/search-boards"
 import { BoardCard } from "@/components/cards/board-card"
 import { CreateBoardDialog } from "@/components/dialogs/create-board-dialog"
 import { getCachedUser } from "@/lib/fetchers/auth"
+import { getAllBoards } from "@/lib/fetchers/board"
+import { getSubscriptionPlan } from "@/lib/fetchers/stripe"
+import { getPlanFeatures } from "@/lib/subscription"
+import Link from "next/link"
+import { Icons } from "@/components/icons"
+import { cn } from "@/lib/utils"
+import { buttonVariants } from "@/components/ui/button"
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 
 export const metadata: Metadata = {
   title: "Dashboard",
@@ -25,18 +31,20 @@ interface DashboardPageProps {
 export default async function DashboardPage(props: DashboardPageProps) {
   const user = await getCachedUser()
 
-  if (!user) return null
+  if (!user) {
+    redirect("/sign-in")
+  }
 
-  const allBoards = props.searchParams.search
-    ? await db.query.boards.findMany({
-        where: and(
-          eq(boards.userId, user.id),
-          like(boards.name, `%${props.searchParams.search}%`)
-        ),
-      })
-    : await db.query.boards.findMany({
-        where: eq(boards.userId, user.id),
-      })
+  const [allBoards, subscriptionPlan] = await Promise.all([
+    getAllBoards({ userId: user.id }),
+    getSubscriptionPlan({ userId: user.id }),
+  ])
+
+  const searchedBoards = allBoards.filter((board) =>
+    new RegExp(props.searchParams.search ?? "", "i").test(board.name)
+  )
+
+  const { maxBoardCount } = getPlanFeatures(subscriptionPlan?.name)
 
   return (
     <div className="mx-auto w-full max-w-4xl space-y-6 px-8 py-2">
@@ -46,12 +54,36 @@ export default async function DashboardPage(props: DashboardPageProps) {
           Here&apos;s a quick overview of your boards
         </PageHeaderDescription>
       </PageHeader>
+      <Alert>
+        <Icons.rocket className="size-4" aria-hidden="true" />
+        <AlertTitle>Heads up!</AlertTitle>
+        <AlertDescription>
+          You are currently on the{" "}
+          <span className="font-semibold">{subscriptionPlan?.name}</span> plan.
+          You can create up to{" "}
+          <span className="font-semibold">{maxBoardCount}</span> boards
+        </AlertDescription>
+      </Alert>
       <SearchBoards />
-      <section className="grid gap-4 sm:grid-cols-3">
-        {allBoards.map((board) => (
+      <section className="grid gap-4 pb-5 sm:grid-cols-3">
+        {searchedBoards.map((board) => (
           <BoardCard key={board.id} board={board} />
         ))}
-        <CreateBoardDialog userId={user.id} />
+        {subscriptionPlan?.isActive ? (
+          <CreateBoardDialog userId={user.id} />
+        ) : allBoards.length >= maxBoardCount ? (
+          <Link
+            href="/app/billing"
+            className={cn(
+              buttonVariants({ variant: "outline", className: "h-44" })
+            )}
+          >
+            <Icons.plus className="mr-2 h-4 w-4" aria-hidden="true" />
+            Create a board
+          </Link>
+        ) : (
+          <CreateBoardDialog userId={user.id} />
+        )}
       </section>
     </div>
   )

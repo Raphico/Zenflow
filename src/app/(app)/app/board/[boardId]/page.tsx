@@ -60,7 +60,7 @@ export default async function BoardPage({ params }: BoardPageProps) {
       </div>
 
       <React.Suspense fallback={<BoardStatusesSkeleton />}>
-        <BoardStatuses boardId={board.id} />
+        <BoardStatuses boardId={board.id} userId={user.id} />
       </React.Suspense>
     </div>
   )

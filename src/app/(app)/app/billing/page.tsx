@@ -106,7 +106,7 @@ export default async function BillingPage() {
 
                 {plan.name === "Free" ? (
                   <Link
-                    href="/dashboard"
+                    href="/app/dashboard"
                     className={cn(buttonVariants(), "w-full")}
                   >
                     Get Started

@@ -1,22 +1,38 @@
 import { Suspense } from "react"
+import Link from "next/link"
 
 import { Skeleton } from "./ui/skeleton"
+import { Tasks, TasksSkeleton } from "./tasks"
+
 import { AddColumnDialog } from "./dialogs/add-column-dialog"
 import { EditColumnDialog } from "./dialogs/edit-column-dialog"
 import { DeleteColumnDialog } from "./dialogs/delete-column-dialog"
 import { AddTaskDialog } from "./dialogs/add-task-dialog"
-import { Tasks, TasksSkeleton } from "./tasks"
+
+import { buttonVariants } from "./ui/button"
+import { Icons } from "./icons"
+import { cn } from "@/lib/utils"
 import { getBoardStatuses } from "@/lib/fetchers/status"
+import { getSubscriptionPlan } from "@/lib/fetchers/stripe"
+import { getPlanFeatures } from "@/lib/subscription"
 
 interface BoardStatusesProps {
   boardId: number
+  userId: string
 }
 
-export async function BoardStatuses({ boardId }: BoardStatusesProps) {
-  const boardStatuses = await getBoardStatuses(boardId)
+export async function BoardStatuses({ boardId, userId }: BoardStatusesProps) {
+  const [boardStatuses, subscriptionPlan] = await Promise.all([
+    getBoardStatuses(boardId),
+    getSubscriptionPlan({ userId }),
+  ])
+
+  const { maxColumnCount, maxTaskCount } = getPlanFeatures(
+    subscriptionPlan?.name
+  )
 
   return (
-    <div className="flex flex-1 overflow-x-auto">
+    <div className="flex flex-1 overflow-x-auto overscroll-x-contain">
       <div className="flex gap-8 px-8 pb-16 pt-6">
         {boardStatuses.map((status) => (
           <section
@@ -48,16 +64,54 @@ export async function BoardStatuses({ boardId }: BoardStatusesProps) {
             </Suspense>
 
             <footer className="grid">
-              <AddTaskDialog
-                boardId={boardId}
-                currentStatus={status.id}
-                availableStatuses={boardStatuses}
-              />
+              {subscriptionPlan?.isActive ? (
+                <AddTaskDialog
+                  boardId={boardId}
+                  currentStatus={status.id}
+                  availableStatuses={boardStatuses}
+                />
+              ) : status.taskCount >= maxTaskCount ? (
+                <Link
+                  href="/app/billing"
+                  className={cn(
+                    buttonVariants({
+                      variant: "ghost",
+                      className: "w-full text-muted-foreground",
+                    })
+                  )}
+                >
+                  <Icons.plus className="mr-2 h-4 w-4" aria-hidden="true" />
+                  Add Task
+                </Link>
+              ) : (
+                <AddTaskDialog
+                  boardId={boardId}
+                  currentStatus={status.id}
+                  availableStatuses={boardStatuses}
+                />
+              )}
             </footer>
           </section>
         ))}
 
-        <AddColumnDialog boardId={boardId} />
+        {subscriptionPlan?.isActive ? (
+          <AddColumnDialog boardId={boardId} />
+        ) : boardStatuses.length >= maxColumnCount ? (
+          <Link
+            href="/app/billing"
+            className={cn(
+              buttonVariants({
+                variant: "ghost",
+                className: "w-[18em] shrink-0",
+              })
+            )}
+          >
+            <Icons.plus className="mr-2 h-4 w-4" aria-hidden="true" />
+            Add Column
+          </Link>
+        ) : (
+          <AddColumnDialog boardId={boardId} />
+        )}
       </div>
     </div>
   )
