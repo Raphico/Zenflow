@@ -6,34 +6,6 @@ import { eq, sql } from "drizzle-orm"
 
 export async function getBoardStatuses(boardId: number) {
   try {
-    // return await db.transaction(async (tx) => {
-    //   const boardStatuses = await tx
-    //     .select({
-    //       id: statuses.id,
-    //       title: statuses.title,
-    //     })
-    //     .from(statuses)
-    //     .where(eq(statuses.boardId, boardId))
-
-    //   const statusesWithTaskCount = await Promise.all(
-    //     boardStatuses.map(async (status) => {
-    //       const taskCount = await tx
-    //         .select({
-    //           count: sql<number>`count(*)`,
-    //         })
-    //         .from(tasks)
-    //         .where(eq(tasks.statusId, status.id))
-
-    //       return {
-    //         ...status,
-    //         taskCount: taskCount[0].count,
-    //       }
-    //     })
-    //   )
-
-    //   return statusesWithTaskCount
-    // })
-
     return await db.transaction(async (tx) => {
       const boardStatuses = await tx
         .select({
