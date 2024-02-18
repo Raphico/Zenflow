@@ -32,7 +32,7 @@ export async function BoardStatuses({ boardId, userId }: BoardStatusesProps) {
   )
 
   return (
-    <div className="flex flex-1 overflow-x-auto overscroll-x-contain">
+    <div className="flex flex-1 ">
       <div className="flex gap-8 px-8 pb-16 pt-6">
         {boardStatuses.map((status) => (
           <section
