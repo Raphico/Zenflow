@@ -1,7 +1,7 @@
 "use server"
 
 import { db } from "@/db"
-import { eq } from "drizzle-orm"
+import { eq, and } from "drizzle-orm"
 import { boards, statuses } from "@/db/schema"
 
 import { z } from "zod"
@@ -17,12 +17,12 @@ export async function createBoard(
 ) {
   const inputs = extendedBoardSchema.parse(rawInputs)
 
-  const boardExists = await db.query.boards.findFirst({
-    where: eq(boards.name, inputs.name),
+  const boardWithSameName = await db.query.boards.findFirst({
+    where: and(eq(boards.name, inputs.name), eq(boards.userId, inputs.userId)),
   })
 
-  if (boardExists) {
-    throw new Error("Board already exists")
+  if (boardWithSameName) {
+    throw new Error("Board name already taken!")
   }
 
   const newBoard = await db.insert(boards).values({
@@ -62,15 +62,15 @@ export async function updateBoard(
 ) {
   const inputs = updateBoardSchema.parse(rawInputs)
 
-  const board = await db.query.boards.findFirst({
-    where: eq(boards.id, inputs.id),
+  const boardWithSameName = await db.query.boards.findFirst({
+    where: and(eq(boards.name, inputs.name), eq(boards.userId, inputs.userId)),
     columns: {
       id: true,
     },
   })
 
-  if (!board) {
-    throw new Error("Board not found")
+  if (boardWithSameName) {
+    throw new Error("Board name already taken!")
   }
 
   await db.update(boards).set(inputs).where(eq(boards.id, inputs.id))

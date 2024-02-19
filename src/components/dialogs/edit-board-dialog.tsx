@@ -24,12 +24,13 @@ import { catchError } from "@/lib/utils"
 import { BoardForm } from "../forms/board-form"
 
 interface EditBoardDialogProps {
+  userId: string
   board: Pick<Board, "id" | "name">
 }
 
 type Inputs = z.infer<typeof boardSchema>
 
-export function EditBoardDialog({ board }: EditBoardDialogProps) {
+export function EditBoardDialog({ userId, board }: EditBoardDialogProps) {
   const [isPending, startTransition] = React.useTransition()
   const [open, setOpen] = React.useState(false)
 
@@ -44,6 +45,7 @@ export function EditBoardDialog({ board }: EditBoardDialogProps) {
     startTransition(async () => {
       try {
         await updateBoard({
+          userId,
           id: board.id,
           name: values.name,
         })

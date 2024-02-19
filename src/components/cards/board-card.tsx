@@ -9,14 +9,18 @@ import Link from "next/link"
 
 interface BoardCardProps {
   board: Board
+  userId: string
 }
 
-export function BoardCard({ board }: BoardCardProps) {
+export function BoardCard({ board, userId }: BoardCardProps) {
   return (
     <Card className="h-44">
       <CardHeader className="flex flex-row items-center justify-end pt-4">
         <div className="flex items-center gap-1">
-          <EditBoardDialog board={{ id: board.id, name: board.name }} />
+          <EditBoardDialog
+            userId={userId}
+            board={{ id: board.id, name: board.name }}
+          />
           <DeleteBoardDialog board={{ id: board.id, name: board.name }} />
         </div>
       </CardHeader>

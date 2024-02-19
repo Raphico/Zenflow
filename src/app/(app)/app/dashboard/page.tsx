@@ -69,7 +69,7 @@ export default async function DashboardPage(props: DashboardPageProps) {
       <SearchBoards />
       <section className="grid gap-4 pb-5 sm:grid-cols-3">
         {searchedBoards.map((board) => (
-          <BoardCard key={board.id} board={board} />
+          <BoardCard key={board.id} userId={user.id} board={board} />
         ))}
         {subscriptionPlan?.isActive ? (
           <CreateBoardDialog userId={user.id} />

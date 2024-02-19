@@ -12,6 +12,7 @@ export const boardSchema = z.object({
 })
 
 export const updateBoardSchema = z.object({
+  userId: z.string(),
   id: z.number(),
   name: boardSchema.shape.name,
 })

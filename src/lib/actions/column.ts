@@ -3,7 +3,7 @@
 import { revalidatePath } from "next/cache"
 
 import { statuses, tasks } from "@/db/schema"
-import { eq } from "drizzle-orm"
+import { and, eq } from "drizzle-orm"
 import { db } from "@/db"
 
 import { createColumnSchema, updateColumnSchema } from "../validations/column"
@@ -14,12 +14,18 @@ export async function createColumn(
 ) {
   const inputs = createColumnSchema.parse(rawInputs)
 
-  const columnExists = await db.query.statuses.findFirst({
-    where: eq(statuses.title, inputs.name),
+  const columnWithSameName = await db.query.statuses.findFirst({
+    where: and(
+      eq(statuses.boardId, inputs.boardId),
+      eq(statuses.title, inputs.name)
+    ),
+    columns: {
+      id: true,
+    },
   })
 
-  if (columnExists) {
-    throw new Error("Board already exists")
+  if (columnWithSameName) {
+    throw new Error("Column name already taken!")
   }
 
   await db.insert(statuses).values({
@@ -39,15 +45,18 @@ export async function updateColumn(
 ) {
   const inputs = extendedUpdateColumnSchema.parse(rawInputs)
 
-  const column = await db.query.statuses.findFirst({
-    where: eq(statuses.id, inputs.id),
+  const columnWithSameName = await db.query.statuses.findFirst({
+    where: and(
+      eq(statuses.boardId, inputs.boardId),
+      eq(statuses.title, inputs.name)
+    ),
     columns: {
       id: true,
     },
   })
 
-  if (!column) {
-    throw new Error("Column not found")
+  if (columnWithSameName) {
+    throw new Error("Column name already taken!")
   }
 
   await db
