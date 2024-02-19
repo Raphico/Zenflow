@@ -56,7 +56,7 @@ export default async function BoardPage({ params }: BoardPageProps) {
         <PageHeader>
           <PageHeaderHeading>{board.name}</PageHeaderHeading>
         </PageHeader>
-        <EditBoardDialog board={board} />
+        <EditBoardDialog userId={user.id} board={board} />
       </div>
 
       <React.Suspense fallback={<BoardStatusesSkeleton />}>
