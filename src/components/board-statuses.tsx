@@ -64,7 +64,7 @@ export async function BoardStatuses({ boardId, userId }: BoardStatusesProps) {
             </Suspense>
 
             <footer className="grid">
-              {subscriptionPlan?.isActive ? (
+              {subscriptionPlan?.isSubscribed ? (
                 <AddTaskDialog
                   boardId={boardId}
                   currentStatus={status.id}
@@ -94,7 +94,7 @@ export async function BoardStatuses({ boardId, userId }: BoardStatusesProps) {
           </section>
         ))}
 
-        {subscriptionPlan?.isActive ? (
+        {subscriptionPlan?.isSubscribed ? (
           <AddColumnDialog boardId={boardId} />
         ) : boardStatuses.length >= maxColumnCount ? (
           <Link

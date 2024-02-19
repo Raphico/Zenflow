@@ -54,7 +54,7 @@ export default async function DashboardPage(props: DashboardPageProps) {
           Here&apos;s a quick overview of your boards
         </PageHeaderDescription>
       </PageHeader>
-      {!subscriptionPlan?.isSubscribed && !subscriptionPlan?.isActive && (
+      {!subscriptionPlan?.isSubscribed && (
         <Alert>
           <Icons.rocket className="size-4" aria-hidden="true" />
           <AlertTitle>Heads up!</AlertTitle>
@@ -71,7 +71,7 @@ export default async function DashboardPage(props: DashboardPageProps) {
         {searchedBoards.map((board) => (
           <BoardCard key={board.id} userId={user.id} board={board} />
         ))}
-        {subscriptionPlan?.isActive ? (
+        {subscriptionPlan?.isSubscribed ? (
           <CreateBoardDialog userId={user.id} />
         ) : allBoards.length >= maxBoardCount ? (
           <Link
