@@ -13,7 +13,7 @@ import { relations } from "drizzle-orm"
 export const boards = mysqlTable("boards", {
   userId: varchar("userId", { length: 191 }).notNull(),
   id: serial("id").primaryKey(),
-  name: varchar("name", { length: 35 }).notNull().unique(),
+  name: varchar("name", { length: 35 }).notNull(),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
   updatedAt: timestamp("updatedAt").defaultNow(),
 })
@@ -22,7 +22,7 @@ export type Board = typeof boards.$inferSelect
 
 export const statuses = mysqlTable("statuses", {
   id: serial("id").primaryKey(),
-  title: varchar("title", { length: 35 }).notNull().unique(),
+  title: varchar("title", { length: 35 }).notNull(),
   boardId: int("boardId").notNull(),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
   updatedAt: timestamp("updatedAt").defaultNow(),
