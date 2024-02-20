@@ -1,14 +1,14 @@
 "use server"
 
 import { db } from "@/db"
-import { statuses, tasks } from "@/db/schema"
+import { boards, statuses, tasks } from "@/db/schema"
 import { desc, sql, gte, and, lte, eq } from "drizzle-orm"
 import { endOfWeek, startOfWeek } from "date-fns"
 
 const startDate = startOfWeek(new Date())
 const endDate = endOfWeek(new Date())
 
-export async function getTaskCompletionRates() {
+export async function getTaskCompletionRates(userId: string) {
   try {
     return await db
       .select({
@@ -16,8 +16,14 @@ export async function getTaskCompletionRates() {
         completedTasks: sql<number>`sum(tasks.done)`,
       })
       .from(tasks)
+      .innerJoin(statuses, eq(statuses.id, tasks.statusId))
+      .innerJoin(boards, eq(boards.id, statuses.boardId))
       .where(
-        and(gte(tasks.createdAt, startDate), lte(tasks.createdAt, endDate))
+        and(
+          eq(boards.userId, userId),
+          gte(tasks.createdAt, startDate),
+          lte(tasks.createdAt, endDate)
+        )
       )
       .groupBy(tasks.createdAt)
   } catch (error) {
@@ -28,7 +34,7 @@ export async function getTaskCompletionRates() {
   }
 }
 
-export async function getPriorityAnalysis() {
+export async function getPriorityAnalysis(userId: string) {
   try {
     return await db
       .select({
@@ -36,6 +42,9 @@ export async function getPriorityAnalysis() {
         count: sql<number>`count(*)`,
       })
       .from(tasks)
+      .innerJoin(statuses, eq(statuses.id, tasks.statusId))
+      .innerJoin(boards, eq(boards.id, statuses.boardId))
+      .where(eq(boards.userId, userId))
       .groupBy(tasks.priority)
   } catch (error) {
     console.error(error)
@@ -45,7 +54,7 @@ export async function getPriorityAnalysis() {
   }
 }
 
-export async function getTaskDistributionByStatus() {
+export async function getTaskDistributionByStatus(userId: string) {
   try {
     return await db
       .select({
@@ -54,6 +63,8 @@ export async function getTaskDistributionByStatus() {
       })
       .from(tasks)
       .innerJoin(statuses, eq(statuses.id, tasks.statusId))
+      .innerJoin(boards, eq(boards.id, statuses.boardId))
+      .where(eq(boards.userId, userId))
       .groupBy(statuses.createdAt, statuses.title)
   } catch (error) {
     console.error(error)
@@ -63,7 +74,7 @@ export async function getTaskDistributionByStatus() {
   }
 }
 
-export async function getPopularTags() {
+export async function getPopularTags(userId: string) {
   try {
     return await db
       .select({
@@ -71,6 +82,9 @@ export async function getPopularTags() {
         count: sql<number>`count(*)`,
       })
       .from(tasks)
+      .innerJoin(statuses, eq(statuses.id, tasks.statusId))
+      .innerJoin(boards, eq(boards.id, statuses.boardId))
+      .where(eq(boards.userId, userId))
       .groupBy(tasks.tag)
       .orderBy(({ count }) => desc(count))
   } catch (error) {

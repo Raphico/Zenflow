@@ -17,6 +17,8 @@ import { PopularTagsChart } from "./_components/popular-tags-chart"
 import { TaskCompletionRatesChart } from "./_components/task-completion-rates-chart"
 import { TaskDistributionByStatusChart } from "./_components/task-distribution-status-chart"
 import { PriorityAnalysisChart } from "./_components/priority-analysis-chart"
+import { getCachedUser } from "@/lib/fetchers/auth"
+import { redirect } from "next/navigation"
 
 export const metadata: Metadata = {
   title: "Analytics",
@@ -24,16 +26,22 @@ export const metadata: Metadata = {
 }
 
 export default async function AnalyticsPage() {
+  const user = await getCachedUser()
+
+  if (!user) {
+    redirect("/sign-in")
+  }
+
   const [
     popularTags,
     taskCompletionRates,
     taskDistributionByStatus,
     priorityAnalysis,
   ] = await Promise.all([
-    getPopularTags(),
-    getTaskCompletionRates(),
-    getTaskDistributionByStatus(),
-    getPriorityAnalysis(),
+    getPopularTags(user.id),
+    getTaskCompletionRates(user.id),
+    getTaskDistributionByStatus(user.id),
+    getPriorityAnalysis(user.id),
   ])
 
   return (
