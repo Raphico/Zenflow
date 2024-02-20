@@ -19,10 +19,10 @@ interface BoardLayoutProps {
 }
 
 export async function generateMetadata({
-  boardId,
-}: BoardLayoutProps["params"]): Promise<Metadata> {
+  params,
+}: BoardLayoutProps): Promise<Metadata> {
   const board = await db.query.boards.findFirst({
-    where: eq(boards.id, boardId),
+    where: eq(boards.id, params.boardId),
   })
 
   if (!board) return {}
@@ -33,7 +33,7 @@ export async function generateMetadata({
   }
 }
 
-export default async function DashboardLayout({
+export default async function BoardLayout({
   children,
   params,
 }: BoardLayoutProps) {
