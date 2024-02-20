@@ -1,67 +1,124 @@
 import * as React from "react"
-import type { Metadata } from "next"
-import { notFound, redirect } from "next/navigation"
-
-import { db } from "@/db"
-import { eq, and } from "drizzle-orm"
-import { boards } from "@/db/schema"
+import { redirect } from "next/navigation"
+import Link from "next/link"
 import { getCachedUser } from "@/lib/fetchers/auth"
+import { getBoardStatuses } from "@/lib/fetchers/status"
+import { getSubscriptionPlan } from "@/lib/fetchers/stripe"
+import { getPlanFeatures } from "@/lib/subscription"
 
-import { PageHeader, PageHeaderHeading } from "@/components/page-header"
-import {
-  BoardStatuses,
-  BoardStatusesSkeleton,
-} from "../../../../../components/board-statuses"
-import { EditBoardDialog } from "@/components/dialogs/edit-board-dialog"
+import { EditColumnDialog } from "@/components/dialogs/edit-column-dialog"
+import { DeleteColumnDialog } from "@/components/dialogs/delete-column-dialog"
+import { AddColumnDialog } from "@/components/dialogs/add-column-dialog"
+import { Tasks, TasksSkeleton } from "@/components/tasks"
+import { AddTaskDialog } from "@/components/dialogs/add-task-dialog"
+import { Icons } from "@/components/icons"
+import { cn } from "@/lib/utils"
+import { buttonVariants } from "@/components/ui/button"
 
-interface BoardPageProps {
+interface BoardPageParams {
   params: {
     boardId: number
   }
 }
 
-export async function generateMetadata({
-  params,
-}: BoardPageProps): Promise<Metadata> {
-  const boardId = params.boardId
-
-  const board = await db.query.boards.findFirst({
-    where: eq(boards.id, boardId),
-  })
-
-  if (!board) return {}
-
-  return {
-    title: board.name,
-    description: `Manage tasks within ${board.name}`,
-  }
-}
-
-export default async function BoardPage({ params }: BoardPageProps) {
+export default async function BoardPage({ params }: BoardPageParams) {
   const user = await getCachedUser()
 
   if (!user) redirect("/sign-in")
 
-  const board = await db.query.boards.findFirst({
-    where: and(eq(boards.userId, user.id), eq(boards.id, params.boardId)),
-  })
+  const { boardId } = params
 
-  if (!board) {
-    return notFound()
-  }
+  const [boardStatuses, subscriptionPlan] = await Promise.all([
+    getBoardStatuses(boardId),
+    getSubscriptionPlan({ userId: user.id }),
+  ])
+
+  const { maxColumnCount, maxTaskCount } = getPlanFeatures(
+    subscriptionPlan?.name
+  )
 
   return (
-    <div className="mx-auto flex w-full max-w-7xl flex-1 flex-col">
-      <div className="flex w-full items-center gap-2 px-8 pt-2">
-        <PageHeader>
-          <PageHeaderHeading>{board.name}</PageHeaderHeading>
-        </PageHeader>
-        <EditBoardDialog userId={user.id} board={board} />
-      </div>
+    <div className="mx-auto flex w-full max-w-7xl px-8 pb-16">
+      <div className="flex gap-8">
+        {boardStatuses.map((status) => (
+          <section
+            key={status.id}
+            className="flex w-80 shrink-0 flex-col gap-4"
+          >
+            <header className="flex items-center justify-between">
+              <h3 className="text-sm font-bold">
+                {status.title}({status.taskCount})
+              </h3>
+              <div className="flex items-center gap-1">
+                <EditColumnDialog
+                  boardId={boardId}
+                  status={{ id: status.id, title: status.title }}
+                />
+                <DeleteColumnDialog
+                  boardId={boardId}
+                  status={{ id: status.id, title: status.title }}
+                />
+              </div>
+            </header>
 
-      <React.Suspense fallback={<BoardStatusesSkeleton />}>
-        <BoardStatuses boardId={board.id} userId={user.id} />
-      </React.Suspense>
+            <React.Suspense fallback={<TasksSkeleton />}>
+              <Tasks
+                boardId={boardId}
+                statusId={status.id}
+                availableStatuses={boardStatuses}
+              />
+            </React.Suspense>
+
+            <footer className="grid">
+              {subscriptionPlan?.isSubscribed ? (
+                <AddTaskDialog
+                  boardId={boardId}
+                  currentStatus={status.id}
+                  availableStatuses={boardStatuses}
+                />
+              ) : status.taskCount >= maxTaskCount ? (
+                <Link
+                  href="/app/billing"
+                  className={cn(
+                    buttonVariants({
+                      variant: "ghost",
+                      className: "w-full text-muted-foreground",
+                    })
+                  )}
+                >
+                  <Icons.plus className="mr-2 h-4 w-4" aria-hidden="true" />
+                  Add Task
+                </Link>
+              ) : (
+                <AddTaskDialog
+                  boardId={boardId}
+                  currentStatus={status.id}
+                  availableStatuses={boardStatuses}
+                />
+              )}
+            </footer>
+          </section>
+        ))}
+
+        {subscriptionPlan?.isSubscribed ? (
+          <AddColumnDialog boardId={boardId} />
+        ) : boardStatuses.length >= maxColumnCount ? (
+          <Link
+            href="/app/billing"
+            className={cn(
+              buttonVariants({
+                variant: "ghost",
+                className: "w-[18em] shrink-0",
+              })
+            )}
+          >
+            <Icons.plus className="mr-2 h-4 w-4" aria-hidden="true" />
+            Add Column
+          </Link>
+        ) : (
+          <AddColumnDialog boardId={boardId} />
+        )}
+      </div>
     </div>
   )
 }

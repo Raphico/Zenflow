@@ -45,7 +45,7 @@ export default async function AnalyticsPage() {
   ])
 
   return (
-    <div className="mx-auto w-full max-w-6xl space-y-8 p-8 pt-2">
+    <div className="mx-auto w-full max-w-6xl space-y-8">
       <PageHeader>
         <PageHeaderHeading>Analytics</PageHeaderHeading>
         <PageHeaderDescription>

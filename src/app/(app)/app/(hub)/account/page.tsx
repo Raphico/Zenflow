@@ -26,7 +26,7 @@ export default async function AccountPage() {
   }
 
   return (
-    <div className="mx-auto w-full max-w-5xl px-8 py-2">
+    <div className="mx-auto w-full max-w-5xl">
       <PageHeader>
         <PageHeaderHeading>Account</PageHeaderHeading>
         <PageHeaderDescription>Manage account settings</PageHeaderDescription>
