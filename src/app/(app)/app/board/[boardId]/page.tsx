@@ -49,14 +49,14 @@ export default async function BoardPage({ params }: BoardPageParams) {
                 {status.title}({status.taskCount})
               </h3>
               <ColumnActions
-                boardId={boardId}
+                boardId={Number(boardId)}
                 status={{ id: status.id, title: status.title }}
               />
             </header>
 
             <React.Suspense fallback={<TasksSkeleton />}>
               <Tasks
-                boardId={boardId}
+                boardId={Number(boardId)}
                 statusId={status.id}
                 availableStatuses={boardStatuses}
               />
@@ -65,7 +65,7 @@ export default async function BoardPage({ params }: BoardPageParams) {
             <footer className="grid">
               {subscriptionPlan?.isSubscribed ? (
                 <AddTaskDialog
-                  boardId={boardId}
+                  boardId={Number(boardId)}
                   currentStatus={status.id}
                   availableStatuses={boardStatuses}
                 />
@@ -84,7 +84,7 @@ export default async function BoardPage({ params }: BoardPageParams) {
                 </Link>
               ) : (
                 <AddTaskDialog
-                  boardId={boardId}
+                  boardId={Number(boardId)}
                   currentStatus={status.id}
                   availableStatuses={boardStatuses}
                 />
@@ -94,7 +94,7 @@ export default async function BoardPage({ params }: BoardPageParams) {
         ))}
 
         {subscriptionPlan?.isSubscribed ? (
-          <AddColumnDialog boardId={boardId} />
+          <AddColumnDialog boardId={Number(boardId)} />
         ) : boardStatuses.length >= maxColumnCount ? (
           <Link
             href="/app/billing"
@@ -109,7 +109,7 @@ export default async function BoardPage({ params }: BoardPageParams) {
             Add Column
           </Link>
         ) : (
-          <AddColumnDialog boardId={boardId} />
+          <AddColumnDialog boardId={Number(boardId)} />
         )}
       </div>
     </div>

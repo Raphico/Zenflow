@@ -116,8 +116,6 @@ export function TasksSkeleton() {
     <div className="flex flex-col gap-4">
       <Skeleton className="h-[153.6px] w-80" />
       <Skeleton className="h-[153.6px] w-80" />
-      <Skeleton className="h-[153.6px] w-80" />
-      <Skeleton className="h-[153.6px] w-80" />
     </div>
   )
 }

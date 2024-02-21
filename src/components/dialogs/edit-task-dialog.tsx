@@ -14,7 +14,7 @@ import { catchError } from "@/lib/utils"
 
 type Inputs = z.infer<typeof taskSchema>
 
-interface AddTaskDialog {
+interface EditTaskDialogProps {
   boardId: number
   task: Task
   subtasks: SubTask[]
@@ -32,7 +32,7 @@ export function EditTaskDialog({
   availableStatuses,
   open,
   setOpen,
-}: AddTaskDialog) {
+}: EditTaskDialogProps) {
   const [isPending, startTransition] = React.useTransition()
 
   const form = useForm<Inputs>({
