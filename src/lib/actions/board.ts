@@ -1,7 +1,7 @@
 "use server"
 
 import { db } from "@/db"
-import { eq, and } from "drizzle-orm"
+import { eq, and, ne } from "drizzle-orm"
 import { boards, statuses } from "@/db/schema"
 
 import { z } from "zod"
@@ -63,7 +63,11 @@ export async function updateBoard(
   const inputs = updateBoardSchema.parse(rawInputs)
 
   const boardWithSameName = await db.query.boards.findFirst({
-    where: and(eq(boards.name, inputs.name), eq(boards.userId, inputs.userId)),
+    where: and(
+      eq(boards.name, inputs.name),
+      eq(boards.userId, inputs.userId),
+      ne(boards.id, inputs.id)
+    ),
     columns: {
       id: true,
     },

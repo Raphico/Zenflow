@@ -35,8 +35,6 @@ export function EditColumnDialog({
     },
   })
 
-  console.log(typeof boardId)
-
   const onSubmit = (values: Inputs) => {
     startTransition(async () => {
       try {

@@ -3,7 +3,7 @@
 import { revalidatePath } from "next/cache"
 
 import { statuses, tasks } from "@/db/schema"
-import { and, eq } from "drizzle-orm"
+import { and, eq, ne } from "drizzle-orm"
 import { db } from "@/db"
 
 import { createColumnSchema, updateColumnSchema } from "../validations/column"
@@ -48,7 +48,8 @@ export async function updateColumn(
   const columnWithSameName = await db.query.statuses.findFirst({
     where: and(
       eq(statuses.boardId, inputs.boardId),
-      eq(statuses.title, inputs.name)
+      eq(statuses.title, inputs.name),
+      ne(statuses.id, inputs.id)
     ),
     columns: {
       id: true,
