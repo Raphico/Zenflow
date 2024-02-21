@@ -67,7 +67,13 @@ export async function Tasks({
               />
             </CardHeader>
             <CardContent className="p-4 pt-0">
-              <CardTitle className="text-lg font-bold">{task.title}</CardTitle>
+              <CardTitle
+                className={cn("text-lg font-bold", {
+                  "line-through": task.done,
+                })}
+              >
+                {task.title}
+              </CardTitle>
             </CardContent>
             <CardFooter className="justify-between p-4 pt-0">
               <span className="text-[12px] font-semibold">{task.priority}</span>
