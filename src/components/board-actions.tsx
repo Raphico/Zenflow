@@ -1,8 +1,7 @@
 "use client"
 
 import * as React from "react"
-import type { Status, Task } from "@/db/schema"
-import type { SubTask } from "@/lib/validations/task"
+import type { Board } from "@/db/schema"
 
 import {
   DropdownMenu,
@@ -12,25 +11,16 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { Button } from "./ui/button"
-import { EditTaskDialog } from "./dialogs/edit-task-dialog"
-import { DeleteTaskDialog } from "./dialogs/delete-task-dialog"
+import { EditBoardDialog } from "./dialogs/edit-board-dialog"
+import { DeleteBoardDialog } from "./dialogs/delete-board-dialog"
 import { Icons } from "@/components/icons"
 
-interface TaskActionsProps {
-  boardId: number
-  currentStatus: number
-  availableStatuses: Pick<Status, "id" | "title">[]
-  task: Task
-  subtasks: SubTask[]
+interface BoardActionsProps {
+  userId: string
+  board: Pick<Board, "id" | "name">
 }
 
-export function TaskActions({
-  boardId,
-  currentStatus,
-  availableStatuses,
-  task,
-  subtasks,
-}: TaskActionsProps) {
+export function BoardActions({ userId, board }: BoardActionsProps) {
   const [showDeleteAlert, setShowDeleteAlert] = React.useState(false)
   const [showEditDialog, setShowEditDialog] = React.useState(false)
 
@@ -43,14 +33,14 @@ export function TaskActions({
               className="h-6 w-6 text-muted-foreground"
               aria-hidden="true"
             />
-            <span className="sr-only">Open Tasks Actions</span>
+            <span className="sr-only">Open Board Actions</span>
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
           <DropdownMenuItem
             className="flex cursor-pointer items-center"
             onSelect={() => setShowEditDialog(true)}
-            arial-label="Edit Task"
+            arial-label="Edit Board"
           >
             <Icons.edit className="mr-2 h-4 w-4" aria-hidden="true" />
             Edit
@@ -59,7 +49,7 @@ export function TaskActions({
           <DropdownMenuItem
             className="flex cursor-pointer items-center text-destructive focus:text-destructive"
             onSelect={() => setShowDeleteAlert(true)}
-            arial-label="Delete Task"
+            arial-label="Delete Board"
           >
             <Icons.delete className="mr-2 h-4 w-4" aria-hidden="true" />
             Delete
@@ -67,18 +57,14 @@ export function TaskActions({
         </DropdownMenuContent>
       </DropdownMenu>
 
-      <EditTaskDialog
-        boardId={boardId}
-        availableStatuses={availableStatuses}
-        currentStatus={currentStatus}
-        task={task}
-        subtasks={subtasks}
+      <EditBoardDialog
+        userId={userId}
+        board={{ id: board.id, name: board.name }}
         open={showEditDialog}
         setOpen={setShowEditDialog}
       />
-      <DeleteTaskDialog
-        boardId={boardId}
-        task={{ id: task.id, title: task.title }}
+      <DeleteBoardDialog
+        board={{ id: board.id, name: board.name }}
         open={showDeleteAlert}
         setOpen={setShowDeleteAlert}
       />

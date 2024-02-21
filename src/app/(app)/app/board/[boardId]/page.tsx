@@ -6,14 +6,13 @@ import { getBoardStatuses } from "@/lib/fetchers/status"
 import { getSubscriptionPlan } from "@/lib/fetchers/stripe"
 import { getPlanFeatures } from "@/lib/subscription"
 
-import { EditColumnDialog } from "@/components/dialogs/edit-column-dialog"
-import { DeleteColumnDialog } from "@/components/dialogs/delete-column-dialog"
 import { AddColumnDialog } from "@/components/dialogs/add-column-dialog"
 import { Tasks, TasksSkeleton } from "@/components/tasks"
 import { AddTaskDialog } from "@/components/dialogs/add-task-dialog"
 import { Icons } from "@/components/icons"
 import { cn } from "@/lib/utils"
 import { buttonVariants } from "@/components/ui/button"
+import { ColumnActions } from "@/components/column-actions"
 
 interface BoardPageParams {
   params: {
@@ -49,16 +48,10 @@ export default async function BoardPage({ params }: BoardPageParams) {
               <h3 className="text-sm font-bold">
                 {status.title}({status.taskCount})
               </h3>
-              <div className="flex items-center gap-1">
-                <EditColumnDialog
-                  boardId={boardId}
-                  status={{ id: status.id, title: status.title }}
-                />
-                <DeleteColumnDialog
-                  boardId={boardId}
-                  status={{ id: status.id, title: status.title }}
-                />
-              </div>
+              <ColumnActions
+                boardId={boardId}
+                status={{ id: status.id, title: status.title }}
+              />
             </header>
 
             <React.Suspense fallback={<TasksSkeleton />}>

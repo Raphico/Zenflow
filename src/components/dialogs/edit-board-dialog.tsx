@@ -1,5 +1,3 @@
-"use client"
-
 import * as React from "react"
 
 import { boardSchema } from "@/lib/validations/board"
@@ -11,13 +9,10 @@ import type { Board } from "@/db/schema"
 import {
   Dialog,
   DialogHeader,
-  DialogTrigger,
   DialogContent,
   DialogTitle,
   DialogDescription,
 } from "../ui/dialog"
-import { Button } from "../ui/button"
-import { Icons } from "../icons"
 import { updateBoard } from "@/lib/actions/board"
 import { toast } from "sonner"
 import { catchError } from "@/lib/utils"
@@ -26,13 +21,19 @@ import { BoardForm } from "../forms/board-form"
 interface EditBoardDialogProps {
   userId: string
   board: Pick<Board, "id" | "name">
+  open: boolean
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 type Inputs = z.infer<typeof boardSchema>
 
-export function EditBoardDialog({ userId, board }: EditBoardDialogProps) {
+export function EditBoardDialog({
+  userId,
+  board,
+  open,
+  setOpen,
+}: EditBoardDialogProps) {
   const [isPending, startTransition] = React.useTransition()
-  const [open, setOpen] = React.useState(false)
 
   const form = useForm<Inputs>({
     resolver: zodResolver(boardSchema),
@@ -59,15 +60,6 @@ export function EditBoardDialog({ userId, board }: EditBoardDialogProps) {
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger asChild>
-        <Button variant="ghost" size="icon">
-          <Icons.edit
-            className="h-4 w-4 text-muted-foreground"
-            aria-hidden="true"
-          />
-          <span className="sr-only">Edit Board</span>
-        </Button>
-      </DialogTrigger>
       <DialogContent className="max-w-96">
         <DialogHeader>
           <DialogTitle>Edit board</DialogTitle>

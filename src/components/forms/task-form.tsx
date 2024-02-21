@@ -1,5 +1,3 @@
-"use client"
-
 import { useFieldArray, type UseFormReturn } from "react-hook-form"
 import type { z } from "zod"
 import type { SubTask, taskSchema } from "@/lib/validations/task"

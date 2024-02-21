@@ -1,5 +1,3 @@
-"use client"
-
 import * as React from "react"
 import type { Status, Task } from "@/db/schema"
 
@@ -8,9 +6,7 @@ import type { z } from "zod"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 
-import { Dialog, DialogTrigger, DialogContent } from "../ui/dialog"
-import { Button } from "../ui/button"
-import { Icons } from "../icons"
+import { Dialog, DialogContent } from "../ui/dialog"
 import { TaskForm } from "../forms/task-form"
 import { updateTask } from "@/lib/actions/task"
 import { toast } from "sonner"
@@ -24,6 +20,8 @@ interface AddTaskDialog {
   subtasks: SubTask[]
   currentStatus: number
   availableStatuses: Pick<Status, "id" | "title">[]
+  open: boolean
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 export function EditTaskDialog({
@@ -32,9 +30,10 @@ export function EditTaskDialog({
   subtasks,
   currentStatus,
   availableStatuses,
+  open,
+  setOpen,
 }: AddTaskDialog) {
   const [isPending, startTransition] = React.useTransition()
-  const [open, setOpen] = React.useState(false)
 
   const form = useForm<Inputs>({
     resolver: zodResolver(taskSchema),
@@ -74,12 +73,6 @@ export function EditTaskDialog({
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger asChild>
-        <Button variant="ghost" size="icon">
-          <Icons.edit className="h-4 w-4 opacity-70" aria-hidden="true" />
-          <span className="sr-only">Edit Task</span>
-        </Button>
-      </DialogTrigger>
       <DialogContent>
         <TaskForm
           form={form}

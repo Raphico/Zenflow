@@ -1,5 +1,3 @@
-"use client"
-
 import type { z } from "zod"
 import type { columnSchema } from "@/lib/validations/column"
 import type { UseFormReturn } from "react-hook-form"

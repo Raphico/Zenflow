@@ -1,5 +1,3 @@
-"use client"
-
 import type { z } from "zod"
 import type { boardSchema } from "@/lib/validations/board"
 import type { UseFormReturn } from "react-hook-form"

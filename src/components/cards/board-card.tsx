@@ -1,11 +1,10 @@
 import * as React from "react"
+import Link from "next/link"
 import type { Board } from "@/db/schema"
 
 import { Card, CardContent, CardFooter, CardHeader } from "../ui/card"
 import { formatDate } from "@/lib/utils"
-import { DeleteBoardDialog } from "../dialogs/delete-board-dialog"
-import { EditBoardDialog } from "../dialogs/edit-board-dialog"
-import Link from "next/link"
+import { BoardActions } from "../board-actions"
 
 interface BoardCardProps {
   board: Board
@@ -16,13 +15,10 @@ export function BoardCard({ board, userId }: BoardCardProps) {
   return (
     <Card className="h-44">
       <CardHeader className="flex flex-row items-center justify-end pt-4">
-        <div className="flex items-center gap-1">
-          <EditBoardDialog
-            userId={userId}
-            board={{ id: board.id, name: board.name }}
-          />
-          <DeleteBoardDialog board={{ id: board.id, name: board.name }} />
-        </div>
+        <BoardActions
+          userId={userId}
+          board={{ id: board.id, name: board.name }}
+        />
       </CardHeader>
       <Link href={`/app/board/${board.id}`}>
         <CardContent>

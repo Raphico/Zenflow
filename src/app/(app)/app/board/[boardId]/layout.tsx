@@ -7,7 +7,6 @@ import { eq, and } from "drizzle-orm"
 import { boards } from "@/db/schema"
 
 import { PageHeader, PageHeaderHeading } from "@/components/page-header"
-import { EditBoardDialog } from "@/components/dialogs/edit-board-dialog"
 import { Sidebar } from "@/components/layouts/sidebar"
 import { dashboardConfig } from "@/config/dashboard"
 
@@ -66,7 +65,6 @@ export default async function BoardLayout({
         <PageHeader>
           <PageHeaderHeading>{board.name}</PageHeaderHeading>
         </PageHeader>
-        <EditBoardDialog userId={user.id} board={board} />
       </div>
       <main className="flex flex-1 flex-col overflow-x-auto overscroll-x-contain">
         {children}

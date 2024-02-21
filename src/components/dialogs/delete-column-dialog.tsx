@@ -1,5 +1,3 @@
-"use client"
-
 import * as React from "react"
 import type { Status } from "@/db/schema"
 
@@ -12,9 +10,8 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-  AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
-import { Button, buttonVariants } from "@/components/ui/button"
+import { buttonVariants } from "@/components/ui/button"
 import { Icons } from "../icons"
 import { catchError } from "@/lib/utils"
 import { deleteColumn } from "@/lib/actions/column"
@@ -23,11 +20,15 @@ import { toast } from "sonner"
 interface DeleteColumnDialogProps {
   boardId: number
   status: Pick<Status, "id" | "title">
+  open: boolean
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 export function DeleteColumnDialog({
   status,
   boardId,
+  open,
+  setOpen,
 }: DeleteColumnDialogProps) {
   const [isPending, startTransition] = React.useTransition()
 
@@ -44,13 +45,7 @@ export function DeleteColumnDialog({
   }
 
   return (
-    <AlertDialog>
-      <AlertDialogTrigger asChild>
-        <Button variant="ghost" className="text-destructive" size="icon">
-          <Icons.delete className="h-4 w-4 opacity-70" aria-hidden="true" />
-          <span className="sr-only">Delete Column</span>
-        </Button>
-      </AlertDialogTrigger>
+    <AlertDialog open={open} onOpenChange={setOpen}>
       <AlertDialogContent>
         <AlertDialogHeader>
           <AlertDialogTitle>Delete </AlertDialogTitle>

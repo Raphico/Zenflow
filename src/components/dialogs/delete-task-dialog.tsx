@@ -1,5 +1,3 @@
-"use client"
-
 import * as React from "react"
 import type { Task } from "@/db/schema"
 
@@ -12,9 +10,8 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-  AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
-import { Button, buttonVariants } from "@/components/ui/button"
+import { buttonVariants } from "@/components/ui/button"
 import { Icons } from "../icons"
 import { catchError } from "@/lib/utils"
 import { deleteTask } from "@/lib/actions/task"
@@ -23,9 +20,16 @@ import { toast } from "sonner"
 interface DeleteTaskDialogProps {
   boardId: number
   task: Pick<Task, "id" | "title">
+  open: boolean
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-export function DeleteTaskDialog({ task, boardId }: DeleteTaskDialogProps) {
+export function DeleteTaskDialog({
+  task,
+  boardId,
+  open,
+  setOpen,
+}: DeleteTaskDialogProps) {
   const [isPending, startTransition] = React.useTransition()
 
   const handleDeleteTask = () => {
@@ -41,13 +45,7 @@ export function DeleteTaskDialog({ task, boardId }: DeleteTaskDialogProps) {
   }
 
   return (
-    <AlertDialog>
-      <AlertDialogTrigger asChild>
-        <Button variant="ghost" className="text-destructive" size="icon">
-          <Icons.delete className="h-4 w-4 opacity-70" aria-hidden="true" />
-          <span className="sr-only">Delete Task</span>
-        </Button>
-      </AlertDialogTrigger>
+    <AlertDialog open={open} onOpenChange={setOpen}>
       <AlertDialogContent>
         <AlertDialogHeader>
           <AlertDialogTitle>Delete</AlertDialogTitle>

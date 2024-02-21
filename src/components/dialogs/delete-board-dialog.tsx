@@ -1,5 +1,3 @@
-"use client"
-
 import * as React from "react"
 import type { Board } from "@/db/schema"
 
@@ -12,9 +10,8 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-  AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
-import { Button, buttonVariants } from "@/components/ui/button"
+import { buttonVariants } from "@/components/ui/button"
 import { Icons } from "../icons"
 import { catchError } from "@/lib/utils"
 import { deleteBoard } from "@/lib/actions/board"
@@ -22,9 +19,15 @@ import { toast } from "sonner"
 
 interface DeleteBoardDialogProps {
   board: Pick<Board, "id" | "name">
+  open: boolean
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-export function DeleteBoardDialog({ board }: DeleteBoardDialogProps) {
+export function DeleteBoardDialog({
+  board,
+  open,
+  setOpen,
+}: DeleteBoardDialogProps) {
   const [isPending, startTransition] = React.useTransition()
 
   const handleDeleteBoard = () => {
@@ -40,16 +43,7 @@ export function DeleteBoardDialog({ board }: DeleteBoardDialogProps) {
   }
 
   return (
-    <AlertDialog>
-      <AlertDialogTrigger asChild>
-        <Button variant="ghost" size="icon">
-          <Icons.delete
-            className="h-4 w-4 text-destructive"
-            aria-hidden="true"
-          />
-          <span className="sr-only">Delete Board</span>
-        </Button>
-      </AlertDialogTrigger>
+    <AlertDialog open={open} onOpenChange={setOpen}>
       <AlertDialogContent>
         <AlertDialogHeader>
           <AlertDialogTitle>Delete </AlertDialogTitle>
