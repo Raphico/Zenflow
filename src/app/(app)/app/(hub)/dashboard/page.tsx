@@ -18,6 +18,7 @@ import { Icons } from "@/components/icons"
 import { cn } from "@/lib/utils"
 import { buttonVariants } from "@/components/ui/button"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
+import { filterBoardSchema } from "@/lib/validations/board"
 
 export const metadata: Metadata = {
   title: "Dashboard",
@@ -29,6 +30,8 @@ interface DashboardPageProps {
 }
 
 export default async function DashboardPage(props: DashboardPageProps) {
+  const { query } = filterBoardSchema.parse(props.searchParams)
+
   const user = await getCachedUser()
 
   if (!user) {
@@ -41,7 +44,7 @@ export default async function DashboardPage(props: DashboardPageProps) {
   ])
 
   const searchedBoards = allBoards.filter((board) =>
-    new RegExp(props.searchParams.search ?? "", "i").test(board.name)
+    new RegExp(query ?? "", "i").test(board.name)
   )
 
   const { maxBoardCount } = getPlanFeatures(subscriptionPlan?.name)

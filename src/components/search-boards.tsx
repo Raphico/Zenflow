@@ -1,15 +1,16 @@
 "use client"
 
 import { useRouter } from "next/navigation"
-import { debounce } from "@/lib/utils"
 import { Input } from "./ui/input"
 
 export function SearchBoards() {
   const router = useRouter()
 
-  const handleSearch = debounce((search: string) => {
-    router.push(`/app/dashboard?search=${search}`, { scroll: false })
-  }, 300)
+  const handleSearch = (query: string) => {
+    router.push(query ? `/app/dashboard?query=${query}` : "/app/dashboard", {
+      scroll: false,
+    })
+  }
 
   return (
     <Input

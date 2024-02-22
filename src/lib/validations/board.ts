@@ -16,3 +16,7 @@ export const updateBoardSchema = z.object({
   id: z.number(),
   name: boardSchema.shape.name,
 })
+
+export const filterBoardSchema = z.object({
+  query: z.string().optional(),
+})
