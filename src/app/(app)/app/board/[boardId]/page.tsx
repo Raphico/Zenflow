@@ -13,17 +13,24 @@ import { Icons } from "@/components/icons"
 import { cn } from "@/lib/utils"
 import { buttonVariants } from "@/components/ui/button"
 import { ColumnActions } from "@/components/column-actions"
+import { taskSearchParamsSchema } from "@/lib/validations/task"
 
 interface BoardPageParams {
   params: {
     boardId: number
   }
+  searchParams: { [key: string]: string | string[] | undefined }
 }
 
-export default async function BoardPage({ params }: BoardPageParams) {
+export default async function BoardPage({
+  params,
+  searchParams,
+}: BoardPageParams) {
   const user = await getCachedUser()
 
   if (!user) redirect("/sign-in")
+
+  const taskSearchParams = taskSearchParamsSchema.parse(searchParams)
 
   const { boardId } = params
 
@@ -59,6 +66,7 @@ export default async function BoardPage({ params }: BoardPageParams) {
                 boardId={Number(boardId)}
                 statusId={status.id}
                 availableStatuses={boardStatuses}
+                taskSearchParams={taskSearchParams}
               />
             </React.Suspense>
 

@@ -15,6 +15,19 @@ export const taskSchema = z.object({
   dueDate: z.date().optional(),
   priority: z.enum(["P1", "P2", "P3", "P4"]).default("P4"),
   tag: z.string().max(25).optional(),
-  statusId: z.number(),
+  statusId: z.coerce.number(),
   subtasks: z.array(subtaskSchema),
 })
+
+export const taskSearchParamsSchema = z.object({
+  showCompletedTasks: z.string().optional().default("true"),
+  sort: z.string().optional().default("createdAt.desc"),
+  priorities: z.string().optional(),
+  dueDate: z.string().optional(),
+})
+
+export const getTasksSchema = taskSearchParamsSchema
+  .omit({ showCompletedTasks: true })
+  .extend({
+    statusId: taskSchema.shape.statusId,
+  })

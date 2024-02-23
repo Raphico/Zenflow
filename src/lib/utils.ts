@@ -1,10 +1,20 @@
+import {
+  isToday,
+  isTomorrow,
+  isThisWeek,
+  format,
+  startOfWeek,
+  endOfWeek,
+  addDays,
+  startOfMonth,
+  endOfMonth,
+} from "date-fns"
 import { env } from "@/env.mjs"
 import { isClerkAPIResponseError } from "@clerk/nextjs"
 import { type ClassValue, clsx } from "clsx"
 import { toast } from "sonner"
 import { twMerge } from "tailwind-merge"
 import { z } from "zod"
-import { isToday, isTomorrow, isThisWeek, format } from "date-fns"
 import type { User } from "@clerk/nextjs/server"
 
 export function cn(...inputs: ClassValue[]) {
@@ -49,6 +59,23 @@ export const debounce = <T extends unknown[]>(
     timer = setTimeout(() => {
       mainFunction(...args)
     }, timeout)
+  }
+}
+
+export function calculateDueDates(
+  dueDateValue: string
+): { endDate: Date; startDate: Date } | null {
+  const today = new Date()
+
+  switch (dueDateValue) {
+    case "this.week":
+      return { startDate: startOfWeek(today), endDate: endOfWeek(today) }
+    case "next.7.days":
+      return { startDate: today, endDate: addDays(today, 7) }
+    case "this.month":
+      return { startDate: startOfMonth(today), endDate: endOfMonth(today) }
+    default:
+      return null // For 'All (default)' and any other unsupported values
   }
 }
 

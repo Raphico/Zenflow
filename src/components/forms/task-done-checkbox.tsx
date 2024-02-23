@@ -5,7 +5,6 @@ import * as React from "react"
 import { Checkbox } from "../ui/checkbox"
 import { updateTaskDone } from "@/lib/actions/task"
 import { catchError } from "@/lib/utils"
-import { toast } from "sonner"
 
 interface TaskDoneCheckboxProps {
   taskId: number
@@ -31,8 +30,6 @@ export function TaskDoneCheckbox({
           boardId,
           isDone,
         })
-
-        toast.success("Task updated!")
       } catch (error) {
         catchError(error)
       }

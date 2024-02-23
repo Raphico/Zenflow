@@ -7,7 +7,15 @@ import { eq, and } from "drizzle-orm"
 import { boards } from "@/db/schema"
 
 import { PageHeader, PageHeaderHeading } from "@/components/page-header"
+import {
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+} from "@/components/ui/popover"
+import { Button } from "@/components/ui/button"
 import { Sidebar } from "@/components/layouts/sidebar"
+import { View } from "@/components/view"
+import { Icons } from "@/components/icons"
 import { dashboardConfig } from "@/config/dashboard"
 
 interface BoardLayoutProps {
@@ -52,7 +60,7 @@ export default async function BoardLayout({
 
   return (
     <div className="flex min-h-screen flex-col">
-      <header className="container sticky top-0 z-50 flex h-14 w-full items-center bg-background px-4">
+      <header className="container sticky top-0 z-50 flex h-14 w-full items-center justify-between bg-background px-4">
         <Sidebar
           user={{
             username: user.username,
@@ -60,6 +68,17 @@ export default async function BoardLayout({
           }}
           items={dashboardConfig.sidebarNav}
         />
+        <Popover>
+          <PopoverTrigger asChild>
+            <Button variant="ghost">
+              <Icons.filters className="mr-2 h-4 w-4" aria-hidden="true" />
+              View
+            </Button>
+          </PopoverTrigger>
+          <PopoverContent align="end" className="w-80 pb-2">
+            <View />
+          </PopoverContent>
+        </Popover>
       </header>
       <div className="mx-auto flex w-full max-w-7xl items-center gap-2 px-8 pb-4 pt-2">
         <PageHeader>

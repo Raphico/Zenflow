@@ -1,7 +1,5 @@
-import { db } from "@/db"
 import type { SubTask } from "@/lib/validations/task"
-import { type Status, tasks } from "@/db/schema"
-import { eq } from "drizzle-orm"
+import { type Status } from "@/db/schema"
 
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "./ui/card"
 import { Skeleton } from "./ui/skeleton"
@@ -9,32 +7,29 @@ import { cn, getDueDate } from "@/lib/utils"
 import { Icons } from "./icons"
 import { TaskDoneCheckbox } from "./forms/task-done-checkbox"
 import { TaskActions } from "./task-actions"
+import { getTasks } from "@/lib/fetchers/tasks"
 
 interface TasksProps {
   statusId: number
   boardId: number
   availableStatuses: Pick<Status, "id" | "title">[]
+  taskSearchParams: {
+    sort: string
+    showCompletedTasks: string
+    priorities?: string | undefined
+    dueDate?: string | undefined
+  }
 }
 
 export async function Tasks({
   statusId,
   boardId,
   availableStatuses,
+  taskSearchParams,
 }: TasksProps) {
-  const columnTasks = await db.query.tasks.findMany({
-    where: eq(tasks.statusId, statusId),
-    with: {
-      subtasks: {
-        columns: {
-          id: true,
-          title: true,
-          done: true,
-          dueDate: true,
-        },
-      },
-    },
-    orderBy: [tasks.done],
-  })
+  const { showCompletedTasks, sort, dueDate, priorities } = taskSearchParams
+
+  const columnTasks = await getTasks({ statusId, sort, dueDate, priorities })
 
   return (
     <div className="flex flex-col gap-4">
@@ -47,9 +42,11 @@ export async function Tasks({
         return (
           <Card
             key={task.id}
-            className={cn("rounded-sm", {
-              "opacity-80": task.done,
-            })}
+            className={cn(
+              "rounded-sm",
+              task.done &&
+                (showCompletedTasks === "true" ? "opacity-80" : "hidden")
+            )}
           >
             <CardHeader className="flex-row items-center justify-between p-4">
               <TaskDoneCheckbox
