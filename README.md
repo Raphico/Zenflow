@@ -10,9 +10,8 @@ A task manager web application built with Next.js 14
 - **Database:** [Planetscale](https://planetscale.com/)
 - **ORM:** [Drizzle ORM](https://orm.drizzle.team)
 - **UI Components:** [shadcn/ui](https://ui.shadcn.com)
-- **Email:** [React Email](https://react.email)
+- **Payment management:** [Stripe](https://stripe.com)
 - **Content Management:** [Contentlayer](https://www.contentlayer.dev)
-- **File Uploads:** [uploadthing](https://uploadthing.com)
 
 ## Roadmap
 
@@ -32,6 +31,7 @@ A task manager web application built with Next.js 14
 - [x] Task Filtering, and Sorting Functionality
 - [x] Add Analytics Page
 - [x] Integrate stripe
+- [ ] Newsletter subscription
 
 ## Running Locally
 
