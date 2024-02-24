@@ -261,7 +261,7 @@ export function View() {
 
       <Button
         variant="ghost"
-        className="w-full justify-start pl-1.5 font-normal"
+        className="w-full justify-start pl-1.5 font-normal !text-destructive"
         onClick={() =>
           startTransition(() =>
             router.push(
