@@ -20,3 +20,8 @@ export const updateBoardSchema = z.object({
 export const filterBoardSchema = z.object({
   query: z.string().optional(),
 })
+
+export const getBoardsSchema = z.object({
+  userId: z.string(),
+  query: filterBoardSchema.shape.query,
+})

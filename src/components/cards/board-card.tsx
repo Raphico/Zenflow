@@ -7,7 +7,7 @@ import { formatDate } from "@/lib/utils"
 import { BoardActions } from "../board-actions"
 
 interface BoardCardProps {
-  board: Board
+  board: Pick<Board, "userId" | "id" | "name" | "createdAt">
   userId: string
 }
 

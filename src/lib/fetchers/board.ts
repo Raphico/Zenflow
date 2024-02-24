@@ -1,11 +1,62 @@
 "use server"
 
 import { db } from "@/db"
-import { eq } from "drizzle-orm"
+import { and, eq, like, sql } from "drizzle-orm"
 import { boards } from "@/db/schema"
+import type { getBoardsSchema } from "../validations/board"
+import type { z } from "zod"
 
-export async function getAllBoards(inputs: { userId: string }) {
-  return await db.query.boards.findMany({
-    where: eq(boards.userId, inputs.userId),
-  })
+export async function getBoards(
+  inputs: z.infer<typeof getBoardsSchema>
+): Promise<{
+  data:
+    | {
+        userId: string
+        id: number
+        name: string
+        createdAt: Date
+      }[]
+    | []
+  count: number
+}> {
+  try {
+    return await db.transaction(async (tx) => {
+      const data = await tx
+        .select({
+          userId: boards.userId,
+          id: boards.id,
+          name: boards.name,
+          createdAt: boards.createdAt,
+        })
+        .from(boards)
+        .where(
+          and(
+            eq(boards.userId, inputs.userId),
+            inputs.query?.length
+              ? like(boards.name, `%${inputs.query}%`)
+              : undefined
+          )
+        )
+
+      const count = await tx
+        .select({
+          count: sql<number>`count(*)`,
+        })
+        .from(boards)
+        .where(eq(boards.userId, inputs.userId))
+        .execute()
+        .then((res) => res[0]?.count ?? 0)
+
+      return {
+        data,
+        count,
+      }
+    })
+  } catch (error) {
+    console.error(error)
+    return {
+      data: [],
+      count: 0,
+    }
+  }
 }

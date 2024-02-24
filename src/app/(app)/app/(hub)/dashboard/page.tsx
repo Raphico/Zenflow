@@ -10,7 +10,7 @@ import { SearchBoards } from "@/components/search-boards"
 import { BoardCard } from "@/components/cards/board-card"
 import { CreateBoardDialog } from "@/components/dialogs/create-board-dialog"
 import { getCachedUser } from "@/lib/fetchers/auth"
-import { getAllBoards } from "@/lib/fetchers/board"
+import { getBoards } from "@/lib/fetchers/board"
 import { getSubscriptionPlan } from "@/lib/fetchers/stripe"
 import { getPlanFeatures } from "@/lib/subscription"
 import Link from "next/link"
@@ -38,14 +38,10 @@ export default async function DashboardPage(props: DashboardPageProps) {
     redirect("/sign-in")
   }
 
-  const [allBoards, subscriptionPlan] = await Promise.all([
-    getAllBoards({ userId: user.id }),
+  const [boards, subscriptionPlan] = await Promise.all([
+    getBoards({ userId: user.id, query }),
     getSubscriptionPlan({ userId: user.id }),
   ])
-
-  const searchedBoards = allBoards.filter((board) =>
-    new RegExp(query ?? "", "i").test(board.name)
-  )
 
   const { maxBoardCount } = getPlanFeatures(subscriptionPlan?.name)
 
@@ -71,12 +67,12 @@ export default async function DashboardPage(props: DashboardPageProps) {
       )}
       <SearchBoards />
       <section className="grid gap-4 pb-5 sm:grid-cols-3">
-        {searchedBoards.map((board) => (
+        {boards.data.map((board) => (
           <BoardCard key={board.id} userId={user.id} board={board} />
         ))}
         {subscriptionPlan?.isSubscribed ? (
           <CreateBoardDialog userId={user.id} />
-        ) : allBoards.length >= maxBoardCount ? (
+        ) : boards.count >= maxBoardCount ? (
           <Link
             href="/app/billing"
             className={cn(
