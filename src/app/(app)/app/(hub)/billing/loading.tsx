@@ -11,7 +11,7 @@ import Link from "next/link"
 
 export default function BillingLoading() {
   return (
-    <div className="container max-w-4xl space-y-8">
+    <div className="mx-auto max-w-4xl space-y-8">
       <PageHeader>
         <PageHeaderHeading>Billing</PageHeaderHeading>
         <PageHeaderDescription>

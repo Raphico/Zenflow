@@ -7,7 +7,6 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { Button } from "./ui/button"
@@ -36,7 +35,7 @@ export function BoardActions({ userId, board }: BoardActionsProps) {
             <span className="sr-only">Open Board Actions</span>
           </Button>
         </DropdownMenuTrigger>
-        <DropdownMenuContent align="end">
+        <DropdownMenuContent align="end" className="space-y-1">
           <DropdownMenuItem
             className="flex cursor-pointer items-center"
             onSelect={() => setShowEditDialog(true)}
@@ -45,7 +44,6 @@ export function BoardActions({ userId, board }: BoardActionsProps) {
             <Icons.edit className="mr-2 h-4 w-4" aria-hidden="true" />
             Edit
           </DropdownMenuItem>
-          <DropdownMenuSeparator />
           <DropdownMenuItem
             className="flex cursor-pointer items-center text-destructive focus:text-destructive"
             onSelect={() => setShowDeleteAlert(true)}
