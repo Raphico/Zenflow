@@ -1,10 +1,11 @@
 import Link from "next/link"
 
+import { JoinNewsletterForm } from "../forms/join-newsletter-form"
+import { ModeToggle } from "./mode-toggle"
 import { Icons } from "@/components/icons"
+import { buttonVariants } from "@/components/ui/button"
 import { siteConfig } from "@/config/site"
 import { cn } from "@/lib/utils"
-import { ModeToggle } from "./mode-toggle"
-import { buttonVariants } from "@/components/ui/button"
 
 export function SiteFooter() {
   return (
@@ -38,7 +39,7 @@ export function SiteFooter() {
 
           <div className="space-y-3">
             <p className="font-medium">Subscribe to our newsletter</p>
-            <p className="text-sm text-muted-foreground">stay tuned</p>
+            <JoinNewsletterForm />
           </div>
         </div>
 

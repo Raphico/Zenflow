@@ -12,6 +12,7 @@ A task manager web application built with Next.js 14
 - **UI Components:** [shadcn/ui](https://ui.shadcn.com)
 - **Payment management:** [Stripe](https://stripe.com)
 - **Content Management:** [Contentlayer](https://www.contentlayer.dev)
+- **Newsletter subscription:** [MailChimp](https://mailchimp.com/)
 
 ## Roadmap
 
@@ -31,7 +32,7 @@ A task manager web application built with Next.js 14
 - [x] Task Filtering, and Sorting Functionality
 - [x] Add Analytics Page
 - [x] Integrate stripe
-- [ ] Newsletter subscription
+- [x] Newsletter subscription with Mailchimp
 
 ## Running Locally
 

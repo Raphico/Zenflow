@@ -8,6 +8,9 @@ export const env = createEnv({
     STRIPE_SECRET_KEY: z.string(),
     STRIPE_WEBHOOK_SECRET: z.string(),
     STRIPE_PRO_MONTHLY_PLAN_ID: z.string(),
+    MAILCHIMP_API_KEY: z.string(),
+    MAILCHIMP_AUDIENCE_ID: z.string(),
+    MAILCHIMP_API_SERVER: z.string(),
   },
   client: {
     NEXT_PUBLIC_APP_URL: z.string().url(),
@@ -25,6 +28,9 @@ export const env = createEnv({
     STRIPE_SECRET_KEY: process.env.STRIPE_SECRET_KEY,
     STRIPE_WEBHOOK_SECRET: process.env.STRIPE_WEBHOOK_SECRET,
     STRIPE_PRO_MONTHLY_PLAN_ID: process.env.STRIPE_PRO_MONTHLY_PLAN_ID,
+    MAILCHIMP_API_KEY: process.env.MAILCHIMP_API_KEY,
+    MAILCHIMP_API_SERVER: process.env.MAILCHIMP_API_SERVER,
+    MAILCHIMP_AUDIENCE_ID: process.env.MAILCHIMP_AUDIENCE_ID,
   },
   emptyStringAsUndefined: true,
 })
