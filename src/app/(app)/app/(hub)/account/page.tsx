@@ -10,7 +10,6 @@ import { Separator } from "@/components/ui/separator"
 import { getCachedUser } from "@/lib/fetchers/auth"
 import { ProfileForm } from "@/components/forms/profile-form"
 import { LogoutButton } from "@/components/auth/logout-button"
-import { DeleteAccount } from "@/components/auth/delete-account"
 import { ChangePasswordForm } from "@/components/forms/change-password-form"
 
 export const metadata: Metadata = {
@@ -54,19 +53,6 @@ export default async function AccountPage() {
             </p>
           </div>
           <LogoutButton />
-        </div>
-
-        <div className="flex flex-col items-start gap-2 sm:flex-row sm:items-center sm:justify-between">
-          <div className="space-y-1">
-            <h3 className="text-sm font-medium text-destructive">
-              Delete Account
-            </h3>
-            <p className="text-[12px] text-muted-foreground">
-              Permanently delete the account and remove access from all
-              workspaces.
-            </p>
-          </div>
-          <DeleteAccount />
         </div>
       </section>
     </div>
