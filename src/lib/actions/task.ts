@@ -6,7 +6,7 @@ import { subtasks, tasks } from "@/db/schema"
 import { z } from "zod"
 import { taskSchema } from "../validations/task"
 import { revalidatePath } from "next/cache"
-import { eq } from "drizzle-orm"
+import { eq, sql } from "drizzle-orm"
 
 const extendedTaskSchema = taskSchema.extend({
   boardId: z.number(),
@@ -141,10 +141,13 @@ export async function deleteTask({
     throw new Error("Task doesn't exists!")
   }
 
-  await db.delete(tasks).where(eq(tasks.id, taskId))
-
-  // Delete all statues of this board
-  await db.delete(subtasks).where(eq(subtasks.taskId, taskId))
+  // Delete all subtasks of this task
+  await db.execute(sql`
+    DELETE subtasks, tasks
+    FROM tasks
+      LEFT JOIN subtasks ON tasks.id = subtasks.taskId
+    WHERE tasks.id = ${taskId};
+  `)
 
   revalidatePath(`/app/board/${boardId}`)
 }

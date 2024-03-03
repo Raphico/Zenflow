@@ -2,8 +2,8 @@
 
 import { revalidatePath } from "next/cache"
 
-import { statuses, tasks } from "@/db/schema"
-import { and, eq, ne } from "drizzle-orm"
+import { statuses } from "@/db/schema"
+import { and, eq, ne, sql } from "drizzle-orm"
 import { db } from "@/db"
 
 import { createColumnSchema, updateColumnSchema } from "../validations/column"
@@ -88,10 +88,14 @@ export async function deleteColumn({
     throw new Error("Board not found")
   }
 
-  await db.delete(statuses).where(eq(statuses.id, columnId))
-
-  // Delete all tasks of this column
-  await db.delete(tasks).where(eq(tasks.statusId, columnId))
+  // Delete all tasks and subtasks of this status
+  await db.execute(sql`
+    DELETE subtasks, tasks, statuses
+    FROM statuses
+      LEFT JOIN tasks ON statuses.id = tasks.statusId
+      LEFT JOIN subtasks ON tasks.id = subtasks.taskId
+    WHERE statuses.id = ${columnId};
+  `)
 
   revalidatePath(`/app/board/${boardId}`)
 }

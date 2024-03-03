@@ -1,8 +1,8 @@
 "use server"
 
 import { db } from "@/db"
-import { eq, and, ne } from "drizzle-orm"
-import { boards, statuses } from "@/db/schema"
+import { eq, and, ne, sql } from "drizzle-orm"
+import { boards } from "@/db/schema"
 
 import { z } from "zod"
 import { boardSchema, updateBoardSchema } from "../validations/board"
@@ -49,10 +49,15 @@ export async function deleteBoard(boardId: number) {
     throw new Error("Board not found")
   }
 
-  await db.delete(boards).where(eq(boards.id, boardId))
-
-  // Delete all statues of this board
-  await db.delete(statuses).where(eq(statuses.boardId, boardId))
+  // Delete all statues, tasks, and subtasks of this board
+  await db.execute(sql`
+    DELETE subtasks, tasks, statuses, boards
+    FROM boards
+      LEFT JOIN statuses ON boards.id = statuses.boardId
+      LEFT JOIN tasks ON statuses.id = tasks.statusId
+      LEFT JOIN subtasks ON tasks.id = subtasks.taskId
+    WHERE boards.id = ${boardId};
+  `)
 
   revalidatePath("/app/dashboard")
 }
