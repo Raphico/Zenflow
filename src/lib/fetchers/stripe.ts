@@ -9,13 +9,13 @@ import { subscriptionPlans } from "@/config/subscription"
 import { addDays } from "date-fns"
 import { stripe } from "../stripe"
 
-export async function getSubscriptionPlan(input: {
+export async function getSubscriptionPlan(inputs: {
   userId: string
 }): Promise<UserSubscriptionPlan | null> {
   try {
     return await cache(
       async () => {
-        const user = await clerkClient.users.getUser(input.userId)
+        const user = await clerkClient.users.getUser(inputs.userId)
 
         if (!user) {
           throw new Error("User not found!")
@@ -63,10 +63,9 @@ export async function getSubscriptionPlan(input: {
           isActive: isSubscribed && !isCanceled,
         }
       },
-      ["user-subscription"],
+      [`${inputs.userId}-subscription`],
       {
         revalidate: 900,
-        tags: ["user-subscription"],
       }
     )()
   } catch (error) {

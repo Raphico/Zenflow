@@ -54,7 +54,7 @@ export async function manageSubscription(
     },
   })
 
-  revalidateTag("user-subscription")
+  revalidateTag(`${user.id}-subscription`)
 
   return {
     url: stripeSession.url,
