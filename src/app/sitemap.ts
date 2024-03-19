@@ -1,5 +1,6 @@
-import { absoluteUrl } from "@/lib/utils"
 import { allPosts } from "contentlayer/generated"
+
+import { absoluteUrl } from "@/lib/utils"
 
 export default function sitemap() {
   const postsRoutes = allPosts.map((post) => ({

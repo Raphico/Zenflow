@@ -1,14 +1,17 @@
 import type { Metadata, Viewport } from "next"
+
 import { env } from "../env.mjs"
 
 import "@/styles/globals.css"
 
-import { Inter as FontSans, Montserrat as FontHeading } from "next/font/google"
-import { cn } from "@/lib/utils"
-import { siteConfig } from "@/config/site"
-import { ThemeProvider } from "./theme-provider"
+import { Montserrat as FontHeading, Inter as FontSans } from "next/font/google"
 import { ClerkProvider } from "@clerk/nextjs"
+
+import { siteConfig } from "@/config/site"
+import { cn } from "@/lib/utils"
 import { Toaster } from "@/components/ui/sonner"
+
+import { ThemeProvider } from "./theme-provider"
 
 const fontSans = FontSans({
   subsets: ["latin"],

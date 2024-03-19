@@ -1,10 +1,10 @@
 "use client"
 
 import * as React from "react"
-
 import { useRouter } from "next/navigation"
-import { Input } from "@/components/ui/input"
+
 import { useDebounce } from "@/hooks/use-debounce"
+import { Input } from "@/components/ui/input"
 
 export function SearchBoards() {
   const router = useRouter()

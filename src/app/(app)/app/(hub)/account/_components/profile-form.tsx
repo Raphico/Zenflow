@@ -2,12 +2,15 @@
 
 import * as React from "react"
 import type { User } from "@clerk/nextjs/server"
-
-import { profileSchema } from "@/lib/validations/account"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
+import { toast } from "sonner"
 import type { z } from "zod"
 
+import { updateProfile } from "@/lib/actions/account"
+import { catchClerkError } from "@/lib/utils"
+import { profileSchema } from "@/lib/validations/account"
+import { Button } from "@/components/ui/button"
 import {
   Form,
   FormControl,
@@ -17,11 +20,7 @@ import {
   FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
-import { Button } from "@/components/ui/button"
 import { Icons } from "@/components/icons"
-import { catchClerkError } from "@/lib/utils"
-import { updateProfile } from "@/lib/actions/account"
-import { toast } from "sonner"
 
 interface ProfileFormProps {
   user: Pick<User, "username">

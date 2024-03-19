@@ -1,14 +1,15 @@
 "use client"
 
 import * as React from "react"
-import { useSignUp } from "@clerk/nextjs"
 import { useRouter } from "next/navigation"
-
-import { verifyEmailSchema } from "@/lib/validations/auth"
+import { useSignUp } from "@clerk/nextjs"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { type z } from "zod"
 
+import { catchClerkError } from "@/lib/utils"
+import { verifyEmailSchema } from "@/lib/validations/auth"
+import { Button } from "@/components/ui/button"
 import {
   Form,
   FormControl,
@@ -18,9 +19,7 @@ import {
   FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
-import { Button } from "@/components/ui/button"
 import { Icons } from "@/components/icons"
-import { catchClerkError } from "@/lib/utils"
 
 type Inputs = z.infer<typeof verifyEmailSchema>
 

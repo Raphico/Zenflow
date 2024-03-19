@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 
-import { Icons } from "@/components/icons"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Icons } from "@/components/icons"
 import {
   PageHeader,
   PageHeaderDescription,

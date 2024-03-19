@@ -1,16 +1,17 @@
 import type { Metadata } from "next"
 import { redirect } from "next/navigation"
 
+import { getCachedUser } from "@/lib/fetchers/auth"
+import { Separator } from "@/components/ui/separator"
 import {
   PageHeader,
   PageHeaderDescription,
   PageHeaderHeading,
 } from "@/components/page-header"
-import { Separator } from "@/components/ui/separator"
-import { getCachedUser } from "@/lib/fetchers/auth"
-import { ProfileForm } from "./_components/profile-form"
-import { LogoutButton } from "./_components/logout-button"
+
 import { ChangePasswordForm } from "./_components/change-password-form"
+import { LogoutButton } from "./_components/logout-button"
+import { ProfileForm } from "./_components/profile-form"
 
 export const metadata: Metadata = {
   title: "Account",

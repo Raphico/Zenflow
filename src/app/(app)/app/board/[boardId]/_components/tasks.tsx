@@ -1,6 +1,8 @@
-import type { SubTask } from "@/lib/validations/task"
 import { type Status } from "@/db/schema"
 
+import { getTasks } from "@/lib/fetchers/tasks"
+import { cn, getDueDate } from "@/lib/utils"
+import type { SubTask } from "@/lib/validations/task"
 import {
   Card,
   CardContent,
@@ -9,11 +11,10 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import { Skeleton } from "@/components/ui/skeleton"
-import { cn, getDueDate } from "@/lib/utils"
 import { Icons } from "@/components/icons"
-import { TaskDoneCheckbox } from "./task-done-checkbox"
+
 import { TaskActions } from "./task-actions"
-import { getTasks } from "@/lib/fetchers/tasks"
+import { TaskDoneCheckbox } from "./task-done-checkbox"
 
 interface TasksProps {
   statusId: number

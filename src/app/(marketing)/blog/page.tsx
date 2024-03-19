@@ -1,18 +1,17 @@
-import Link from "next/link"
 import type { Metadata } from "next"
 import Image from "next/image"
-
+import Link from "next/link"
 import { allPosts } from "contentlayer/generated"
 import { compareDesc } from "date-fns"
 
+import { formatDate } from "@/lib/utils"
+import { AspectRatio } from "@/components/ui/aspect-ratio"
+import { Separator } from "@/components/ui/separator"
 import {
   PageHeader,
   PageHeaderDescription,
   PageHeaderHeading,
 } from "@/components/page-header"
-import { Separator } from "@/components/ui/separator"
-import { AspectRatio } from "@/components/ui/aspect-ratio"
-import { formatDate } from "@/lib/utils"
 
 export const metadata: Metadata = {
   title: "Blog",

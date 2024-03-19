@@ -1,11 +1,12 @@
 import Link from "next/link"
 
-import { JoinNewsletterForm } from "./join-newsletter-form"
-import { ModeToggle } from "./mode-toggle"
-import { Icons } from "@/components/icons"
-import { buttonVariants } from "@/components/ui/button"
 import { siteConfig } from "@/config/site"
 import { cn } from "@/lib/utils"
+import { buttonVariants } from "@/components/ui/button"
+import { Icons } from "@/components/icons"
+
+import { JoinNewsletterForm } from "./join-newsletter-form"
+import { ModeToggle } from "./mode-toggle"
 
 export function SiteFooter() {
   return (

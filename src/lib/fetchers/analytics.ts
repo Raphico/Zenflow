@@ -2,8 +2,8 @@
 
 import { db } from "@/db"
 import { boards, statuses, tasks } from "@/db/schema"
-import { desc, sql, gte, and, lte, eq } from "drizzle-orm"
 import { endOfWeek, startOfWeek } from "date-fns"
+import { and, desc, eq, gte, lte, sql } from "drizzle-orm"
 
 const startDate = startOfWeek(new Date())
 const endDate = endOfWeek(new Date())

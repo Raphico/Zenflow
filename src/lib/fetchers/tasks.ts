@@ -1,17 +1,18 @@
 "use server"
 
 import { db } from "@/db"
-import { type Task, tasks } from "@/db/schema"
+import { tasks, type Task } from "@/db/schema"
 import { and, asc, between, desc, eq, inArray } from "drizzle-orm"
 import type { z } from "zod"
-import type { getTasksSchema } from "../validations/task"
+
 import { calculateDueDates } from "../utils"
+import type { getTasksSchema } from "../validations/task"
 
 export async function getTasks(inputs: z.infer<typeof getTasksSchema>) {
   try {
     const [column, order] = (inputs.sort?.split(".") as [
       keyof Task | undefined,
-      "asc" | "desc" | undefined
+      "asc" | "desc" | undefined,
     ]) ?? ["createdAt", "desc"]
     const priorities =
       (inputs.priorities?.split(".") as Task["priority"][]) ?? []

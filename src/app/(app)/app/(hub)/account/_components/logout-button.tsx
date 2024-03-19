@@ -2,8 +2,8 @@
 
 import * as React from "react"
 import { useRouter } from "next/navigation"
-
 import { SignOutButton } from "@clerk/nextjs"
+
 import { Button } from "@/components/ui/button"
 import { Icons } from "@/components/icons"
 

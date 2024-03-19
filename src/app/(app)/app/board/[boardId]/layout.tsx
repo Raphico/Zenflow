@@ -1,22 +1,23 @@
 import * as React from "react"
 import type { Metadata } from "next"
-import { getCachedUser } from "@/lib/fetchers/auth"
 import { notFound, redirect } from "next/navigation"
 import { db } from "@/db"
-import { eq, and } from "drizzle-orm"
 import { boards } from "@/db/schema"
+import { and, eq } from "drizzle-orm"
 
-import { PageHeader, PageHeaderHeading } from "@/components/page-header"
+import { dashboardConfig } from "@/config/dashboard"
+import { getCachedUser } from "@/lib/fetchers/auth"
+import { Button } from "@/components/ui/button"
 import {
   Popover,
-  PopoverTrigger,
   PopoverContent,
+  PopoverTrigger,
 } from "@/components/ui/popover"
-import { Button } from "@/components/ui/button"
+import { Icons } from "@/components/icons"
+import { PageHeader, PageHeaderHeading } from "@/components/page-header"
+
 import { Sidebar } from "../../_components/sidebar"
 import { View } from "./_components/view"
-import { Icons } from "@/components/icons"
-import { dashboardConfig } from "@/config/dashboard"
 
 interface BoardLayoutProps {
   children: React.ReactNode

@@ -1,12 +1,12 @@
 import type { Metadata } from "next"
 import Link from "next/link"
 
-import { PageHeader, PageHeaderHeading } from "@/components/page-header"
-import { buttonVariants } from "@/components/ui/button"
-import { Icons } from "@/components/icons"
-import { cn, formatPrice } from "@/lib/utils"
 import { subscriptionPlans } from "@/config/subscription"
+import { cn, formatPrice } from "@/lib/utils"
+import { buttonVariants } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Icons } from "@/components/icons"
+import { PageHeader, PageHeaderHeading } from "@/components/page-header"
 
 export const metadata: Metadata = {
   title: "Pricing",

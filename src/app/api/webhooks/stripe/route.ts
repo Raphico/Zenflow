@@ -1,11 +1,11 @@
-import type { NextRequest } from "next/server"
+import { revalidateTag } from "next/cache"
 import { headers } from "next/headers"
+import type { NextRequest } from "next/server"
+import { env } from "@/env.mjs"
 import { clerkClient } from "@clerk/nextjs"
 import type Stripe from "stripe"
-import { env } from "@/env.mjs"
 
 import { stripe } from "@/lib/stripe"
-import { revalidateTag } from "next/cache"
 
 export async function POST(req: NextRequest) {
   const body = await req.text()

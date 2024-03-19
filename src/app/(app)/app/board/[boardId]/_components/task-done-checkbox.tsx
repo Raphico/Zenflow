@@ -2,9 +2,9 @@
 
 import * as React from "react"
 
-import { Checkbox } from "@/components/ui/checkbox"
 import { updateTaskDone } from "@/lib/actions/task"
 import { catchError } from "@/lib/utils"
+import { Checkbox } from "@/components/ui/checkbox"
 
 interface TaskDoneCheckboxProps {
   taskId: number

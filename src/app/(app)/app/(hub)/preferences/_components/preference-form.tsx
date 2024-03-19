@@ -5,9 +5,11 @@
 "use client"
 
 import { zodResolver } from "@hookform/resolvers/zod"
+import { useTheme } from "next-themes"
 import { useForm } from "react-hook-form"
 import type { z } from "zod"
 
+import { preferenceSchema } from "@/lib/validations/preference"
 import { Button } from "@/components/ui/button"
 import {
   Form,
@@ -18,8 +20,6 @@ import {
   FormMessage,
 } from "@/components/ui/form"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
-import { preferenceSchema } from "@/lib/validations/preference"
-import { useTheme } from "next-themes"
 
 type Inputs = z.infer<typeof preferenceSchema>
 

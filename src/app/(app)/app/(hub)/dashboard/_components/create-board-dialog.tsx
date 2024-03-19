@@ -2,26 +2,25 @@
 
 import * as React from "react"
 import { useRouter } from "next/navigation"
-
-import { boardSchema } from "@/lib/validations/board"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
+import { toast } from "sonner"
 import type { z } from "zod"
 
-import {
-  Dialog,
-  DialogHeader,
-  DialogTrigger,
-  DialogContent,
-  DialogTitle,
-  DialogDescription,
-} from "@/components/ui/dialog"
-import { Button } from "@/components/ui/button"
-import { Icons } from "@/components/icons"
-import { BoardForm } from "@/app/(app)/app/(hub)/dashboard/_components/board-form"
-import { toast } from "sonner"
 import { createBoard } from "@/lib/actions/board"
 import { catchError } from "@/lib/utils"
+import { boardSchema } from "@/lib/validations/board"
+import { Button } from "@/components/ui/button"
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog"
+import { Icons } from "@/components/icons"
+import { BoardForm } from "@/app/(app)/app/(hub)/dashboard/_components/board-form"
 
 type Inputs = z.infer<typeof boardSchema>
 

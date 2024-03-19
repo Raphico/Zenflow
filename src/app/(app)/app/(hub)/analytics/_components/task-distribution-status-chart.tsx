@@ -1,8 +1,8 @@
 "use client"
 
-import { useMounted } from "@/hooks/use-mounted"
+import { Bar, BarChart, ResponsiveContainer, XAxis, YAxis } from "recharts"
 
-import { ResponsiveContainer, BarChart, XAxis, YAxis, Bar } from "recharts"
+import { useMounted } from "@/hooks/use-mounted"
 
 interface TaskDistributionByStatusChartProps {
   data: {

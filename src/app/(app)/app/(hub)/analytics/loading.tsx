@@ -1,9 +1,9 @@
+import { Skeleton } from "@/components/ui/skeleton"
 import {
   PageHeader,
   PageHeaderDescription,
   PageHeaderHeading,
 } from "@/components/page-header"
-import { Skeleton } from "@/components/ui/skeleton"
 
 export default function AnalyticsLoading() {
   return (

@@ -1,11 +1,12 @@
 import type { Metadata } from "next"
 
+import { Separator } from "@/components/ui/separator"
 import {
   PageHeader,
   PageHeaderDescription,
   PageHeaderHeading,
 } from "@/components/page-header"
-import { Separator } from "@/components/ui/separator"
+
 import { PreferenceForm } from "./_components/preference-form"
 
 export const metadata: Metadata = {

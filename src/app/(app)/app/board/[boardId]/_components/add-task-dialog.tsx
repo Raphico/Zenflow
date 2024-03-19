@@ -2,19 +2,19 @@
 
 import * as React from "react"
 import type { Status } from "@/db/schema"
-
-import { taskSchema } from "@/lib/validations/task"
-import type { z } from "zod"
-import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
-
-import { Dialog, DialogTrigger, DialogContent } from "@/components/ui/dialog"
-import { Button } from "@/components/ui/button"
-import { Icons } from "@/components/icons"
-import { TaskForm } from "./task-form"
-import { addTask } from "@/lib/actions/task"
+import { useForm } from "react-hook-form"
 import { toast } from "sonner"
+import type { z } from "zod"
+
+import { addTask } from "@/lib/actions/task"
 import { catchError } from "@/lib/utils"
+import { taskSchema } from "@/lib/validations/task"
+import { Button } from "@/components/ui/button"
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog"
+import { Icons } from "@/components/icons"
+
+import { TaskForm } from "./task-form"
 
 type Inputs = z.infer<typeof taskSchema>
 

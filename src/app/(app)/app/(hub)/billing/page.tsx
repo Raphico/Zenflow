@@ -1,22 +1,23 @@
 import type { Metadata } from "next"
 import Link from "next/link"
 import { redirect } from "next/navigation"
-import { getSubscriptionPlan } from "@/lib/fetchers/stripe"
-import { getCachedUser } from "@/lib/fetchers/auth"
 
+import { subscriptionPlans } from "@/config/subscription"
+import { getCachedUser } from "@/lib/fetchers/auth"
+import { getSubscriptionPlan } from "@/lib/fetchers/stripe"
+import { cn, formatDate, formatPrice } from "@/lib/utils"
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
+import { buttonVariants } from "@/components/ui/button"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Separator } from "@/components/ui/separator"
+import { Icons } from "@/components/icons"
 import {
   PageHeader,
   PageHeaderDescription,
   PageHeaderHeading,
 } from "@/components/page-header"
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
-import { Separator } from "@/components/ui/separator"
-import { Icons } from "@/components/icons"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { buttonVariants } from "@/components/ui/button"
+
 import { ManageSubscriptionForm } from "./_components/manage-subscription-form"
-import { cn, formatDate, formatPrice } from "@/lib/utils"
-import { subscriptionPlans } from "@/config/subscription"
 
 export const metadata: Metadata = {
   title: "Billing",
@@ -71,8 +72,8 @@ export default async function BillingPage() {
             {!subscriptionPlan?.isSubscribed
               ? "Upgrade to unlock unlimited access to Zenflow"
               : subscriptionPlan.isCanceled
-              ? "Your plan will be canceled on "
-              : "Your plan renews on "}
+                ? "Your plan will be canceled on "
+                : "Your plan renews on "}
             {subscriptionPlan?.stripeCurrentPeriodEnd
               ? `${formatDate(subscriptionPlan.stripeCurrentPeriodEnd)}.`
               : null}

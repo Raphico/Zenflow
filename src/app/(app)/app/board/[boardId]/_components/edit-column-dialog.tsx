@@ -1,20 +1,21 @@
 import * as React from "react"
-import { columnSchema } from "@/lib/validations/column"
+import type { Status } from "@/db/schema"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
+import { toast } from "sonner"
 import type { z } from "zod"
-import type { Status } from "@/db/schema"
 
+import { updateColumn } from "@/lib/actions/column"
+import { catchError } from "@/lib/utils"
+import { columnSchema } from "@/lib/validations/column"
 import {
   Dialog,
-  DialogHeader,
   DialogContent,
+  DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog"
+
 import { ColumnForm } from "./column-form"
-import { toast } from "sonner"
-import { catchError } from "@/lib/utils"
-import { updateColumn } from "@/lib/actions/column"
 
 interface EditColumnDialogProps {
   boardId: number

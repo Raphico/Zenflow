@@ -2,8 +2,18 @@
 
 import * as React from "react"
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
-import { dueDatesOptions, priorityOptions, sortOptions } from "@/config/task"
 
+import { dueDatesOptions, priorityOptions, sortOptions } from "@/config/task"
+import { cn } from "@/lib/utils"
+
+import { Icons } from "../../../../../../components/icons"
+import { Button } from "../../../../../../components/ui/button"
+import {
+  Command,
+  CommandGroup,
+  CommandItem,
+  CommandList,
+} from "../../../../../../components/ui/command"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -13,21 +23,12 @@ import {
   DropdownMenuTrigger,
 } from "../../../../../../components/ui/dropdown-menu"
 import {
-  Command,
-  CommandList,
-  CommandGroup,
-  CommandItem,
-} from "../../../../../../components/ui/command"
-import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from "../../../../../../components/ui/popover"
-import { Button } from "../../../../../../components/ui/button"
-import { Switch } from "../../../../../../components/ui/switch"
 import { Separator } from "../../../../../../components/ui/separator"
-import { Icons } from "../../../../../../components/icons"
-import { cn } from "@/lib/utils"
+import { Switch } from "../../../../../../components/ui/switch"
 
 export function View() {
   const router = useRouter()

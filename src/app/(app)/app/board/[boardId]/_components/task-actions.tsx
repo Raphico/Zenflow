@@ -2,18 +2,19 @@
 
 import * as React from "react"
 import type { Status, Task } from "@/db/schema"
-import type { SubTask } from "@/lib/validations/task"
 
+import type { SubTask } from "@/lib/validations/task"
+import { Button } from "@/components/ui/button"
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { Button } from "@/components/ui/button"
-import { EditTaskDialog } from "./edit-task-dialog"
-import { DeleteTaskDialog } from "./delete-task-dialog"
 import { Icons } from "@/components/icons"
+
+import { DeleteTaskDialog } from "./delete-task-dialog"
+import { EditTaskDialog } from "./edit-task-dialog"
 
 interface TaskActionsProps {
   boardId: number

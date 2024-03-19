@@ -1,15 +1,14 @@
 "use client"
 
+import { format } from "date-fns"
 import {
-  ResponsiveContainer,
+  Line,
   LineChart,
+  ResponsiveContainer,
+  Tooltip,
   XAxis,
   YAxis,
-  Line,
-  Tooltip,
 } from "recharts"
-
-import { format } from "date-fns"
 
 interface TaskCompletionRatesChartProps {
   data: {

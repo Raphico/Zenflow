@@ -1,6 +1,9 @@
 import * as React from "react"
 import type { Task } from "@/db/schema"
+import { toast } from "sonner"
 
+import { deleteTask } from "@/lib/actions/task"
+import { catchError } from "@/lib/utils"
 import {
   AlertDialog,
   AlertDialogAction,
@@ -13,9 +16,6 @@ import {
 } from "@/components/ui/alert-dialog"
 import { buttonVariants } from "@/components/ui/button"
 import { Icons } from "@/components/icons"
-import { catchError } from "@/lib/utils"
-import { deleteTask } from "@/lib/actions/task"
-import { toast } from "sonner"
 
 interface DeleteTaskDialogProps {
   boardId: number

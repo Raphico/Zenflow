@@ -1,6 +1,7 @@
-import { Icons } from "@/components/icons"
-import { buttonVariants } from "@/components/ui/button"
 import Link from "next/link"
+
+import { buttonVariants } from "@/components/ui/button"
+import { Icons } from "@/components/icons"
 
 export default function NotFound() {
   return (

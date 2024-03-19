@@ -1,8 +1,14 @@
-import { useFieldArray, type UseFormReturn } from "react-hook-form"
-import type { z } from "zod"
-import type { SubTask, taskSchema } from "@/lib/validations/task"
 import type { Status } from "@/db/schema"
+import { format } from "date-fns"
+import { useFieldArray, type UseFormReturn } from "react-hook-form"
+import TextareaAutosize from "react-textarea-autosize"
+import type { z } from "zod"
 
+import { cn } from "@/lib/utils"
+import type { SubTask, taskSchema } from "@/lib/validations/task"
+import { Button, buttonVariants } from "@/components/ui/button"
+import { Calendar } from "@/components/ui/calendar"
+import { Checkbox } from "@/components/ui/checkbox"
 import {
   Form,
   FormControl,
@@ -11,6 +17,12 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form"
+import { Input } from "@/components/ui/input"
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover"
 import {
   Select,
   SelectContent,
@@ -19,20 +31,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover"
-import { Button, buttonVariants } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import TextareaAutosize from "react-textarea-autosize"
-import { Calendar } from "@/components/ui/calendar"
 import { Icons } from "@/components/icons"
-
-import { format } from "date-fns"
-import { cn } from "@/lib/utils"
-import { Checkbox } from "@/components/ui/checkbox"
 
 type Inputs = z.infer<typeof taskSchema>
 

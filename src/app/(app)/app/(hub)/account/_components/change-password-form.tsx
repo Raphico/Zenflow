@@ -1,12 +1,21 @@
 "use client"
 
 import * as React from "react"
-
-import { changePasswordSchema } from "@/lib/validations/account"
-import type { z } from "zod"
-import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
+import { useForm } from "react-hook-form"
+import { toast } from "sonner"
+import type { z } from "zod"
 
+import { updateUserPassword } from "@/lib/actions/account"
+import { catchClerkError } from "@/lib/utils"
+import { changePasswordSchema } from "@/lib/validations/account"
+import { Button } from "@/components/ui/button"
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+} from "@/components/ui/dialog"
 import {
   Form,
   FormControl,
@@ -15,18 +24,8 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form"
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogDescription,
-} from "@/components/ui/dialog"
-import { PasswordInput } from "@/components/password-input"
-import { Button } from "@/components/ui/button"
 import { Icons } from "@/components/icons"
-import { catchClerkError } from "@/lib/utils"
-import { updateUserPassword } from "@/lib/actions/account"
-import { toast } from "sonner"
+import { PasswordInput } from "@/components/password-input"
 
 type Inputs = z.infer<typeof changePasswordSchema>
 

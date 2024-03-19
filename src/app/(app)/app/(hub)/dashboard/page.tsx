@@ -1,24 +1,25 @@
 import { type Metadata } from "next"
+import Link from "next/link"
 import { redirect } from "next/navigation"
 
+import { getCachedUser } from "@/lib/fetchers/auth"
+import { getBoards } from "@/lib/fetchers/board"
+import { getSubscriptionPlan } from "@/lib/fetchers/stripe"
+import { getPlanFeatures } from "@/lib/subscription"
+import { cn } from "@/lib/utils"
+import { filterBoardSchema } from "@/lib/validations/board"
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
+import { buttonVariants } from "@/components/ui/button"
+import { Icons } from "@/components/icons"
 import {
   PageHeader,
   PageHeaderDescription,
   PageHeaderHeading,
 } from "@/components/page-header"
-import { SearchBoards } from "./_components/search-boards"
 import { BoardCard } from "@/app/(app)/app/(hub)/dashboard/_components/board-card"
 import { CreateBoardDialog } from "@/app/(app)/app/(hub)/dashboard/_components/create-board-dialog"
-import { getCachedUser } from "@/lib/fetchers/auth"
-import { getBoards } from "@/lib/fetchers/board"
-import { getSubscriptionPlan } from "@/lib/fetchers/stripe"
-import { getPlanFeatures } from "@/lib/subscription"
-import Link from "next/link"
-import { Icons } from "@/components/icons"
-import { cn } from "@/lib/utils"
-import { buttonVariants } from "@/components/ui/button"
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
-import { filterBoardSchema } from "@/lib/validations/board"
+
+import { SearchBoards } from "./_components/search-boards"
 
 export const metadata: Metadata = {
   title: "Dashboard",

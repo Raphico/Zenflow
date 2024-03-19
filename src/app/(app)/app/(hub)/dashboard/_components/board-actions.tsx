@@ -3,16 +3,17 @@
 import * as React from "react"
 import type { Board } from "@/db/schema"
 
+import { Button } from "@/components/ui/button"
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { Button } from "@/components/ui/button"
-import { EditBoardDialog } from "./edit-board-dialog"
-import { DeleteBoardDialog } from "./delete-board-dialog"
 import { Icons } from "@/components/icons"
+
+import { DeleteBoardDialog } from "./delete-board-dialog"
+import { EditBoardDialog } from "./edit-board-dialog"
 
 interface BoardActionsProps {
   userId: string

@@ -1,3 +1,4 @@
+import { relations } from "drizzle-orm"
 import {
   boolean,
   datetime,
@@ -8,7 +9,6 @@ import {
   timestamp,
   varchar,
 } from "drizzle-orm/mysql-core"
-import { relations } from "drizzle-orm"
 
 export const boards = mysqlTable("boards", {
   userId: varchar("userId", { length: 191 }).notNull(),

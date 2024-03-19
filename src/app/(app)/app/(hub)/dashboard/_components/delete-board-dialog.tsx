@@ -1,6 +1,9 @@
 import * as React from "react"
 import type { Board } from "@/db/schema"
+import { toast } from "sonner"
 
+import { deleteBoard } from "@/lib/actions/board"
+import { catchError } from "@/lib/utils"
 import {
   AlertDialog,
   AlertDialogAction,
@@ -13,9 +16,6 @@ import {
 } from "@/components/ui/alert-dialog"
 import { buttonVariants } from "@/components/ui/button"
 import { Icons } from "@/components/icons"
-import { catchError } from "@/lib/utils"
-import { deleteBoard } from "@/lib/actions/board"
-import { toast } from "sonner"
 
 interface DeleteBoardDialogProps {
   board: Pick<Board, "id" | "name">

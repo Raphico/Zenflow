@@ -1,11 +1,13 @@
 "use client"
 
-import { siteConfig } from "@/config/site"
-import { Icons } from "@/components/icons"
 import Link from "next/link"
-import { cn } from "@/lib/utils"
 import { usePathname } from "next/navigation"
+
+import { siteConfig } from "@/config/site"
+import { cn } from "@/lib/utils"
 import { buttonVariants } from "@/components/ui/button"
+import { Icons } from "@/components/icons"
+
 import { MobileNav } from "./mobile-nav"
 
 export function SiteHeader() {

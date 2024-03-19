@@ -1,8 +1,8 @@
 import Link from "next/link"
 import { type Post } from "contentlayer/generated"
 
-import { buttonVariants } from "@/components/ui/button"
 import { cn, truncate } from "@/lib/utils"
+import { buttonVariants } from "@/components/ui/button"
 import { Icons } from "@/components/icons"
 
 interface PostPagerProps {

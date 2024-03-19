@@ -1,11 +1,11 @@
 import Link from "next/link"
-
-import { buttonVariants } from "@/components/ui/button"
 import Balancer from "react-wrap-balancer"
-import { cn } from "@/lib/utils"
+
 import { siteConfig } from "@/config/site"
-import { Icons } from "@/components/icons"
+import { cn } from "@/lib/utils"
+import { buttonVariants } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Icons } from "@/components/icons"
 
 export default function HomePage() {
   return (

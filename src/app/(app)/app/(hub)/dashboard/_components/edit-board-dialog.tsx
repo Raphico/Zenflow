@@ -1,21 +1,20 @@
 import * as React from "react"
-
-import { boardSchema } from "@/lib/validations/board"
+import type { Board } from "@/db/schema"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
+import { toast } from "sonner"
 import type { z } from "zod"
-import type { Board } from "@/db/schema"
 
+import { updateBoard } from "@/lib/actions/board"
+import { catchError } from "@/lib/utils"
+import { boardSchema } from "@/lib/validations/board"
 import {
   Dialog,
-  DialogHeader,
   DialogContent,
-  DialogTitle,
   DialogDescription,
+  DialogHeader,
+  DialogTitle,
 } from "@/components/ui/dialog"
-import { updateBoard } from "@/lib/actions/board"
-import { toast } from "sonner"
-import { catchError } from "@/lib/utils"
 import { BoardForm } from "@/app/(app)/app/(hub)/dashboard/_components/board-form"
 
 interface EditBoardDialogProps {

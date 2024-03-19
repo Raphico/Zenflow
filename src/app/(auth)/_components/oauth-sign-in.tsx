@@ -1,13 +1,12 @@
 "use client"
 
 import * as React from "react"
-
-import { type OAuthStrategy } from "@clerk/nextjs/server"
 import { isClerkAPIResponseError, useSignIn } from "@clerk/nextjs"
+import { type OAuthStrategy } from "@clerk/nextjs/server"
+import { toast } from "sonner"
 
 import { Button } from "@/components/ui/button"
 import { Icons } from "@/components/icons"
-import { toast } from "sonner"
 
 const providers = [
   {

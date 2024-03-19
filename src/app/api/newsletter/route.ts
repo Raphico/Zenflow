@@ -1,5 +1,6 @@
-import { z } from "zod"
 import { env } from "@/env.mjs"
+import { z } from "zod"
+
 import { joinNewsletterSchema } from "@/lib/validations/email"
 
 export async function POST(req: Request) {

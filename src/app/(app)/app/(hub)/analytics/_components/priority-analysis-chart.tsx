@@ -1,8 +1,8 @@
 "use client"
 
-import { useMounted } from "@/hooks/use-mounted"
+import { Bar, BarChart, ResponsiveContainer, XAxis, YAxis } from "recharts"
 
-import { ResponsiveContainer, BarChart, Bar, XAxis, YAxis } from "recharts"
+import { useMounted } from "@/hooks/use-mounted"
 
 interface PriorityAnalysisChartProps {
   data: {

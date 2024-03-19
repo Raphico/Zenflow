@@ -4,6 +4,7 @@
   "extends": [
     "next/core-web-vitals",
     "plugin:tailwindcss/recommended",
+    "prettier",
     "plugin:@typescript-eslint/recommended-type-checked"
   ],
   "plugins": ["@typescript-eslint", "tailwindcss"],
@@ -12,9 +13,6 @@
     "project": true
   },
   "rules": {
-    "tailwindcss/no-custom-classname": "off",
-    "tailwindcss/classnames-order": "error",
-
     "@typescript-eslint/array-type": "off",
     "@typescript-eslint/consistent-type-definitions": "off",
 

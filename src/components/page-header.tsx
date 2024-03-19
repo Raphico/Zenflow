@@ -1,8 +1,8 @@
 import * as React from "react"
+import { cva, type VariantProps } from "class-variance-authority"
+import Balancer from "react-wrap-balancer"
 
 import { cn } from "@/lib/utils"
-import { type VariantProps, cva } from "class-variance-authority"
-import Balancer from "react-wrap-balancer"
 
 interface PageHeaderProps extends React.HTMLAttributes<HTMLHeadElement> {
   as?: React.ElementType

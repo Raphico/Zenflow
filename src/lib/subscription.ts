@@ -1,4 +1,5 @@
 import type { SubscriptionPlan } from "@/types"
+
 import { subscriptionPlans } from "@/config/subscription"
 
 export function getPlanFeatures(planName?: SubscriptionPlan["name"]) {

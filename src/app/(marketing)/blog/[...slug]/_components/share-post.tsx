@@ -3,9 +3,9 @@
 import * as React from "react"
 import Link from "next/link"
 
-import { Icons } from "@/components/icons"
-import { Button, buttonVariants } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
+import { Button, buttonVariants } from "@/components/ui/button"
+import { Icons } from "@/components/icons"
 
 interface SharePostProps {
   postTitle: string

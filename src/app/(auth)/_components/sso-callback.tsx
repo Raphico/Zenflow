@@ -4,6 +4,7 @@ import * as React from "react"
 import { useClerk } from "@clerk/nextjs"
 
 import { Icons } from "@/components/icons"
+
 import type { SSOCallbackPageProps } from "../sso-callback/page"
 
 export function SSOCallback({ searchParams }: SSOCallbackPageProps) {

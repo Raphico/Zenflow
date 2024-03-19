@@ -1,6 +1,9 @@
 import * as React from "react"
 import type { Status } from "@/db/schema"
+import { toast } from "sonner"
 
+import { deleteColumn } from "@/lib/actions/column"
+import { catchError } from "@/lib/utils"
 import {
   AlertDialog,
   AlertDialogAction,
@@ -13,9 +16,6 @@ import {
 } from "@/components/ui/alert-dialog"
 import { buttonVariants } from "@/components/ui/button"
 import { Icons } from "@/components/icons"
-import { catchError } from "@/lib/utils"
-import { deleteColumn } from "@/lib/actions/column"
-import { toast } from "sonner"
 
 interface DeleteColumnDialogProps {
   boardId: number

@@ -1,17 +1,18 @@
 import { type Metadata } from "next"
-import Link from "next/link"
 import Image from "next/image"
+import Link from "next/link"
 import { notFound } from "next/navigation"
-
 import { allAuthors, allPosts } from "contentlayer/generated"
+
 import "@/styles/mdx.css"
 
-import { cn, formatDate, absoluteUrl } from "@/lib/utils"
-import { Icons } from "@/components/icons"
-import { buttonVariants } from "@/components/ui/button"
+import { absoluteUrl, cn, formatDate } from "@/lib/utils"
 import { AspectRatio } from "@/components/ui/aspect-ratio"
-import { Mdx } from "@/components/mdx/mdx-components"
+import { buttonVariants } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
+import { Icons } from "@/components/icons"
+import { Mdx } from "@/components/mdx/mdx-components"
+
 import { PostPager } from "./_components/post-pager"
 import { SharePost } from "./_components/share-post"
 

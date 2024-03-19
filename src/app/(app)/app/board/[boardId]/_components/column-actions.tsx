@@ -3,6 +3,7 @@
 import * as React from "react"
 import type { Status } from "@/db/schema"
 
+import { Button } from "@/components/ui/button"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -10,9 +11,9 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { Icons } from "@/components/icons"
-import { Button } from "@/components/ui/button"
-import { EditColumnDialog } from "./edit-column-dialog"
+
 import { DeleteColumnDialog } from "./delete-column-dialog"
+import { EditColumnDialog } from "./edit-column-dialog"
 
 interface ColumnActionsProps {
   boardId: number

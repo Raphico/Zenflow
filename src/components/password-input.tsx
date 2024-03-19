@@ -1,9 +1,10 @@
 import * as React from "react"
 
-import { Input, type InputProps } from "./ui/input"
-import { Button } from "./ui/button"
-import { Icons } from "./icons"
 import { cn } from "@/lib/utils"
+
+import { Icons } from "./icons"
+import { Button } from "./ui/button"
+import { Input, type InputProps } from "./ui/input"
 
 const PasswordInput = React.forwardRef<HTMLInputElement, InputProps>(
   ({ className, ...props }, ref) => {

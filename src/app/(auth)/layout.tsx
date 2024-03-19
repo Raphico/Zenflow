@@ -1,9 +1,9 @@
 import Link from "next/link"
-import { currentUser } from "@clerk/nextjs"
 import { redirect } from "next/navigation"
+import { currentUser } from "@clerk/nextjs"
 
-import { Icons } from "@/components/icons"
 import { siteConfig } from "@/config/site"
+import { Icons } from "@/components/icons"
 
 export default async function AuthLayout({
   children,

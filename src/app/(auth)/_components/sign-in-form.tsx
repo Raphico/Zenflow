@@ -1,14 +1,15 @@
 "use client"
 
 import * as React from "react"
-import { useSignIn } from "@clerk/nextjs"
 import { useRouter } from "next/navigation"
-
-import { authSchema } from "@/lib/validations/auth"
+import { useSignIn } from "@clerk/nextjs"
+import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { type z } from "zod"
-import { zodResolver } from "@hookform/resolvers/zod"
 
+import { catchClerkError } from "@/lib/utils"
+import { authSchema } from "@/lib/validations/auth"
+import { Button } from "@/components/ui/button"
 import {
   Form,
   FormControl,
@@ -18,10 +19,8 @@ import {
   FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
-import { Button } from "@/components/ui/button"
-import { PasswordInput } from "@/components/password-input"
 import { Icons } from "@/components/icons"
-import { catchClerkError } from "@/lib/utils"
+import { PasswordInput } from "@/components/password-input"
 
 type Inputs = z.infer<typeof authSchema>
 

@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import { redirect } from "next/navigation"
 
 import {
   getPopularTags,
@@ -6,19 +7,18 @@ import {
   getTaskCompletionRates,
   getTaskDistributionByStatus,
 } from "@/lib/fetchers/analytics"
-
+import { getCachedUser } from "@/lib/fetchers/auth"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import {
   PageHeader,
-  PageHeaderHeading,
   PageHeaderDescription,
+  PageHeaderHeading,
 } from "@/components/page-header"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+
 import { PopularTagsChart } from "./_components/popular-tags-chart"
+import { PriorityAnalysisChart } from "./_components/priority-analysis-chart"
 import { TaskCompletionRatesChart } from "./_components/task-completion-rates-chart"
 import { TaskDistributionByStatusChart } from "./_components/task-distribution-status-chart"
-import { PriorityAnalysisChart } from "./_components/priority-analysis-chart"
-import { getCachedUser } from "@/lib/fetchers/auth"
-import { redirect } from "next/navigation"
 
 export const metadata: Metadata = {
   title: "Analytics",
