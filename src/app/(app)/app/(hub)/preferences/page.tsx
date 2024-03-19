@@ -6,7 +6,7 @@ import {
   PageHeaderHeading,
 } from "@/components/page-header"
 import { Separator } from "@/components/ui/separator"
-import { PreferenceForm } from "@/components/forms/preference-form"
+import { PreferenceForm } from "./_components/preference-form"
 
 export const metadata: Metadata = {
   title: "Preferences",

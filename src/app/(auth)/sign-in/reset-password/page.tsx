@@ -5,7 +5,7 @@ import {
   PageHeaderDescription,
   PageHeaderHeading,
 } from "@/components/page-header"
-import { ResetPasswordForm } from "@/components/forms/reset-password-form"
+import { ResetPasswordForm } from "../../_components/reset-password-form"
 
 export const metadata: Metadata = {
   title: "Reset password",

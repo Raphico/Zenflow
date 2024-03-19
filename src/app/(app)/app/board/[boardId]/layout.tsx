@@ -13,8 +13,8 @@ import {
   PopoverContent,
 } from "@/components/ui/popover"
 import { Button } from "@/components/ui/button"
-import { Sidebar } from "@/components/layouts/sidebar"
-import { View } from "@/components/view"
+import { Sidebar } from "../../_components/sidebar"
+import { View } from "./_components/view"
 import { Icons } from "@/components/icons"
 import { dashboardConfig } from "@/config/dashboard"
 

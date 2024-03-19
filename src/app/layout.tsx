@@ -6,7 +6,7 @@ import "@/styles/globals.css"
 import { Inter as FontSans, Montserrat as FontHeading } from "next/font/google"
 import { cn } from "@/lib/utils"
 import { siteConfig } from "@/config/site"
-import { ThemeProvider } from "@/components/theme-provider"
+import { ThemeProvider } from "./theme-provider"
 import { ClerkProvider } from "@clerk/nextjs"
 import { Toaster } from "@/components/ui/sonner"
 

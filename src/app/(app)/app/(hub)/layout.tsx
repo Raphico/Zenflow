@@ -1,7 +1,7 @@
 import { getCachedUser } from "@/lib/fetchers/auth"
 import { redirect } from "next/navigation"
 
-import { Sidebar } from "@/components/layouts/sidebar"
+import { Sidebar } from "../_components/sidebar"
 import { dashboardConfig } from "@/config/dashboard"
 
 export default async function DashboardLayout({

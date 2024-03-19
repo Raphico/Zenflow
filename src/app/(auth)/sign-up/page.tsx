@@ -6,8 +6,8 @@ import {
   PageHeaderDescription,
   PageHeaderHeading,
 } from "@/components/page-header"
-import { OAuthSignIn } from "@/components/auth/oauth-sign-in"
-import { SignUpForm } from "@/components/forms/sign-up-form"
+import { OAuthSignIn } from "../_components/oauth-sign-in"
+import { SignUpForm } from "../_components/sign-up-form"
 
 export const metadata: Metadata = {
   title: "Sign up",

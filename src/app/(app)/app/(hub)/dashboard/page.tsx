@@ -6,9 +6,9 @@ import {
   PageHeaderDescription,
   PageHeaderHeading,
 } from "@/components/page-header"
-import { SearchBoards } from "@/components/search-boards"
-import { BoardCard } from "@/components/cards/board-card"
-import { CreateBoardDialog } from "@/components/dialogs/create-board-dialog"
+import { SearchBoards } from "./_components/search-boards"
+import { BoardCard } from "@/app/(app)/app/(hub)/dashboard/_components/board-card"
+import { CreateBoardDialog } from "@/app/(app)/app/(hub)/dashboard/_components/create-board-dialog"
 import { getCachedUser } from "@/lib/fetchers/auth"
 import { getBoards } from "@/lib/fetchers/board"
 import { getSubscriptionPlan } from "@/lib/fetchers/stripe"

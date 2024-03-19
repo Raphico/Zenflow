@@ -6,13 +6,16 @@ import { getBoardStatuses } from "@/lib/fetchers/status"
 import { getSubscriptionPlan } from "@/lib/fetchers/stripe"
 import { getPlanFeatures } from "@/lib/subscription"
 
-import { AddColumnDialog } from "@/components/dialogs/add-column-dialog"
-import { Tasks, TasksSkeleton } from "@/components/tasks"
-import { AddTaskDialog } from "@/components/dialogs/add-task-dialog"
+import { AddColumnDialog } from "./_components/add-column-dialog"
+import {
+  Tasks,
+  TasksSkeleton,
+} from "@/app/(app)/app/board/[boardId]/_components/tasks"
+import { AddTaskDialog } from "./_components/add-task-dialog"
 import { Icons } from "@/components/icons"
 import { cn } from "@/lib/utils"
 import { buttonVariants } from "@/components/ui/button"
-import { ColumnActions } from "@/components/column-actions"
+import { ColumnActions } from "./_components/column-actions"
 import { taskSearchParamsSchema } from "@/lib/validations/task"
 
 interface BoardPageParams {

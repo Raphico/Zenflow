@@ -14,7 +14,7 @@ import { Separator } from "@/components/ui/separator"
 import { Icons } from "@/components/icons"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { buttonVariants } from "@/components/ui/button"
-import { ManageSubscriptionForm } from "@/components/forms/manage-subscription-form"
+import { ManageSubscriptionForm } from "./_components/manage-subscription-form"
 import { cn, formatDate, formatPrice } from "@/lib/utils"
 import { subscriptionPlans } from "@/config/subscription"
 

@@ -8,9 +8,9 @@ import {
 } from "@/components/page-header"
 import { Separator } from "@/components/ui/separator"
 import { getCachedUser } from "@/lib/fetchers/auth"
-import { ProfileForm } from "@/components/forms/profile-form"
-import { LogoutButton } from "@/components/auth/logout-button"
-import { ChangePasswordForm } from "@/components/forms/change-password-form"
+import { ProfileForm } from "./_components/profile-form"
+import { LogoutButton } from "./_components/logout-button"
+import { ChangePasswordForm } from "./_components/change-password-form"
 
 export const metadata: Metadata = {
   title: "Account",

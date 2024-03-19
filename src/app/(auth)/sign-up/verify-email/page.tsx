@@ -5,7 +5,7 @@ import {
   PageHeaderDescription,
   PageHeaderHeading,
 } from "@/components/page-header"
-import { VerifyEmailForm } from "@/components/forms/verify-email-form"
+import { VerifyEmailForm } from "../../_components/verify-email-form"
 
 export const metadata: Metadata = {
   title: "Verify email",
