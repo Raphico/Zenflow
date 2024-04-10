@@ -7,7 +7,7 @@ A task manager web application built with Next.js 14
 - **Framework:** [Next.js](https://nextjs.org)
 - **Styling:** [Tailwind CSS](https://tailwindcss.com)
 - **User Management:** [clerk](https://clerk.com/)
-- **Database:** [Planetscale](https://planetscale.com/)
+- **Database:** [Railway](https://railway.app)
 - **ORM:** [Drizzle ORM](https://orm.drizzle.team)
 - **UI Components:** [shadcn/ui](https://ui.shadcn.com)
 - **Payment management:** [Stripe](https://stripe.com)
