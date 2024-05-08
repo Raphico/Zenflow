@@ -20,7 +20,6 @@
   "dependencies": {
     "@clerk/nextjs": "^4.29.3",
     "@hookform/resolvers": "^3.3.4",
-    "@planetscale/database": "^1.13.0",
     "@radix-ui/react-alert-dialog": "^1.0.5",
     "@radix-ui/react-aspect-ratio": "^1.0.3",
     "@radix-ui/react-avatar": "^1.0.4",
@@ -43,8 +42,9 @@
     "cmdk": "^0.2.1",
     "contentlayer": "^0.3.4",
     "date-fns": "^3.3.1",
-    "drizzle-orm": "^0.29.3",
+    "drizzle-orm": "^0.29.5",
     "lucide-react": "^0.303.0",
+    "mysql2": "^3.9.7",
     "next": "^14.1.0",
     "next-contentlayer": "^0.3.4",
     "next-themes": "^0.2.1",
