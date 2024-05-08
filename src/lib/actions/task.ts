@@ -33,7 +33,7 @@ export async function addTask(rawInputs: z.infer<typeof extendedTaskSchema>) {
 
       const subtaskPromises = inputs.subtasks.map(async (subtask) => {
         await tx.insert(subtasks).values({
-          taskId: parseInt(task.insertId),
+          taskId: task[0].insertId,
           title: subtask.title,
           done: subtask.done,
           dueDate: subtask.dueDate,

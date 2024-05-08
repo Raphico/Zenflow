@@ -33,7 +33,7 @@ export async function createBoard(
   revalidatePath("/dashboard")
 
   return {
-    boardId: newBoard.insertId,
+    boardId: newBoard[0].insertId,
   }
 }
 
