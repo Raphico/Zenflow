@@ -5,6 +5,7 @@ import {
   PageHeaderDescription,
   PageHeaderHeading,
 } from "@/components/page-header"
+import { Shell } from "@/components/shell"
 
 import { VerifyEmailForm } from "../../_components/verify-email-form"
 
@@ -15,16 +16,18 @@ export const metadata: Metadata = {
 
 export default function VerifyEmail() {
   return (
-    <>
-      <PageHeader className="place-items-center text-center">
-        <PageHeaderHeading>Verify Email</PageHeaderHeading>
-        <PageHeaderDescription>
-          Please check your inbox and paste the sign up code below to create an
-          account
-        </PageHeaderDescription>
-      </PageHeader>
+    <Shell variant="centered" className="max-w-md">
+      <div className="flex flex-col space-y-4">
+        <PageHeader className="place-items-center text-center">
+          <PageHeaderHeading>Verify Email</PageHeaderHeading>
+          <PageHeaderDescription>
+            Please check your inbox and paste the sign up code below to create
+            an account
+          </PageHeaderDescription>
+        </PageHeader>
 
-      <VerifyEmailForm />
-    </>
+        <VerifyEmailForm />
+      </div>
+    </Shell>
   )
 }

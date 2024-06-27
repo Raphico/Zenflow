@@ -6,11 +6,12 @@ import { cn } from "@/lib/utils"
 import { buttonVariants } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Icons } from "@/components/icons"
+import { Shell } from "@/components/shell"
 
 export default function HomePage() {
   return (
-    <div className="container max-w-6xl">
-      <section className="flex flex-col items-center justify-center gap-4 py-12 text-center md:pt-32">
+    <Shell className="max-w-6xl">
+      <section className="flex flex-col items-center justify-center gap-4 py-6 text-center md:pt-32">
         <Balancer
           as="h1"
           className="font-heading text-3xl font-bold sm:text-5xl md:text-6xl lg:text-7xl"
@@ -39,7 +40,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="space-y-8 py-8 md:py-12 lg:py-24">
+      <section className="space-y-8 py-8">
         <h2 className="text-center font-heading text-2xl font-bold sm:text-3xl">
           Why Zenflow?
         </h2>
@@ -102,6 +103,6 @@ export default function HomePage() {
           </Card>
         </div>
       </section>
-    </div>
+    </Shell>
   )
 }

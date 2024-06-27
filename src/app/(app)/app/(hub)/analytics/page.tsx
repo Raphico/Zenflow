@@ -14,6 +14,7 @@ import {
   PageHeaderDescription,
   PageHeaderHeading,
 } from "@/components/page-header"
+import { Shell } from "@/components/shell"
 
 import { PopularTagsChart } from "./_components/popular-tags-chart"
 import { PriorityAnalysisChart } from "./_components/priority-analysis-chart"
@@ -45,7 +46,7 @@ export default async function AnalyticsPage() {
   ])
 
   return (
-    <div className="mx-auto w-full max-w-6xl space-y-8">
+    <Shell className="max-w-6xl">
       <PageHeader>
         <PageHeaderHeading>Analytics</PageHeaderHeading>
         <PageHeaderDescription>
@@ -87,6 +88,6 @@ export default async function AnalyticsPage() {
           </CardContent>
         </Card>
       </section>
-    </div>
+    </Shell>
   )
 }

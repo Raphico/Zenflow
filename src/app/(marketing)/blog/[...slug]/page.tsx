@@ -14,6 +14,7 @@ import { buttonVariants } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
 import { Icons } from "@/components/icons"
 import { Mdx } from "@/components/mdx/mdx-components"
+import { Shell } from "@/components/shell"
 
 import { PostPager } from "./_components/post-pager"
 import { SharePost } from "./_components/share-post"
@@ -97,7 +98,7 @@ export default function PostPage({ params }: PostPageProps) {
   )
 
   return (
-    <article className="container mx-auto grid max-w-3xl gap-8 py-12 lg:py-16">
+    <Shell as="article" className="max-w-3xl">
       <div className="space-y-4">
         <div className="flex items-center gap-2 text-sm text-muted-foreground">
           <p>{formatDate(post.publishedAt)}</p>
@@ -158,6 +159,6 @@ export default function PostPage({ params }: PostPageProps) {
         <Icons.chevronLeft className="mr-2 h-4 w-4" aria-hidden="true" />
         See all posts
       </Link>
-    </article>
+    </Shell>
   )
 }

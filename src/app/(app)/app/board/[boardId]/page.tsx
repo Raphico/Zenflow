@@ -4,6 +4,7 @@ import { redirect } from "next/navigation"
 import { getCachedUser } from "@/server/data/auth"
 import { getBoardStatuses } from "@/server/data/status"
 import { getSubscriptionPlan } from "@/server/data/stripe"
+import { Shell } from "lucide-react"
 
 import { getPlanFeatures } from "@/lib/subscription"
 import { cn } from "@/lib/utils"
@@ -45,7 +46,7 @@ export default async function BoardPage({
   )
 
   return (
-    <div className="mx-auto flex w-full max-w-7xl px-8 pb-16">
+    <Shell className="max-w-7xl">
       <div className="flex gap-8">
         {boardStatuses.map((status) => (
           <section
@@ -121,6 +122,6 @@ export default async function BoardPage({
           <AddColumnDialog boardId={Number(boardId)} />
         )}
       </div>
-    </div>
+    </Shell>
   )
 }

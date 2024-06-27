@@ -4,10 +4,11 @@ import {
   PageHeaderDescription,
   PageHeaderHeading,
 } from "@/components/page-header"
+import { Shell } from "@/components/shell"
 
 export default function AnalyticsLoading() {
   return (
-    <div className="mx-auto w-full max-w-6xl space-y-8">
+    <Shell className="max-w-6xl">
       <PageHeader>
         <PageHeaderHeading>Analytics</PageHeaderHeading>
         <PageHeaderDescription>
@@ -21,6 +22,6 @@ export default function AnalyticsLoading() {
         <Skeleton className="h-[350px]" />
         <Skeleton className="h-[350px]" />
       </section>
-    </div>
+    </Shell>
   )
 }

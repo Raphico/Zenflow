@@ -9,10 +9,11 @@ import {
   PageHeaderDescription,
   PageHeaderHeading,
 } from "@/components/page-header"
+import { Shell } from "@/components/shell"
 
 export default function BillingLoading() {
   return (
-    <div className="mx-auto max-w-4xl space-y-8">
+    <Shell className="max-w-4xl">
       <PageHeader>
         <PageHeaderHeading>Billing</PageHeaderHeading>
         <PageHeaderDescription>
@@ -54,6 +55,6 @@ export default function BillingLoading() {
           <Skeleton className="h-[381.6px] w-full sm:w-[396px]" />
         </div>
       </section>
-    </div>
+    </Shell>
   )
 }

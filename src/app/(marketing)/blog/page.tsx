@@ -12,6 +12,7 @@ import {
   PageHeaderDescription,
   PageHeaderHeading,
 } from "@/components/page-header"
+import { Shell } from "@/components/shell"
 
 export const metadata: Metadata = {
   title: "Blog",
@@ -28,7 +29,7 @@ export default function BlogPage() {
     )
 
   return (
-    <section className="container max-w-5xl py-12 lg:py-16">
+    <Shell className="max-w-5xl">
       <PageHeader>
         <PageHeaderHeading size="lg">
           Productivity Hub: Tips & Insights
@@ -38,7 +39,7 @@ export default function BlogPage() {
           and workflow optimization.
         </PageHeaderDescription>
       </PageHeader>
-      <Separator className="my-8" />
+      <Separator />
       <section className="grid gap-12 sm:grid-cols-2">
         {posts.map((post, index) => (
           <Link key={post._id} href={post.slug}>
@@ -61,6 +62,6 @@ export default function BlogPage() {
           </Link>
         ))}
       </section>
-    </section>
+    </Shell>
   )
 }

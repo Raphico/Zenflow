@@ -6,6 +6,7 @@ import {
   PageHeaderDescription,
   PageHeaderHeading,
 } from "@/components/page-header"
+import { Shell } from "@/components/shell"
 
 import { PreferenceForm } from "./_components/preference-form"
 
@@ -16,15 +17,19 @@ export const metadata: Metadata = {
 
 export default function PreferencePage() {
   return (
-    <div className="mx-auto w-full max-w-5xl">
-      <PageHeader>
-        <PageHeaderHeading>Preferences</PageHeaderHeading>
-        <PageHeaderDescription>
-          Tailoring your experience to suit your unique preferences
-        </PageHeaderDescription>
-      </PageHeader>
-      <Separator className="my-6" />
-      <PreferenceForm />
-    </div>
+    <Shell className="max-w-5xl">
+      <div className="flex flex-col space-y-4">
+        <PageHeader>
+          <PageHeaderHeading>Preferences</PageHeaderHeading>
+          <PageHeaderDescription>
+            Tailoring your experience to suit your unique preferences
+          </PageHeaderDescription>
+        </PageHeader>
+
+        <Separator />
+
+        <PreferenceForm />
+      </div>
+    </Shell>
   )
 }

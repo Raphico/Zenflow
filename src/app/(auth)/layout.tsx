@@ -15,12 +15,12 @@ export default async function AuthLayout({
   }
 
   return (
-    <div className="relative flex min-h-screen flex-col items-center justify-center">
+    <div className="relative flex min-h-screen flex-col">
       <Link href="/" className="absolute left-8 top-6 flex items-center gap-2">
         <Icons.logo className="h-6 w-6" aria-hidden="true" />
         <span className="font-semibold">{siteConfig.name}</span>
       </Link>
-      <main className="container grid max-w-md gap-6">{children}</main>
+      <main className="flex-1">{children}</main>
     </div>
   )
 }

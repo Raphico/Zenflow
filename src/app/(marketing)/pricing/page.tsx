@@ -8,6 +8,7 @@ import { buttonVariants } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Icons } from "@/components/icons"
 import { PageHeader, PageHeaderHeading } from "@/components/page-header"
+import { Shell } from "@/components/shell"
 
 export const metadata: Metadata = {
   title: "Pricing",
@@ -17,7 +18,7 @@ export const metadata: Metadata = {
 
 export default function PricingPage() {
   return (
-    <div className="container flex max-w-4xl flex-col space-y-10 py-12 lg:py-16">
+    <Shell className="max-w-4xl">
       <PageHeader className="text-center">
         <PageHeaderHeading size="lg">
           Discover the right plan for you
@@ -72,6 +73,6 @@ export default function PricingPage() {
           You can test the upgrade and won&apos;t be charged.
         </strong>
       </p>
-    </div>
+    </Shell>
   )
 }

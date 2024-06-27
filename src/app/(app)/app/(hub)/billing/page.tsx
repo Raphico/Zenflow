@@ -18,6 +18,7 @@ import {
   PageHeaderDescription,
   PageHeaderHeading,
 } from "@/components/page-header"
+import { Shell } from "@/components/shell"
 
 import { ManageSubscriptionForm } from "./_components/manage-subscription-form"
 
@@ -36,7 +37,7 @@ export default async function BillingPage() {
   const subscriptionPlan = await getSubscriptionPlan({ userId: user.id })
 
   return (
-    <div className="mx-auto max-w-4xl space-y-8">
+    <Shell className="max-w-4xl">
       <PageHeader>
         <PageHeaderHeading>Billing</PageHeaderHeading>
         <PageHeaderDescription>
@@ -142,6 +143,6 @@ export default async function BillingPage() {
           ))}
         </div>
       </section>
-    </div>
+    </Shell>
   )
 }

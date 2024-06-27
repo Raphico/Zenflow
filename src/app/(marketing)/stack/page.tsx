@@ -7,6 +7,7 @@ import {
   PageHeaderDescription,
   PageHeaderHeading,
 } from "@/components/page-header"
+import { Shell } from "@/components/shell"
 
 export const metadata: Metadata = {
   title: "Stack",
@@ -15,7 +16,7 @@ export const metadata: Metadata = {
 
 export default function StackPage() {
   return (
-    <section className="container max-w-5xl space-y-8 py-12 lg:py-16">
+    <Shell className="max-w-5xl">
       <PageHeader>
         <PageHeaderHeading size="lg">Tech Stack</PageHeaderHeading>
         <PageHeaderDescription size="lg">
@@ -91,6 +92,6 @@ export default function StackPage() {
           </CardContent>
         </Card>
       </div>
-    </section>
+    </Shell>
   )
 }
