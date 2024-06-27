@@ -6,10 +6,9 @@ import { useSignUp } from "@clerk/nextjs"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { toast } from "sonner"
-import { type z } from "zod"
 
 import { redirects } from "@/config/constants"
-import { authSchema } from "@/lib/zod/schemas/auth"
+import { authSchema, type AuthSchema } from "@/lib/zod/schemas/auth"
 import { showErrorToast } from "@/utils/hanld-error"
 import { Button } from "@/components/ui/button"
 import {
@@ -24,14 +23,12 @@ import { Input } from "@/components/ui/input"
 import { Icons } from "@/components/icons"
 import { PasswordInput } from "@/components/password-input"
 
-type Inputs = z.infer<typeof authSchema>
-
 export function SignUpForm() {
   const [isPending, startTransition] = React.useTransition()
   const { signUp, isLoaded } = useSignUp()
   const router = useRouter()
 
-  const form = useForm<Inputs>({
+  const form = useForm<AuthSchema>({
     resolver: zodResolver(authSchema),
     defaultValues: {
       email: "",
@@ -39,7 +36,7 @@ export function SignUpForm() {
     },
   })
 
-  const onSubmit = (values: Inputs) => {
+  const onSubmit = (values: AuthSchema) => {
     if (!isLoaded) return
     startTransition(async () => {
       try {

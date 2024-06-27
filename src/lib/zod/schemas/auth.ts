@@ -25,7 +25,7 @@ export const verifyEmailSchema = z.object({
     .max(6),
 })
 
-export const resetRequestSchema = z.object({
+export const resetPasswordRequestSchema = z.object({
   email: authSchema.shape.email,
 })
 
@@ -33,3 +33,12 @@ export const passwordVerificationSchema = z.object({
   code: verifyEmailSchema.shape.code,
   password: authSchema.shape.password,
 })
+
+export type AuthSchema = z.infer<typeof authSchema>
+export type VerifyEmailSchema = z.infer<typeof verifyEmailSchema>
+export type ResetPasswordRequestSchema = z.infer<
+  typeof resetPasswordRequestSchema
+>
+export type PasswordVerificationSchema = z.infer<
+  typeof passwordVerificationSchema
+>

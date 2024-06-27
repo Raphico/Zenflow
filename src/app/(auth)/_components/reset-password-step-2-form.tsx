@@ -6,10 +6,12 @@ import { useSignIn } from "@clerk/nextjs"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { toast } from "sonner"
-import { type z } from "zod"
 
 import { redirects } from "@/config/constants"
-import { passwordVerificationSchema } from "@/lib/zod/schemas/auth"
+import {
+  passwordVerificationSchema,
+  type PasswordVerificationSchema,
+} from "@/lib/zod/schemas/auth"
 import { showErrorToast } from "@/utils/hanld-error"
 import { Button } from "@/components/ui/button"
 import {
@@ -24,14 +26,12 @@ import { Input } from "@/components/ui/input"
 import { Icons } from "@/components/icons"
 import { PasswordInput } from "@/components/password-input"
 
-type Inputs = z.infer<typeof passwordVerificationSchema>
-
 export function ResetPasswordStep2Form() {
   const [isPending, startTransition] = React.useTransition()
   const { isLoaded, signIn, setActive } = useSignIn()
   const router = useRouter()
 
-  const form = useForm<Inputs>({
+  const form = useForm<PasswordVerificationSchema>({
     resolver: zodResolver(passwordVerificationSchema),
     defaultValues: {
       code: "",
@@ -39,7 +39,7 @@ export function ResetPasswordStep2Form() {
     },
   })
 
-  const onSubmit = (values: Inputs) => {
+  const onSubmit = (values: PasswordVerificationSchema) => {
     if (!isLoaded) return null
 
     startTransition(async () => {

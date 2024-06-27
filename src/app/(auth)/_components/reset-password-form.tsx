@@ -6,10 +6,12 @@ import { useSignIn } from "@clerk/nextjs"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { toast } from "sonner"
-import { type z } from "zod"
 
 import { redirects } from "@/config/constants"
-import { resetRequestSchema } from "@/lib/zod/schemas/auth"
+import {
+  resetPasswordRequestSchema,
+  type ResetPasswordRequestSchema,
+} from "@/lib/zod/schemas/auth"
 import { showErrorToast } from "@/utils/hanld-error"
 import { Button } from "@/components/ui/button"
 import {
@@ -23,21 +25,19 @@ import {
 import { Input } from "@/components/ui/input"
 import { Icons } from "@/components/icons"
 
-type Inputs = z.infer<typeof resetRequestSchema>
-
 export function ResetPasswordForm() {
   const [isPending, startTransition] = React.useTransition()
   const { isLoaded, signIn } = useSignIn()
   const router = useRouter()
 
-  const form = useForm<Inputs>({
-    resolver: zodResolver(resetRequestSchema),
+  const form = useForm<ResetPasswordRequestSchema>({
+    resolver: zodResolver(resetPasswordRequestSchema),
     defaultValues: {
       email: "",
     },
   })
 
-  const onSubmit = (values: Inputs) => {
+  const onSubmit = (values: ResetPasswordRequestSchema) => {
     if (!isLoaded) return null
 
     startTransition(async () => {

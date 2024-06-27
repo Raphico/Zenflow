@@ -5,10 +5,12 @@ import { useRouter } from "next/navigation"
 import { useSignUp } from "@clerk/nextjs"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
-import { type z } from "zod"
 
 import { redirects } from "@/config/constants"
-import { verifyEmailSchema } from "@/lib/zod/schemas/auth"
+import {
+  verifyEmailSchema,
+  type VerifyEmailSchema,
+} from "@/lib/zod/schemas/auth"
 import { showErrorToast } from "@/utils/hanld-error"
 import { Button } from "@/components/ui/button"
 import {
@@ -22,21 +24,19 @@ import {
 import { Input } from "@/components/ui/input"
 import { Icons } from "@/components/icons"
 
-type Inputs = z.infer<typeof verifyEmailSchema>
-
 export function VerifyEmailForm() {
   const { isLoaded, signUp, setActive } = useSignUp()
   const [isPending, startTransition] = React.useTransition()
   const router = useRouter()
 
-  const form = useForm<Inputs>({
+  const form = useForm<VerifyEmailSchema>({
     resolver: zodResolver(verifyEmailSchema),
     defaultValues: {
       code: "",
     },
   })
 
-  const onSubmit = (values: Inputs) => {
+  const onSubmit = (values: VerifyEmailSchema) => {
     if (!isLoaded) return
 
     startTransition(async () => {
