@@ -1,11 +1,10 @@
-"use server"
+import "server-only"
 
 import { and, eq, like, sql } from "drizzle-orm"
-import type { z } from "zod"
 
 import {
   type GetBoardSchema,
-  type getBoardsSchema,
+  type GetBoardsSchema,
 } from "@/lib/zod/schemas/board"
 
 import { db } from "../db"
@@ -21,19 +20,7 @@ export async function getBoard(input: GetBoardSchema) {
   }
 }
 
-export async function getBoards(
-  inputs: z.infer<typeof getBoardsSchema>
-): Promise<{
-  data:
-    | {
-        userId: string
-        id: number
-        name: string
-        createdAt: Date
-      }[]
-    | []
-  count: number
-}> {
+export async function getBoards(inputs: GetBoardsSchema) {
   try {
     return await db.transaction(async (tx) => {
       const data = await tx

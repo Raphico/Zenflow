@@ -31,4 +31,5 @@ export const getBoardsSchema = z.object({
   query: filterBoardSchema.shape.query,
 })
 
+export type GetBoardsSchema = z.infer<typeof getBoardsSchema>
 export type GetBoardSchema = z.infer<typeof getBoardSchema>
