@@ -1,10 +1,11 @@
 "use client"
 
 import * as React from "react"
-import { isClerkAPIResponseError, useSignIn } from "@clerk/nextjs"
+import { useSignIn } from "@clerk/nextjs"
 import { type OAuthStrategy } from "@clerk/nextjs/server"
-import { toast } from "sonner"
 
+import { redirects } from "@/config/constants"
+import { showErrorToast } from "@/utils/hanld-error"
 import { Button } from "@/components/ui/button"
 import { Icons } from "@/components/icons"
 
@@ -37,17 +38,13 @@ export function OAuthSignIn() {
 
       await signIn.authenticateWithRedirect({
         strategy: oauthStrategy,
-        redirectUrl: "/sso-callback",
-        redirectUrlComplete: "/app/dashboard",
+        redirectUrl: redirects.ssoCallback,
+        redirectUrlComplete: redirects.afterSignIn,
       })
-    } catch (error) {
+    } catch (err) {
+      showErrorToast(err)
+    } finally {
       setIsLoading(null)
-
-      const unknownError = "Something went wrong, please try again."
-
-      isClerkAPIResponseError(error)
-        ? toast.error(error.errors[0]?.longMessage ?? unknownError)
-        : toast.error(unknownError)
     }
   }
 

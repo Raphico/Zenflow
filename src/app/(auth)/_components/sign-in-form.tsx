@@ -7,8 +7,9 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { type z } from "zod"
 
+import { redirects } from "@/config/constants"
 import { authSchema } from "@/lib/zod/schemas/auth"
-import { catchClerkError } from "@/utils/catch-clerk-error"
+import { showErrorToast } from "@/utils/hanld-error"
 import { Button } from "@/components/ui/button"
 import {
   Form,
@@ -58,10 +59,10 @@ export function SignInForm() {
           // If complete, user exists and provided password match -- set session active
           await setActive({ session: completeSignIn.createdSessionId })
           // Redirect the user to a post sign-in route
-          router.push("/app/dashboard")
+          router.push(redirects.afterSignIn)
         }
-      } catch (error) {
-        catchClerkError(error)
+      } catch (err) {
+        showErrorToast(err)
       }
     })
   }

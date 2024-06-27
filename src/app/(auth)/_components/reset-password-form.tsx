@@ -8,8 +8,9 @@ import { useForm } from "react-hook-form"
 import { toast } from "sonner"
 import { type z } from "zod"
 
+import { redirects } from "@/config/constants"
 import { resetRequestSchema } from "@/lib/zod/schemas/auth"
-import { catchClerkError } from "@/utils/catch-clerk-error"
+import { showErrorToast } from "@/utils/hanld-error"
 import { Button } from "@/components/ui/button"
 import {
   Form,
@@ -46,13 +47,13 @@ export function ResetPasswordForm() {
           identifier: values.email,
         })
 
-        router.push("/sign-in/reset-password/step-2")
+        router.push(redirects.resetPasswordStep2)
 
         toast.message("Check your email", {
           description: "We sent you a 6-digit verification code.",
         })
-      } catch (error) {
-        catchClerkError(error)
+      } catch (err) {
+        showErrorToast(err)
       }
     })
   }

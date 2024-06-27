@@ -8,8 +8,9 @@ import { useForm } from "react-hook-form"
 import { toast } from "sonner"
 import { type z } from "zod"
 
+import { redirects } from "@/config/constants"
 import { authSchema } from "@/lib/zod/schemas/auth"
-import { catchClerkError } from "@/utils/catch-clerk-error"
+import { showErrorToast } from "@/utils/hanld-error"
 import { Button } from "@/components/ui/button"
 import {
   Form,
@@ -53,13 +54,13 @@ export function SignUpForm() {
           strategy: "email_code",
         })
 
-        router.push("/sign-up/verify-email")
+        router.push(redirects.verifyEmail)
 
         toast.message("Check your email", {
           description: "We sent you a 6-digit verification code.",
         })
-      } catch (error) {
-        catchClerkError(error)
+      } catch (err) {
+        showErrorToast(err)
       }
     })
   }

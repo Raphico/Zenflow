@@ -7,8 +7,9 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { type z } from "zod"
 
+import { redirects } from "@/config/constants"
 import { verifyEmailSchema } from "@/lib/zod/schemas/auth"
-import { catchClerkError } from "@/utils/catch-clerk-error"
+import { showErrorToast } from "@/utils/hanld-error"
 import { Button } from "@/components/ui/button"
 import {
   Form,
@@ -55,10 +56,10 @@ export function VerifyEmailForm() {
         // If complete, the user has been created -- set the session active
         if (completeSignUp.status === "complete") {
           await setActive({ session: completeSignUp.createdSessionId })
-          router.push("/app/dashboard")
+          router.push(redirects.afterSignIn)
         }
-      } catch (error) {
-        catchClerkError(error)
+      } catch (err) {
+        showErrorToast(err)
       }
     })
   }
