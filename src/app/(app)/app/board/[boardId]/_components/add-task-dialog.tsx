@@ -1,15 +1,15 @@
 "use client"
 
 import * as React from "react"
-import type { Status } from "@/db/schema"
+import { addTask } from "@/server/actions/task"
+import type { Status } from "@/server/db/schema"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { toast } from "sonner"
 import type { z } from "zod"
 
-import { addTask } from "@/lib/actions/task"
 import { catchError } from "@/lib/utils"
-import { taskSchema } from "@/lib/validations/task"
+import { taskSchema } from "@/lib/zod/schemas/task"
 import { Button } from "@/components/ui/button"
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog"
 import { Icons } from "@/components/icons"

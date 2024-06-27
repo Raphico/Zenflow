@@ -9,7 +9,7 @@ import { toast } from "sonner"
 import { type z } from "zod"
 
 import { catchClerkError } from "@/lib/utils"
-import { resetRequestSchema } from "@/lib/validations/auth"
+import { resetRequestSchema } from "@/lib/zod/schemas/auth"
 import { Button } from "@/components/ui/button"
 import {
   Form,

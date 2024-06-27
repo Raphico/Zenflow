@@ -1,8 +1,8 @@
 "use client"
 
 import * as React from "react"
+import { updateTaskDone } from "@/server/actions/task"
 
-import { updateTaskDone } from "@/lib/actions/task"
 import { catchError } from "@/lib/utils"
 import { Checkbox } from "@/components/ui/checkbox"
 

@@ -1,12 +1,13 @@
 "use server"
 
 import { revalidatePath } from "next/cache"
-import { db } from "@/db"
-import { subtasks, tasks } from "@/db/schema"
 import { eq, sql } from "drizzle-orm"
 import { z } from "zod"
 
-import { taskSchema } from "../validations/task"
+import { taskSchema } from "@/lib/zod/schemas/task"
+
+import { db } from "../db"
+import { subtasks, tasks } from "../db/schema"
 
 const extendedTaskSchema = taskSchema.extend({
   boardId: z.number(),

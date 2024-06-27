@@ -1,6 +1,6 @@
 import * as React from "react"
 import Link from "next/link"
-import type { Board } from "@/db/schema"
+import type { Board } from "@/server/db/schema"
 
 import { formatDate } from "@/lib/utils"
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"

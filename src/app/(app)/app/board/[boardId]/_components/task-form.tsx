@@ -1,11 +1,11 @@
-import type { Status } from "@/db/schema"
+import type { Status } from "@/server/db/schema"
 import { format } from "date-fns"
 import { useFieldArray, type UseFormReturn } from "react-hook-form"
 import TextareaAutosize from "react-textarea-autosize"
 import type { z } from "zod"
 
 import { cn } from "@/lib/utils"
-import type { SubTask, taskSchema } from "@/lib/validations/task"
+import type { SubTask, taskSchema } from "@/lib/zod/schemas/task"
 import { Button, buttonVariants } from "@/components/ui/button"
 import { Calendar } from "@/components/ui/calendar"
 import { Checkbox } from "@/components/ui/checkbox"

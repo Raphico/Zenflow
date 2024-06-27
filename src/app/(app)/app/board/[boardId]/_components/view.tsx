@@ -5,15 +5,13 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation"
 
 import { dueDatesOptions, priorityOptions, sortOptions } from "@/config/task"
 import { cn } from "@/lib/utils"
-
-import { Icons } from "../../../../../../components/icons"
-import { Button } from "../../../../../../components/ui/button"
+import { Button } from "@/components/ui/button"
 import {
   Command,
   CommandGroup,
   CommandItem,
   CommandList,
-} from "../../../../../../components/ui/command"
+} from "@/components/ui/command"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -21,14 +19,15 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "../../../../../../components/ui/dropdown-menu"
+} from "@/components/ui/dropdown-menu"
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "../../../../../../components/ui/popover"
-import { Separator } from "../../../../../../components/ui/separator"
-import { Switch } from "../../../../../../components/ui/switch"
+} from "@/components/ui/popover"
+import { Separator } from "@/components/ui/separator"
+import { Switch } from "@/components/ui/switch"
+import { Icons } from "@/components/icons"
 
 export function View() {
   const router = useRouter()

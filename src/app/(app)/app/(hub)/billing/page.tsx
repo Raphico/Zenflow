@@ -1,10 +1,10 @@
 import type { Metadata } from "next"
 import Link from "next/link"
 import { redirect } from "next/navigation"
+import { getCachedUser } from "@/server/data/auth"
+import { getSubscriptionPlan } from "@/server/data/stripe"
 
 import { subscriptionPlans } from "@/config/subscription"
-import { getCachedUser } from "@/lib/fetchers/auth"
-import { getSubscriptionPlan } from "@/lib/fetchers/stripe"
 import { cn, formatDate, formatPrice } from "@/lib/utils"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { buttonVariants } from "@/components/ui/button"

@@ -1,12 +1,16 @@
 "use server"
 
 import { revalidatePath } from "next/cache"
-import { db } from "@/db"
-import { statuses } from "@/db/schema"
 import { and, eq, ne, sql } from "drizzle-orm"
 import { z } from "zod"
 
-import { createColumnSchema, updateColumnSchema } from "../validations/column"
+import {
+  createColumnSchema,
+  updateColumnSchema,
+} from "@/lib/zod/schemas/column"
+
+import { db } from "../db"
+import { statuses } from "../db/schema"
 
 export async function createColumn(
   rawInputs: z.infer<typeof createColumnSchema>

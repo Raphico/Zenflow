@@ -4,9 +4,9 @@ import { revalidateTag } from "next/cache"
 import { currentUser } from "@clerk/nextjs"
 import type { z } from "zod"
 
-import { stripe } from "../stripe"
-import { absoluteUrl, getUserEmail } from "../utils"
-import { manageSubscriptionSchema } from "../validations/stripe"
+import { stripe } from "@/lib/stripe"
+import { absoluteUrl, getUserEmail } from "@/lib/utils"
+import { manageSubscriptionSchema } from "@/lib/zod/schemas/stripe"
 
 export async function manageSubscription(
   rawInputs: z.infer<typeof manageSubscriptionSchema>

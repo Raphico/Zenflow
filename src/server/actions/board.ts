@@ -1,12 +1,13 @@
 "use server"
 
 import { revalidatePath } from "next/cache"
-import { db } from "@/db"
-import { boards } from "@/db/schema"
 import { and, eq, ne, sql } from "drizzle-orm"
 import { z } from "zod"
 
-import { boardSchema, updateBoardSchema } from "../validations/board"
+import { boardSchema, updateBoardSchema } from "@/lib/zod/schemas/board"
+
+import { db } from "../db"
+import { boards } from "../db/schema"
 
 const extendedBoardSchema = boardSchema.extend({
   userId: z.string(),

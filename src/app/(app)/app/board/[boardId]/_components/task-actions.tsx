@@ -1,9 +1,9 @@
 "use client"
 
 import * as React from "react"
-import type { Status, Task } from "@/db/schema"
+import type { Status, Task } from "@/server/db/schema"
 
-import type { SubTask } from "@/lib/validations/task"
+import type { SubTask } from "@/lib/zod/schemas/task"
 import { Button } from "@/components/ui/button"
 import {
   DropdownMenu,

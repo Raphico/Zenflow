@@ -1,4 +1,4 @@
-import { env } from "@/env.mjs"
+import { env } from "@/env"
 import type { SubscriptionPlan } from "@/types"
 
 export const subscriptionPlans: SubscriptionPlan[] = [

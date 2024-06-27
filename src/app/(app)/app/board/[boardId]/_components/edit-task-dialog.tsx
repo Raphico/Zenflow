@@ -1,13 +1,13 @@
 import * as React from "react"
-import type { Status, Task } from "@/db/schema"
+import { updateTask } from "@/server/actions/task"
+import type { Status, Task } from "@/server/db/schema"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { toast } from "sonner"
 import type { z } from "zod"
 
-import { updateTask } from "@/lib/actions/task"
 import { catchError } from "@/lib/utils"
-import { taskSchema, type SubTask } from "@/lib/validations/task"
+import { taskSchema, type SubTask } from "@/lib/zod/schemas/task"
 import { Dialog, DialogContent } from "@/components/ui/dialog"
 
 import { TaskForm } from "./task-form"

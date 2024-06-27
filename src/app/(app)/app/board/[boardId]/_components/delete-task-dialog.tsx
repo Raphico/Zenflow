@@ -1,8 +1,8 @@
 import * as React from "react"
-import type { Task } from "@/db/schema"
+import { deleteTask } from "@/server/actions/task"
+import type { Task } from "@/server/db/schema"
 import { toast } from "sonner"
 
-import { deleteTask } from "@/lib/actions/task"
 import { catchError } from "@/lib/utils"
 import {
   AlertDialog,

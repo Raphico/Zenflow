@@ -1,7 +1,7 @@
 import type { UseFormReturn } from "react-hook-form"
 import type { z } from "zod"
 
-import type { columnSchema } from "@/lib/validations/column"
+import type { columnSchema } from "@/lib/zod/schemas/column"
 import { Button } from "@/components/ui/button"
 import {
   Form,

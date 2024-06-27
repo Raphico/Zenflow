@@ -1,7 +1,7 @@
 import { revalidateTag } from "next/cache"
 import { headers } from "next/headers"
 import type { NextRequest } from "next/server"
-import { env } from "@/env.mjs"
+import { env } from "@/env"
 import { clerkClient } from "@clerk/nextjs"
 import type Stripe from "stripe"
 

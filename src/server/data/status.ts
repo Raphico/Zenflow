@@ -1,8 +1,9 @@
 "use server"
 
-import { db } from "@/db"
-import { statuses, tasks } from "@/db/schema"
 import { eq, sql } from "drizzle-orm"
+
+import { db } from "../db"
+import { statuses, tasks } from "../db/schema"
 
 export async function getBoardStatuses(boardId: number) {
   try {

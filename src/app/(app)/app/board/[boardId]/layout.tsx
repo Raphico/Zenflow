@@ -1,12 +1,12 @@
 import * as React from "react"
 import type { Metadata } from "next"
 import { notFound, redirect } from "next/navigation"
-import { db } from "@/db"
-import { boards } from "@/db/schema"
+import { getCachedUser } from "@/server/data/auth"
+import { db } from "@/server/db"
+import { boards } from "@/server/db/schema"
 import { and, eq } from "drizzle-orm"
 
 import { dashboardConfig } from "@/config/dashboard"
-import { getCachedUser } from "@/lib/fetchers/auth"
 import { Button } from "@/components/ui/button"
 import {
   Popover,

@@ -7,6 +7,7 @@ import type { SidebarNavItem } from "@/types"
 import type { User } from "@clerk/nextjs/server"
 
 import { cn } from "@/lib/utils"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Button, buttonVariants } from "@/components/ui/button"
 import {
   Sheet,
@@ -15,12 +16,6 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet"
 import { Icons } from "@/components/icons"
-
-import {
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
-} from "../../../../components/ui/avatar"
 
 interface SidebarProps {
   user: Pick<User, "username" | "imageUrl">

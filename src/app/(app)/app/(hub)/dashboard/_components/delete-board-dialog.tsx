@@ -1,8 +1,8 @@
 import * as React from "react"
-import type { Board } from "@/db/schema"
+import { deleteBoard } from "@/server/actions/board"
+import type { Board } from "@/server/db/schema"
 import { toast } from "sonner"
 
-import { deleteBoard } from "@/lib/actions/board"
 import { catchError } from "@/lib/utils"
 import {
   AlertDialog,

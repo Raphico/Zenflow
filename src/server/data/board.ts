@@ -1,11 +1,12 @@
 "use server"
 
-import { db } from "@/db"
-import { boards } from "@/db/schema"
 import { and, eq, like, sql } from "drizzle-orm"
 import type { z } from "zod"
 
-import type { getBoardsSchema } from "../validations/board"
+import { type getBoardsSchema } from "@/lib/zod/schemas/board"
+
+import { db } from "../db"
+import { boards } from "../db/schema"
 
 export async function getBoards(
   inputs: z.infer<typeof getBoardsSchema>

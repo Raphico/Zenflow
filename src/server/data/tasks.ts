@@ -1,12 +1,13 @@
 "use server"
 
-import { db } from "@/db"
-import { tasks, type Task } from "@/db/schema"
 import { and, asc, between, desc, eq, inArray } from "drizzle-orm"
 import type { z } from "zod"
 
-import { calculateDueDates } from "../utils"
-import type { getTasksSchema } from "../validations/task"
+import { calculateDueDates } from "@/lib/utils"
+import type { getTasksSchema } from "@/lib/zod/schemas/task"
+
+import { db } from "../db"
+import { tasks, type Task } from "../db/schema"
 
 export async function getTasks(inputs: z.infer<typeof getTasksSchema>) {
   try {

@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 import { redirect } from "next/navigation"
+import { getCachedUser } from "@/server/data/auth"
 
-import { getCachedUser } from "@/lib/fetchers/auth"
 import { Separator } from "@/components/ui/separator"
 import {
   PageHeader,

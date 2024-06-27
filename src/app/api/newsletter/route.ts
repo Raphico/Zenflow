@@ -1,7 +1,7 @@
-import { env } from "@/env.mjs"
+import { env } from "@/env"
 import { z } from "zod"
 
-import { joinNewsletterSchema } from "@/lib/validations/email"
+import { joinNewsletterSchema } from "@/lib/zod/schemas/email"
 
 export async function POST(req: Request) {
   const { email } = joinNewsletterSchema.parse(await req.json())

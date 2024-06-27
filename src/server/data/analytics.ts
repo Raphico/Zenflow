@@ -1,9 +1,10 @@
 "use server"
 
-import { db } from "@/db"
-import { boards, statuses, tasks } from "@/db/schema"
 import { endOfWeek, startOfWeek } from "date-fns"
 import { and, desc, eq, gte, lte, sql } from "drizzle-orm"
+
+import { db } from "../db"
+import { boards, statuses, tasks } from "../db/schema"
 
 const startDate = startOfWeek(new Date())
 const endDate = endOfWeek(new Date())

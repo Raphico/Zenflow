@@ -9,7 +9,7 @@ import { useTheme } from "next-themes"
 import { useForm } from "react-hook-form"
 import type { z } from "zod"
 
-import { preferenceSchema } from "@/lib/validations/preference"
+import { preferenceSchema } from "@/lib/zod/schemas/preference"
 import { Button } from "@/components/ui/button"
 import {
   Form,

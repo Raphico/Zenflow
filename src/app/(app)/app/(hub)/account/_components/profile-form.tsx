@@ -1,15 +1,15 @@
 "use client"
 
 import * as React from "react"
+import { updateProfile } from "@/server/actions/account"
 import type { User } from "@clerk/nextjs/server"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { toast } from "sonner"
 import type { z } from "zod"
 
-import { updateProfile } from "@/lib/actions/account"
 import { catchClerkError } from "@/lib/utils"
-import { profileSchema } from "@/lib/validations/account"
+import { profileSchema } from "@/lib/zod/schemas/account"
 import { Button } from "@/components/ui/button"
 import {
   Form,

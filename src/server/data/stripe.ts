@@ -6,9 +6,8 @@ import { clerkClient } from "@clerk/nextjs"
 import { addDays } from "date-fns"
 
 import { subscriptionPlans } from "@/config/subscription"
-
-import { stripe } from "../stripe"
-import { userPrivateMetadataSchema } from "../validations/account"
+import { stripe } from "@/lib/stripe"
+import { userPrivateMetadataSchema } from "@/lib/zod/schemas/account"
 
 export async function getSubscriptionPlan(inputs: {
   userId: string

@@ -25,7 +25,7 @@ export type SiteConfig = {
   }[]
 }
 
-type SidebarNavItem = NavItem & { icon: keyof typeof Icons }
+export type SidebarNavItem = NavItem & { icon: keyof typeof Icons }
 
 export type DashboardConfig = {
   sidebarNav: SidebarNavItem[]

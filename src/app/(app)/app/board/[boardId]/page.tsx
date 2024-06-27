@@ -1,23 +1,20 @@
 import * as React from "react"
 import Link from "next/link"
 import { redirect } from "next/navigation"
+import { getCachedUser } from "@/server/data/auth"
+import { getBoardStatuses } from "@/server/data/status"
+import { getSubscriptionPlan } from "@/server/data/stripe"
 
-import { getCachedUser } from "@/lib/fetchers/auth"
-import { getBoardStatuses } from "@/lib/fetchers/status"
-import { getSubscriptionPlan } from "@/lib/fetchers/stripe"
 import { getPlanFeatures } from "@/lib/subscription"
 import { cn } from "@/lib/utils"
-import { taskSearchParamsSchema } from "@/lib/validations/task"
+import { taskSearchParamsSchema } from "@/lib/zod/schemas/task"
 import { buttonVariants } from "@/components/ui/button"
 import { Icons } from "@/components/icons"
-import {
-  Tasks,
-  TasksSkeleton,
-} from "./_components/tasks"
 
 import { AddColumnDialog } from "./_components/add-column-dialog"
 import { AddTaskDialog } from "./_components/add-task-dialog"
 import { ColumnActions } from "./_components/column-actions"
+import { Tasks, TasksSkeleton } from "./_components/tasks"
 
 interface BoardPageParams {
   params: {

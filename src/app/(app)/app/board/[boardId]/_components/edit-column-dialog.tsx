@@ -1,13 +1,13 @@
 import * as React from "react"
-import type { Status } from "@/db/schema"
+import { updateColumn } from "@/server/actions/column"
+import type { Status } from "@/server/db/schema"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { toast } from "sonner"
 import type { z } from "zod"
 
-import { updateColumn } from "@/lib/actions/column"
 import { catchError } from "@/lib/utils"
-import { columnSchema } from "@/lib/validations/column"
+import { columnSchema } from "@/lib/zod/schemas/column"
 import {
   Dialog,
   DialogContent,

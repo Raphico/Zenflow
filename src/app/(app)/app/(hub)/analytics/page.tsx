@@ -1,13 +1,13 @@
 import type { Metadata } from "next"
 import { redirect } from "next/navigation"
-
 import {
   getPopularTags,
   getPriorityAnalysis,
   getTaskCompletionRates,
   getTaskDistributionByStatus,
-} from "@/lib/fetchers/analytics"
-import { getCachedUser } from "@/lib/fetchers/auth"
+} from "@/server/data/analytics"
+import { getCachedUser } from "@/server/data/auth"
+
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import {
   PageHeader,

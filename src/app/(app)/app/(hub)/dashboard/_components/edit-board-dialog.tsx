@@ -1,13 +1,13 @@
 import * as React from "react"
-import type { Board } from "@/db/schema"
+import { updateBoard } from "@/server/actions/board"
+import type { Board } from "@/server/db/schema"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { toast } from "sonner"
 import type { z } from "zod"
 
-import { updateBoard } from "@/lib/actions/board"
 import { catchError } from "@/lib/utils"
-import { boardSchema } from "@/lib/validations/board"
+import { boardSchema } from "@/lib/zod/schemas/board"
 import {
   Dialog,
   DialogContent,

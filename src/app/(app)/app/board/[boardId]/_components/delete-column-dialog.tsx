@@ -1,8 +1,8 @@
 import * as React from "react"
-import type { Status } from "@/db/schema"
+import { deleteColumn } from "@/server/actions/column"
+import type { Status } from "@/server/db/schema"
 import { toast } from "sonner"
 
-import { deleteColumn } from "@/lib/actions/column"
 import { catchError } from "@/lib/utils"
 import {
   AlertDialog,

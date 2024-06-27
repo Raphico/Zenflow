@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-import type { Board } from "@/db/schema"
+import type { Board } from "@/server/db/schema"
 
 import { Button } from "@/components/ui/button"
 import {

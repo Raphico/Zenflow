@@ -1,14 +1,14 @@
 "use client"
 
 import * as React from "react"
+import { updateUserPassword } from "@/server/actions/account"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { toast } from "sonner"
 import type { z } from "zod"
 
-import { updateUserPassword } from "@/lib/actions/account"
 import { catchClerkError } from "@/lib/utils"
-import { changePasswordSchema } from "@/lib/validations/account"
+import { changePasswordSchema } from "@/lib/zod/schemas/account"
 import { Button } from "@/components/ui/button"
 import {
   Dialog,

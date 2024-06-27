@@ -1,7 +1,7 @@
 import { redirect } from "next/navigation"
+import { getCachedUser } from "@/server/data/auth"
 
 import { dashboardConfig } from "@/config/dashboard"
-import { getCachedUser } from "@/lib/fetchers/auth"
 
 import { Sidebar } from "../_components/sidebar"
 

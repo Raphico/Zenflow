@@ -1,11 +1,11 @@
 "use client"
 
 import * as React from "react"
+import { manageSubscription } from "@/server/actions/stripe"
 import type { z } from "zod"
 
-import { manageSubscription } from "@/lib/actions/stripe"
 import { catchError } from "@/lib/utils"
-import type { manageSubscriptionSchema } from "@/lib/validations/stripe"
+import type { manageSubscriptionSchema } from "@/lib/zod/schemas/stripe"
 import { Button } from "@/components/ui/button"
 import { Icons } from "@/components/icons"
 
