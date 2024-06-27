@@ -3,7 +3,7 @@ import { deleteTask } from "@/server/actions/task"
 import type { Task } from "@/server/db/schema"
 import { toast } from "sonner"
 
-import { catchError } from "@/lib/utils"
+import { catchError } from "@/utils/catch-error"
 import {
   AlertDialog,
   AlertDialogAction,

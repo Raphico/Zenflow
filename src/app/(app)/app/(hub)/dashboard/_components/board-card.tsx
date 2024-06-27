@@ -2,7 +2,7 @@ import * as React from "react"
 import Link from "next/link"
 import type { Board } from "@/server/db/schema"
 
-import { formatDate } from "@/lib/utils"
+import { formatDate } from "@/utils/format-date"
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
 
 import { BoardActions } from "./board-actions"

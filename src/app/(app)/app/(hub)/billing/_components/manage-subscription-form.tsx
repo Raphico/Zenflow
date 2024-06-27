@@ -4,8 +4,8 @@ import * as React from "react"
 import { manageSubscription } from "@/server/actions/stripe"
 import type { z } from "zod"
 
-import { catchError } from "@/lib/utils"
 import type { manageSubscriptionSchema } from "@/lib/zod/schemas/stripe"
+import { catchError } from "@/utils/catch-error"
 import { Button } from "@/components/ui/button"
 import { Icons } from "@/components/icons"
 

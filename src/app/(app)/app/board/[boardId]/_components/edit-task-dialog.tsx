@@ -6,8 +6,8 @@ import { useForm } from "react-hook-form"
 import { toast } from "sonner"
 import type { z } from "zod"
 
-import { catchError } from "@/lib/utils"
 import { taskSchema, type SubTask } from "@/lib/zod/schemas/task"
+import { catchError } from "@/utils/catch-error"
 import { Dialog, DialogContent } from "@/components/ui/dialog"
 
 import { TaskForm } from "./task-form"

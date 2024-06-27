@@ -3,7 +3,7 @@
 import * as React from "react"
 import { updateTaskDone } from "@/server/actions/task"
 
-import { catchError } from "@/lib/utils"
+import { catchError } from "@/utils/catch-error"
 import { Checkbox } from "@/components/ui/checkbox"
 
 interface TaskDoneCheckboxProps {

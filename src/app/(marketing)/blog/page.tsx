@@ -4,7 +4,7 @@ import Link from "next/link"
 import { allPosts } from "contentlayer/generated"
 import { compareDesc } from "date-fns"
 
-import { formatDate } from "@/lib/utils"
+import { formatDate } from "@/utils/format-date"
 import { AspectRatio } from "@/components/ui/aspect-ratio"
 import { Separator } from "@/components/ui/separator"
 import {

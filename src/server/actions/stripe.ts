@@ -5,15 +5,16 @@ import { currentUser } from "@clerk/nextjs"
 import type { z } from "zod"
 
 import { stripe } from "@/lib/stripe"
-import { absoluteUrl, getUserEmail } from "@/lib/utils"
 import { manageSubscriptionSchema } from "@/lib/zod/schemas/stripe"
+import { getAbsoluteUrl } from "@/utils/get-absolute-url"
+import { getUserEmail } from "@/utils/get-user-email"
 
 export async function manageSubscription(
   rawInputs: z.infer<typeof manageSubscriptionSchema>
 ) {
   const inputs = manageSubscriptionSchema.parse(rawInputs)
 
-  const billingUrl = absoluteUrl("/app/billing")
+  const billingUrl = getAbsoluteUrl("/app/billing")
 
   const user = await currentUser()
 

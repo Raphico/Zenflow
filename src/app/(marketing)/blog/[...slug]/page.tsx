@@ -6,7 +6,9 @@ import { allAuthors, allPosts } from "contentlayer/generated"
 
 import "@/styles/mdx.css"
 
-import { absoluteUrl, cn, formatDate } from "@/lib/utils"
+import { cn } from "@/lib/utils"
+import { formatDate } from "@/utils/format-date"
+import { getAbsoluteUrl } from "@/utils/get-absolute-url"
 import { AspectRatio } from "@/components/ui/aspect-ratio"
 import { buttonVariants } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
@@ -52,7 +54,7 @@ export async function generateMetadata({
     return {}
   }
 
-  const ogUrl = absoluteUrl(post.image)
+  const ogUrl = getAbsoluteUrl(post.image)
 
   return {
     title: post.title,
@@ -64,7 +66,7 @@ export async function generateMetadata({
       title: post.title,
       description: post.description,
       type: "article",
-      url: absoluteUrl(post.slug),
+      url: getAbsoluteUrl(post.slug),
       images: [
         {
           url: ogUrl.toString(),
@@ -145,7 +147,7 @@ export default function PostPage({ params }: PostPageProps) {
       <Separator className="my-4" />
       <SharePost
         postTitle={post.title}
-        postUrl={absoluteUrl(`blog/${post.slugAsParams}`)}
+        postUrl={getAbsoluteUrl(`blog/${post.slugAsParams}`)}
       />
       <Separator />
       <PostPager currentPost={post} allPosts={allPosts} />

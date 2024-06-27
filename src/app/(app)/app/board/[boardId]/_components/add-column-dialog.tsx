@@ -7,8 +7,8 @@ import { useForm } from "react-hook-form"
 import { toast } from "sonner"
 import type { z } from "zod"
 
-import { catchError } from "@/lib/utils"
 import { columnSchema } from "@/lib/zod/schemas/column"
+import { catchError } from "@/utils/catch-error"
 import { Button } from "@/components/ui/button"
 import {
   Dialog,

@@ -1,7 +1,8 @@
 import Link from "next/link"
 import { type Post } from "contentlayer/generated"
 
-import { cn, truncate } from "@/lib/utils"
+import { cn } from "@/lib/utils"
+import { truncate } from "@/utils/truncate"
 import { buttonVariants } from "@/components/ui/button"
 import { Icons } from "@/components/icons"
 

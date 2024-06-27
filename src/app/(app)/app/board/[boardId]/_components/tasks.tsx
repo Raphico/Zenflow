@@ -1,8 +1,9 @@
 import { getTasks } from "@/server/data/tasks"
 import { type Status } from "@/server/db/schema"
 
-import { cn, getDueDate } from "@/lib/utils"
+import { cn } from "@/lib/utils"
 import type { SubTask } from "@/lib/zod/schemas/task"
+import { getDueDate } from "@/utils/get-due-date"
 import {
   Card,
   CardContent,

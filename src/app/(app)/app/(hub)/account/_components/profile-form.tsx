@@ -8,8 +8,8 @@ import { useForm } from "react-hook-form"
 import { toast } from "sonner"
 import type { z } from "zod"
 
-import { catchClerkError } from "@/lib/utils"
 import { profileSchema } from "@/lib/zod/schemas/account"
+import { catchClerkError } from "@/utils/catch-clerk-error"
 import { Button } from "@/components/ui/button"
 import {
   Form,

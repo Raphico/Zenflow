@@ -3,8 +3,8 @@
 import { and, asc, between, desc, eq, inArray } from "drizzle-orm"
 import type { z } from "zod"
 
-import { calculateDueDates } from "@/lib/utils"
 import type { getTasksSchema } from "@/lib/zod/schemas/task"
+import { calculateDueDates } from "@/utils/calculate-due-dates"
 
 import { db } from "../db"
 import { tasks, type Task } from "../db/schema"
