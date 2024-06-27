@@ -1,9 +1,10 @@
 import type { Metadata } from "next"
 import Link from "next/link"
 import { redirect } from "next/navigation"
-import { getCachedUser } from "@/server/data/auth"
 import { getSubscriptionPlan } from "@/server/data/stripe"
+import { getCachedUser } from "@/server/data/user"
 
+import { redirects } from "@/config/constants"
 import { subscriptionPlans } from "@/config/subscription"
 import { cn } from "@/lib/utils"
 import { formatDate } from "@/utils/format-date"
@@ -31,7 +32,7 @@ export default async function BillingPage() {
   const user = await getCachedUser()
 
   if (!user) {
-    redirect("/sign-in")
+    redirect(redirects.toSignIn)
   }
 
   const subscriptionPlan = await getSubscriptionPlan({ userId: user.id })

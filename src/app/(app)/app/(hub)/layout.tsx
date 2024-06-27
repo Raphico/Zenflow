@@ -1,6 +1,7 @@
 import { redirect } from "next/navigation"
-import { getCachedUser } from "@/server/data/auth"
+import { getCachedUser } from "@/server/data/user"
 
+import { redirects } from "@/config/constants"
 import { dashboardConfig } from "@/config/dashboard"
 
 import { Sidebar } from "../_components/sidebar"
@@ -11,7 +12,7 @@ export default async function DashboardLayout({
   const user = await getCachedUser()
 
   if (!user) {
-    redirect("/sign-in")
+    redirect(redirects.toSignIn)
   }
 
   return (

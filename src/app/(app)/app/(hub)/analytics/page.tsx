@@ -6,8 +6,9 @@ import {
   getTaskCompletionRates,
   getTaskDistributionByStatus,
 } from "@/server/data/analytics"
-import { getCachedUser } from "@/server/data/auth"
+import { getCachedUser } from "@/server/data/user"
 
+import { redirects } from "@/config/constants"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import {
   PageHeader,
@@ -30,7 +31,7 @@ export default async function AnalyticsPage() {
   const user = await getCachedUser()
 
   if (!user) {
-    redirect("/sign-in")
+    redirect(redirects.toSignIn)
   }
 
   const [

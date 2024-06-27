@@ -1,10 +1,11 @@
 import { type Metadata } from "next"
 import Link from "next/link"
 import { redirect } from "next/navigation"
-import { getCachedUser } from "@/server/data/auth"
 import { getBoards } from "@/server/data/board"
 import { getSubscriptionPlan } from "@/server/data/stripe"
+import { getCachedUser } from "@/server/data/user"
 
+import { redirects } from "@/config/constants"
 import { getPlanFeatures } from "@/lib/subscription"
 import { cn } from "@/lib/utils"
 import { filterBoardSchema } from "@/lib/zod/schemas/board"
@@ -37,7 +38,7 @@ export default async function DashboardPage(props: DashboardPageProps) {
   const user = await getCachedUser()
 
   if (!user) {
-    redirect("/sign-in")
+    redirect(redirects.toSignIn)
   }
 
   const [boards, subscriptionPlan] = await Promise.all([

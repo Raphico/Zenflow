@@ -1,11 +1,12 @@
 import * as React from "react"
 import type { Metadata } from "next"
 import { notFound, redirect } from "next/navigation"
-import { getCachedUser } from "@/server/data/auth"
+import { getCachedUser } from "@/server/data/user"
 import { db } from "@/server/db"
 import { boards } from "@/server/db/schema"
 import { and, eq } from "drizzle-orm"
 
+import { redirects } from "@/config/constants"
 import { dashboardConfig } from "@/config/dashboard"
 import { Button } from "@/components/ui/button"
 import {
@@ -48,7 +49,7 @@ export default async function BoardLayout({
   const user = await getCachedUser()
 
   if (!user) {
-    redirect("/sign-in")
+    redirect(redirects.toSignIn)
   }
 
   const board = await db.query.boards.findFirst({

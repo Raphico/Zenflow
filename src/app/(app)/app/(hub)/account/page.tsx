@@ -1,7 +1,8 @@
 import type { Metadata } from "next"
 import { redirect } from "next/navigation"
-import { getCachedUser } from "@/server/data/auth"
+import { getCachedUser } from "@/server/data/user"
 
+import { redirects } from "@/config/constants"
 import { Separator } from "@/components/ui/separator"
 import {
   PageHeader,
@@ -23,7 +24,7 @@ export default async function AccountPage() {
   const user = await getCachedUser()
 
   if (!user) {
-    redirect("/sign-in")
+    redirect(redirects.toSignIn)
   }
 
   return (

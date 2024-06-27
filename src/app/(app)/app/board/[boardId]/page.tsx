@@ -1,11 +1,12 @@
 import * as React from "react"
 import Link from "next/link"
 import { redirect } from "next/navigation"
-import { getCachedUser } from "@/server/data/auth"
 import { getBoardStatuses } from "@/server/data/status"
 import { getSubscriptionPlan } from "@/server/data/stripe"
+import { getCachedUser } from "@/server/data/user"
 import { Shell } from "lucide-react"
 
+import { redirects } from "@/config/constants"
 import { getPlanFeatures } from "@/lib/subscription"
 import { cn } from "@/lib/utils"
 import { taskSearchParamsSchema } from "@/lib/zod/schemas/task"
@@ -30,7 +31,7 @@ export default async function BoardPage({
 }: BoardPageParams) {
   const user = await getCachedUser()
 
-  if (!user) redirect("/sign-in")
+  if (!user) redirect(redirects.toSignIn)
 
   const taskSearchParams = taskSearchParamsSchema.parse(searchParams)
 
