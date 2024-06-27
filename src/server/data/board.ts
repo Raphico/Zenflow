@@ -3,10 +3,23 @@
 import { and, eq, like, sql } from "drizzle-orm"
 import type { z } from "zod"
 
-import { type getBoardsSchema } from "@/lib/zod/schemas/board"
+import {
+  type GetBoardSchema,
+  type getBoardsSchema,
+} from "@/lib/zod/schemas/board"
 
 import { db } from "../db"
 import { boards } from "../db/schema"
+
+export async function getBoard(input: GetBoardSchema) {
+  try {
+    return await db.query.boards.findFirst({
+      where: and(eq(boards.userId, input.userId), eq(boards.id, input.boardId)),
+    })
+  } catch (err) {
+    return null
+  }
+}
 
 export async function getBoards(
   inputs: z.infer<typeof getBoardsSchema>

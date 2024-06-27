@@ -1,10 +1,7 @@
 import * as React from "react"
-import type { Metadata } from "next"
 import { notFound, redirect } from "next/navigation"
+import { getBoard } from "@/server/data/board"
 import { getCachedUser } from "@/server/data/user"
-import { db } from "@/server/db"
-import { boards } from "@/server/db/schema"
-import { and, eq } from "drizzle-orm"
 
 import { redirects } from "@/config/constants"
 import { dashboardConfig } from "@/config/dashboard"
@@ -27,21 +24,6 @@ interface BoardLayoutProps {
   }
 }
 
-export async function generateMetadata({
-  params,
-}: BoardLayoutProps): Promise<Metadata> {
-  const board = await db.query.boards.findFirst({
-    where: eq(boards.id, params.boardId),
-  })
-
-  if (!board) return {}
-
-  return {
-    title: board.name,
-    description: `Manage tasks within ${board.name}`,
-  }
-}
-
 export default async function BoardLayout({
   children,
   params,
@@ -52,8 +34,11 @@ export default async function BoardLayout({
     redirect(redirects.toSignIn)
   }
 
-  const board = await db.query.boards.findFirst({
-    where: and(eq(boards.userId, user.id), eq(boards.id, params.boardId)),
+  const { boardId } = params
+
+  const board = await getBoard({
+    userId: user.id,
+    boardId,
   })
 
   if (!board) {

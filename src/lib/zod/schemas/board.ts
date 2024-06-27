@@ -21,7 +21,14 @@ export const filterBoardSchema = z.object({
   query: z.string().optional(),
 })
 
+export const getBoardSchema = z.object({
+  userId: z.string(),
+  boardId: z.number(),
+})
+
 export const getBoardsSchema = z.object({
   userId: z.string(),
   query: filterBoardSchema.shape.query,
 })
+
+export type GetBoardSchema = z.infer<typeof getBoardSchema>
