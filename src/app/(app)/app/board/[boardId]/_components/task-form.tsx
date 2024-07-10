@@ -39,19 +39,7 @@ interface TaskFormProps {
   type: "Create" | "Update"
   isPending: boolean
   onSubmit: (data: Inputs) => void
-  form: UseFormReturn<
-    {
-      title: string
-      priority: "P1" | "P2" | "P3" | "P4"
-      statusId: number
-      subtasks: SubTask[]
-      description?: string | undefined
-      dueDate?: Date | undefined
-      tag?: string | undefined
-    },
-    unknown,
-    undefined
-  >
+  form: UseFormReturn<Inputs>
   availableStatuses: Pick<Status, "id" | "title">[]
 }
 

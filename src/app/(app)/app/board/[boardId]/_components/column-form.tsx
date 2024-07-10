@@ -20,13 +20,7 @@ interface ColumnFormProps {
   type: "Create" | "Update"
   isPending: boolean
   onSubmit: (data: Inputs) => void
-  form: UseFormReturn<
-    {
-      name: string
-    },
-    unknown,
-    undefined
-  >
+  form: UseFormReturn<Inputs>
 }
 
 export function ColumnForm({

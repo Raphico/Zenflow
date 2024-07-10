@@ -20,13 +20,7 @@ interface BoardFormProps {
   type: "Create" | "Update"
   isPending: boolean
   onSubmit: (data: Inputs) => void
-  form: UseFormReturn<
-    {
-      name: string
-    },
-    unknown,
-    undefined
-  >
+  form: UseFormReturn<Inputs>
 }
 
 export function BoardForm({ isPending, onSubmit, form, type }: BoardFormProps) {
