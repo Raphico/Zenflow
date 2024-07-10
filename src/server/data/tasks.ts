@@ -1,4 +1,4 @@
-"use server"
+import "server-only"
 
 import { and, asc, between, desc, eq, inArray } from "drizzle-orm"
 import type { z } from "zod"

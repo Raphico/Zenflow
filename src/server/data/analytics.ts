@@ -1,4 +1,4 @@
-"use server"
+import "server-only"
 
 import { endOfWeek, startOfWeek } from "date-fns"
 import { and, desc, eq, gte, lte, sql } from "drizzle-orm"
