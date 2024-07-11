@@ -7,3 +7,5 @@ export const manageSubscriptionSchema = z.object({
   isSubscribed: z.boolean(),
   isCurrentPlan: z.boolean(),
 })
+
+export type ManageSubscriptionSchema = z.infer<typeof manageSubscriptionSchema>

@@ -33,3 +33,6 @@ export const getBoardsSchema = z.object({
 
 export type GetBoardsSchema = z.infer<typeof getBoardsSchema>
 export type GetBoardSchema = z.infer<typeof getBoardSchema>
+export type FilterBoardSchema = z.infer<typeof filterBoardSchema>
+export type UpdateBoardSchema = z.infer<typeof updateBoardSchema>
+export type BoardSchema = z.infer<typeof boardSchema>

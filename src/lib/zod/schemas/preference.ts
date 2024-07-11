@@ -5,3 +5,5 @@ export const preferenceSchema = z.object({
     required_error: "Please select a theme.",
   }),
 })
+
+export type PreferenceSchema = z.infer<typeof preferenceSchema>

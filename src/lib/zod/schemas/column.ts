@@ -20,3 +20,7 @@ export const updateColumnSchema = z.object({
   id: z.number(),
   name: columnSchema.shape.name,
 })
+
+export type ColumnSchema = z.infer<typeof columnSchema>
+export type CreateColumnSchema = z.infer<typeof createColumnSchema>
+export type UpdateColumnSchema = z.infer<typeof updateColumnSchema>

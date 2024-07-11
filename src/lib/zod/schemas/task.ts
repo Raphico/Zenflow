@@ -7,8 +7,6 @@ export const subtaskSchema = z.object({
   dueDate: z.coerce.date().optional(),
 })
 
-export type SubTask = z.infer<typeof subtaskSchema>
-
 export const taskSchema = z.object({
   title: z.string().min(3).max(35),
   description: z.string().max(150).optional(),
@@ -31,3 +29,9 @@ export const getTasksSchema = taskSearchParamsSchema
   .extend({
     statusId: taskSchema.shape.statusId,
   })
+
+export type SubtaskSchema = z.infer<typeof subtaskSchema>
+export type SubTask = z.infer<typeof subtaskSchema>
+export type TaskSchema = z.infer<typeof taskSchema>
+export type TaskSearchParamsSchema = z.infer<typeof taskSearchParamsSchema>
+export type GetTasksSchema = z.infer<typeof getTasksSchema>

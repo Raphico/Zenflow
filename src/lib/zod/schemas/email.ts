@@ -5,3 +5,5 @@ export const joinNewsletterSchema = z.object({
     message: "Please enter a valid email address.",
   }),
 })
+
+export type JoinNewsletterSchema = z.infer<typeof joinNewsletterSchema>
