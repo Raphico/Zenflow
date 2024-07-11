@@ -39,7 +39,7 @@ export function CreateBoardDialog({ userId }: CreateBoardDialogProps) {
 
   const onSubmit = (values: BoardSchema) => {
     startTransition(async () => {
-      const { data, error } = await createBoard({
+      const { boardId, error } = await createBoard({
         userId,
         name: values.name,
       })
@@ -48,8 +48,9 @@ export function CreateBoardDialog({ userId }: CreateBoardDialogProps) {
         showErrorToast(error)
       }
 
-      router.push(`/app/board/${data?.insertId}`)
+      router.push(`/app/board/${boardId}`)
 
+      setOpen(false)
       toast.success(`${values.name} Created!`)
       form.reset()
     })

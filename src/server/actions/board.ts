@@ -33,7 +33,7 @@ export async function createBoard(input: BoardSchema & { userId: string }) {
     revalidatePath("/dashboard")
 
     return {
-      data: newBoard[0],
+      boardId: newBoard[0].insertId,
       error: null,
     }
   } catch (err) {
