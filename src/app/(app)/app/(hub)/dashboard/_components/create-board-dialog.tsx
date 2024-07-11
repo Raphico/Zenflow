@@ -6,10 +6,9 @@ import { createBoard } from "@/server/actions/board"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { toast } from "sonner"
-import type { z } from "zod"
 
-import { boardSchema } from "@/lib/zod/schemas/board"
-import { catchError } from "@/utils/catch-error"
+import { boardSchema, type BoardSchema } from "@/lib/zod/schemas/board"
+import { showErrorToast } from "@/utils/hanld-error"
 import { Button } from "@/components/ui/button"
 import {
   Dialog,
@@ -22,8 +21,6 @@ import {
 import { Icons } from "@/components/icons"
 import { BoardForm } from "@/app/(app)/app/(hub)/dashboard/_components/board-form"
 
-type Inputs = z.infer<typeof boardSchema>
-
 interface CreateBoardDialogProps {
   userId: string
 }
@@ -33,28 +30,28 @@ export function CreateBoardDialog({ userId }: CreateBoardDialogProps) {
   const [open, setOpen] = React.useState(false)
   const router = useRouter()
 
-  const form = useForm<Inputs>({
+  const form = useForm<BoardSchema>({
     resolver: zodResolver(boardSchema),
     defaultValues: {
       name: "",
     },
   })
 
-  const onSubmit = (values: Inputs) => {
+  const onSubmit = (values: BoardSchema) => {
     startTransition(async () => {
-      try {
-        const newBoard = await createBoard({
-          userId,
-          name: values.name,
-        })
+      const { data, error } = await createBoard({
+        userId,
+        name: values.name,
+      })
 
-        router.push(`/app/board/${newBoard.boardId}`)
-
-        toast.success(`${values.name} Created!`)
-        setOpen(false)
-      } catch (error) {
-        catchError(error)
+      if (error) {
+        showErrorToast(error)
       }
+
+      router.push(`/app/board/${data?.insertId}`)
+
+      toast.success(`${values.name} Created!`)
+      form.reset()
     })
   }
 

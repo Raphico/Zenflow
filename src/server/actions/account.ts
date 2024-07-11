@@ -2,38 +2,51 @@
 
 import { revalidatePath } from "next/cache"
 import { auth, clerkClient } from "@clerk/nextjs"
-import type { z } from "zod"
 
-import { changePasswordSchema, profileSchema } from "@/lib/zod/schemas/account"
+import {
+  type ChangePasswordSchema,
+  type ProfileSchema,
+} from "@/lib/zod/schemas/account"
+import { getErrorMessage } from "@/utils/hanld-error"
 
-export async function updateProfile(rawInputs: z.infer<typeof profileSchema>) {
-  const inputs = profileSchema.parse(rawInputs)
+export async function updateProfile(input: ProfileSchema) {
+  try {
+    const { userId } = auth()
 
-  const { userId } = auth()
+    if (!userId) {
+      throw new Error("User not found!")
+    }
 
-  if (!userId) {
-    throw new Error("User not found!")
+    await clerkClient.users.updateUser(userId, {
+      username: input.username,
+    })
+
+    revalidatePath("/profile/account")
+
+    return {
+      error: null,
+    }
+  } catch (err) {
+    return {
+      error: getErrorMessage(err),
+    }
   }
-
-  await clerkClient.users.updateUser(userId, {
-    username: inputs.username,
-  })
-
-  revalidatePath("/profile/account")
 }
 
-export async function updateUserPassword(
-  rawInputs: z.infer<typeof changePasswordSchema>
-) {
-  const inputs = changePasswordSchema.parse(rawInputs)
+export async function updateUserPassword(input: ChangePasswordSchema) {
+  try {
+    const { userId } = auth()
 
-  const { userId } = auth()
+    if (!userId) {
+      throw new Error("User not found!")
+    }
 
-  if (!userId) {
-    throw new Error("User not found!")
+    await clerkClient.users.updateUser(userId, {
+      password: input.newPassword,
+    })
+  } catch (err) {
+    return {
+      error: getErrorMessage(err),
+    }
   }
-
-  await clerkClient.users.updateUser(userId, {
-    password: inputs.newPassword,
-  })
 }

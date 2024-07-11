@@ -3,7 +3,7 @@ import { deleteBoard } from "@/server/actions/board"
 import type { Board } from "@/server/db/schema"
 import { toast } from "sonner"
 
-import { catchError } from "@/utils/catch-error"
+import { showErrorToast } from "@/utils/hanld-error"
 import {
   AlertDialog,
   AlertDialogAction,
@@ -32,13 +32,14 @@ export function DeleteBoardDialog({
 
   const handleDeleteBoard = () => {
     startTransition(async () => {
-      try {
-        await deleteBoard(board.id)
+      const { error } = await deleteBoard(board.id)
 
-        toast.success("Board Deleted!")
-      } catch (error) {
-        catchError(error)
+      if (error) {
+        showErrorToast(error)
       }
+
+      toast.success("Board Deleted!")
+      setOpen(false)
     })
   }
 

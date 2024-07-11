@@ -2,56 +2,51 @@
 
 import { revalidatePath } from "next/cache"
 import { and, eq, ne, sql } from "drizzle-orm"
-import { z } from "zod"
 
-import { boardSchema, updateBoardSchema } from "@/lib/zod/schemas/board"
+import {
+  type BoardSchema,
+  type UpdateBoardSchema,
+} from "@/lib/zod/schemas/board"
+import { getErrorMessage } from "@/utils/hanld-error"
 
 import { db } from "../db"
 import { boards } from "../db/schema"
 
-const extendedBoardSchema = boardSchema.extend({
-  userId: z.string(),
-})
+export async function createBoard(input: BoardSchema & { userId: string }) {
+  try {
+    const boardWithSameName = await db.query.boards.findFirst({
+      columns: {
+        id: true,
+      },
+      where: and(eq(boards.name, input.name), eq(boards.userId, input.userId)),
+    })
 
-export async function createBoard(
-  rawInputs: z.infer<typeof extendedBoardSchema>
-) {
-  const inputs = extendedBoardSchema.parse(rawInputs)
+    if (boardWithSameName) {
+      throw new Error(`Board with ${input.name} already exists`)
+    }
 
-  const boardWithSameName = await db.query.boards.findFirst({
-    where: and(eq(boards.name, inputs.name), eq(boards.userId, inputs.userId)),
-  })
+    const newBoard = await db.insert(boards).values({
+      userId: input.userId,
+      name: input.name,
+    })
 
-  if (boardWithSameName) {
-    throw new Error("Board name already taken!")
-  }
+    revalidatePath("/dashboard")
 
-  const newBoard = await db.insert(boards).values({
-    userId: inputs.userId,
-    name: inputs.name,
-  })
-
-  revalidatePath("/dashboard")
-
-  return {
-    boardId: newBoard[0].insertId,
+    return {
+      data: newBoard[0],
+      error: null,
+    }
+  } catch (err) {
+    return {
+      error: getErrorMessage(err),
+    }
   }
 }
 
 export async function deleteBoard(boardId: number) {
-  const board = await db.query.boards.findFirst({
-    where: eq(boards.id, boardId),
-    columns: {
-      id: true,
-    },
-  })
-
-  if (!board) {
-    throw new Error("Board not found")
-  }
-
-  // Delete all statues, tasks, and subtasks of this board
-  await db.execute(sql`
+  try {
+    // Delete all statues, tasks, and subtasks of this board
+    await db.execute(sql`
     DELETE subtasks, tasks, statuses, boards
     FROM boards
       LEFT JOIN statuses ON boards.id = statuses.boardId
@@ -60,30 +55,50 @@ export async function deleteBoard(boardId: number) {
     WHERE boards.id = ${boardId};
   `)
 
-  revalidatePath("/app/dashboard")
+    revalidatePath("/app/dashboard")
+
+    return {
+      error: null,
+    }
+  } catch (err) {
+    return {
+      error: getErrorMessage(err),
+    }
+  }
 }
 
-export async function updateBoard(
-  rawInputs: z.infer<typeof updateBoardSchema>
-) {
-  const inputs = updateBoardSchema.parse(rawInputs)
+export async function updateBoard(input: UpdateBoardSchema) {
+  try {
+    const boardWithSameName = await db.query.boards.findFirst({
+      where: and(
+        eq(boards.name, input.name),
+        eq(boards.userId, input.userId),
+        ne(boards.id, input.id)
+      ),
+      columns: {
+        id: true,
+      },
+    })
 
-  const boardWithSameName = await db.query.boards.findFirst({
-    where: and(
-      eq(boards.name, inputs.name),
-      eq(boards.userId, inputs.userId),
-      ne(boards.id, inputs.id)
-    ),
-    columns: {
-      id: true,
-    },
-  })
+    if (boardWithSameName) {
+      throw new Error("Board name already taken!")
+    }
 
-  if (boardWithSameName) {
-    throw new Error("Board name already taken!")
+    await db
+      .update(boards)
+      .set({
+        name: input.name,
+      })
+      .where(eq(boards.id, input.id))
+
+    revalidatePath("/app/dashboard")
+
+    return {
+      error: null,
+    }
+  } catch (err) {
+    return {
+      error: getErrorMessage(err),
+    }
   }
-
-  await db.update(boards).set(inputs).where(eq(boards.id, inputs.id))
-
-  revalidatePath("/app/dashboard")
 }

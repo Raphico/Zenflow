@@ -7,7 +7,7 @@ import { toast } from "sonner"
 import type { z } from "zod"
 
 import { boardSchema } from "@/lib/zod/schemas/board"
-import { catchError } from "@/utils/catch-error"
+import { showErrorToast } from "@/utils/hanld-error"
 import {
   Dialog,
   DialogContent,
@@ -15,7 +15,8 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog"
-import { BoardForm } from "@/app/(app)/app/(hub)/dashboard/_components/board-form"
+
+import { BoardForm } from "./board-form"
 
 interface EditBoardDialogProps {
   userId: string
@@ -43,17 +44,18 @@ export function EditBoardDialog({
 
   const onSubmit = (values: Inputs) => {
     startTransition(async () => {
-      try {
-        await updateBoard({
-          userId,
-          id: board.id,
-          name: values.name,
-        })
-        toast.success(`${values.name} updated!`)
-        setOpen(false)
-      } catch (error) {
-        catchError(error)
+      const { error } = await updateBoard({
+        userId,
+        id: board.id,
+        name: values.name,
+      })
+
+      if (error) {
+        showErrorToast(error)
       }
+
+      toast.success(`${values.name} updated!`)
+      setOpen(false)
     })
   }
 
