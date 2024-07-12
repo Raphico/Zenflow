@@ -48,6 +48,7 @@ export function EditColumnDialog({
 
       if (error) {
         showErrorToast(error)
+        return
       }
 
       setOpen(false)

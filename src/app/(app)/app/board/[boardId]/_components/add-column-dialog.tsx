@@ -44,6 +44,7 @@ export function AddColumnDialog({ boardId }: AddColumnDialogProps) {
 
       if (error) {
         showErrorToast(error)
+        return
       }
 
       setOpen(false)

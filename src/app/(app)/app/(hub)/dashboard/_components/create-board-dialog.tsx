@@ -46,6 +46,7 @@ export function CreateBoardDialog({ userId }: CreateBoardDialogProps) {
 
       if (error) {
         showErrorToast(error)
+        return
       }
 
       router.push(`/app/board/${boardId}`)

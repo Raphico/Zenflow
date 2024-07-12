@@ -36,6 +36,7 @@ export function DeleteBoardDialog({
 
       if (error) {
         showErrorToast(error)
+        return
       }
 
       toast.success("Board Deleted!")

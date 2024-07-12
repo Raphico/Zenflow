@@ -52,6 +52,7 @@ export function EditBoardDialog({
 
       if (error) {
         showErrorToast(error)
+        return
       }
 
       toast.success(`${values.name} updated!`)

@@ -39,6 +39,7 @@ export function DeleteColumnDialog({
 
       if (error) {
         showErrorToast(error)
+        return
       }
 
       toast.success("Column Deleted!")
