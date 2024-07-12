@@ -4,10 +4,9 @@ import type { Status } from "@/server/db/schema"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { toast } from "sonner"
-import type { z } from "zod"
 
-import { columnSchema } from "@/lib/zod/schemas/column"
-import { catchError } from "@/utils/catch-error"
+import { columnSchema, type ColumnSchema } from "@/lib/zod/schemas/column"
+import { showErrorToast } from "@/utils/hanld-error"
 import {
   Dialog,
   DialogContent,
@@ -24,8 +23,6 @@ interface EditColumnDialogProps {
   setOpen: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-type Inputs = z.infer<typeof columnSchema>
-
 export function EditColumnDialog({
   boardId,
   status,
@@ -34,26 +31,28 @@ export function EditColumnDialog({
 }: EditColumnDialogProps) {
   const [isPending, startTransition] = React.useTransition()
 
-  const form = useForm<Inputs>({
+  const form = useForm<ColumnSchema>({
     resolver: zodResolver(columnSchema),
     defaultValues: {
       name: status.title,
     },
   })
 
-  const onSubmit = (values: Inputs) => {
+  const onSubmit = (values: ColumnSchema) => {
     startTransition(async () => {
-      try {
-        await updateColumn({
-          boardId,
-          id: status.id,
-          name: values.name,
-        })
-        toast.success(`${values.name} updated!`)
-        setOpen(false)
-      } catch (error) {
-        catchError(error)
+      const { error } = await updateColumn({
+        boardId,
+        id: status.id,
+        name: values.name,
+      })
+
+      if (error) {
+        showErrorToast(error)
       }
+
+      setOpen(false)
+      toast.success(`${values.name} updated!`)
+      form.reset()
     })
   }
 

@@ -5,10 +5,9 @@ import { createColumn } from "@/server/actions/column"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { toast } from "sonner"
-import type { z } from "zod"
 
-import { columnSchema } from "@/lib/zod/schemas/column"
-import { catchError } from "@/utils/catch-error"
+import { columnSchema, type ColumnSchema } from "@/lib/zod/schemas/column"
+import { showErrorToast } from "@/utils/hanld-error"
 import { Button } from "@/components/ui/button"
 import {
   Dialog,
@@ -21,8 +20,6 @@ import { Icons } from "@/components/icons"
 
 import { ColumnForm } from "./column-form"
 
-type Inputs = z.infer<typeof columnSchema>
-
 interface AddColumnDialogProps {
   boardId: number
 }
@@ -31,26 +28,27 @@ export function AddColumnDialog({ boardId }: AddColumnDialogProps) {
   const [isPending, startTransition] = React.useTransition()
   const [open, setOpen] = React.useState(false)
 
-  const form = useForm<Inputs>({
+  const form = useForm<ColumnSchema>({
     resolver: zodResolver(columnSchema),
     defaultValues: {
       name: "",
     },
   })
 
-  const onSubmit = (values: Inputs) => {
+  const onSubmit = (values: ColumnSchema) => {
     startTransition(async () => {
-      try {
-        await createColumn({
-          boardId,
-          name: values.name,
-        })
+      const { error } = await createColumn({
+        boardId,
+        name: values.name,
+      })
 
-        toast.success(`${values.name} Created!`)
-        setOpen(false)
-      } catch (error) {
-        catchError(error)
+      if (error) {
+        showErrorToast(error)
       }
+
+      setOpen(false)
+      toast.success(`${values.name} Created!`)
+      form.reset()
     })
   }
 

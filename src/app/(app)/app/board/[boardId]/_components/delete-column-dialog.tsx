@@ -4,6 +4,7 @@ import type { Status } from "@/server/db/schema"
 import { toast } from "sonner"
 
 import { catchError } from "@/utils/catch-error"
+import { showErrorToast } from "@/utils/hanld-error"
 import {
   AlertDialog,
   AlertDialogAction,
@@ -34,13 +35,14 @@ export function DeleteColumnDialog({
 
   const handleDeleteColumn = () => {
     startTransition(async () => {
-      try {
-        await deleteColumn({ boardId, columnId: status.id })
+      const { error } = await deleteColumn({ boardId, columnId: status.id })
 
-        toast.success("Column Deleted!")
-      } catch (error) {
-        catchError(error)
+      if (error) {
+        showErrorToast(error)
       }
+
+      toast.success("Column Deleted!")
+      setOpen(false)
     })
   }
 

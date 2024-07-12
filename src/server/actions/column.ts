@@ -2,103 +2,116 @@
 
 import { revalidatePath } from "next/cache"
 import { and, eq, ne, sql } from "drizzle-orm"
-import { z } from "zod"
 
 import {
-  createColumnSchema,
-  updateColumnSchema,
+  type CreateColumnSchema,
+  type DeleteColumnSchema,
+  type UpdateColumnSchema,
 } from "@/lib/zod/schemas/column"
+import { getErrorMessage } from "@/utils/hanld-error"
 
 import { db } from "../db"
 import { statuses } from "../db/schema"
 
-export async function createColumn(
-  rawInputs: z.infer<typeof createColumnSchema>
-) {
-  const inputs = createColumnSchema.parse(rawInputs)
-
-  const columnWithSameName = await db.query.statuses.findFirst({
-    where: and(
-      eq(statuses.boardId, inputs.boardId),
-      eq(statuses.title, inputs.name)
-    ),
-    columns: {
-      id: true,
-    },
-  })
-
-  if (columnWithSameName) {
-    throw new Error("Column name already taken!")
-  }
-
-  await db.insert(statuses).values({
-    boardId: inputs.boardId,
-    title: inputs.name,
-  })
-
-  revalidatePath(`/app/board/${inputs.boardId}`)
-}
-
-const extendedUpdateColumnSchema = updateColumnSchema.extend({
-  boardId: z.number(),
-})
-
-export async function updateColumn(
-  rawInputs: z.infer<typeof extendedUpdateColumnSchema>
-) {
-  const inputs = extendedUpdateColumnSchema.parse(rawInputs)
-
-  const columnWithSameName = await db.query.statuses.findFirst({
-    where: and(
-      eq(statuses.boardId, inputs.boardId),
-      eq(statuses.title, inputs.name),
-      ne(statuses.id, inputs.id)
-    ),
-    columns: {
-      id: true,
-    },
-  })
-
-  if (columnWithSameName) {
-    throw new Error("Column name already taken!")
-  }
-
-  await db
-    .update(statuses)
-    .set({
-      title: inputs.name,
+export async function createColumn(input: CreateColumnSchema) {
+  try {
+    const columnWithSameName = await db.query.statuses.findFirst({
+      where: and(
+        eq(statuses.boardId, input.boardId),
+        eq(statuses.title, input.name)
+      ),
+      columns: {
+        id: true,
+      },
     })
-    .where(eq(statuses.id, inputs.id))
 
-  revalidatePath(`/app/board/${inputs.boardId}`)
+    if (columnWithSameName) {
+      throw new Error("Column name already taken!")
+    }
+
+    await db.insert(statuses).values({
+      boardId: input.boardId,
+      title: input.name,
+    })
+
+    revalidatePath(`/app/board/${input.boardId}`)
+
+    return {
+      error: null,
+    }
+  } catch (err) {
+    return {
+      error: getErrorMessage(err),
+    }
+  }
 }
 
-export async function deleteColumn({
-  boardId,
-  columnId,
-}: {
-  boardId: number
-  columnId: number
-}) {
-  const board = await db.query.statuses.findFirst({
-    where: eq(statuses.id, columnId),
-    columns: {
-      id: true,
-    },
-  })
+export async function updateColumn(input: UpdateColumnSchema) {
+  try {
+    const columnWithSameName = await db.query.statuses.findFirst({
+      where: and(
+        eq(statuses.boardId, input.boardId),
+        eq(statuses.title, input.name),
+        ne(statuses.id, input.id)
+      ),
+      columns: {
+        id: true,
+      },
+    })
 
-  if (!board) {
-    throw new Error("Board not found")
+    if (columnWithSameName) {
+      throw new Error("Column name already taken!")
+    }
+
+    await db
+      .update(statuses)
+      .set({
+        title: input.name,
+      })
+      .where(eq(statuses.id, input.id))
+
+    revalidatePath(`/app/board/${input.boardId}`)
+
+    return {
+      error: null,
+    }
+  } catch (err) {
+    return {
+      error: getErrorMessage(err),
+    }
   }
+}
 
-  // Delete all tasks and subtasks of this status
-  await db.execute(sql`
+export async function deleteColumn(input: DeleteColumnSchema) {
+  try {
+    const board = await db.query.statuses.findFirst({
+      where: eq(statuses.id, input.columnId),
+      columns: {
+        id: true,
+      },
+    })
+
+    if (!board) {
+      throw new Error("Board not found")
+    }
+
+    // Delete all tasks and subtasks of this status
+    await db.execute(sql`
     DELETE subtasks, tasks, statuses
     FROM statuses
       LEFT JOIN tasks ON statuses.id = tasks.statusId
       LEFT JOIN subtasks ON tasks.id = subtasks.taskId
-    WHERE statuses.id = ${columnId};
+    WHERE statuses.id = ${input.columnId};
   `)
 
-  revalidatePath(`/app/board/${boardId}`)
+    revalidatePath(`/app/board/${input.boardId}`)
+
+    return {
+      error: null,
+    }
+  } catch (err) {
+    return {
+      error: getErrorMessage(err),
+    }
+  }
 }
