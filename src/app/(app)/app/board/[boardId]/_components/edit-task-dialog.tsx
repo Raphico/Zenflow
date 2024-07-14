@@ -4,15 +4,16 @@ import type { Status, Task } from "@/server/db/schema"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { toast } from "sonner"
-import type { z } from "zod"
 
-import { taskSchema, type SubTask } from "@/lib/zod/schemas/task"
-import { catchError } from "@/utils/catch-error"
+import {
+  taskSchema,
+  type SubTask,
+  type TaskSchema,
+} from "@/lib/zod/schemas/task"
+import { showErrorToast } from "@/utils/hanld-error"
 import { Dialog, DialogContent } from "@/components/ui/dialog"
 
 import { TaskForm } from "./task-form"
-
-type Inputs = z.infer<typeof taskSchema>
 
 interface EditTaskDialogProps {
   boardId: number
@@ -35,7 +36,7 @@ export function EditTaskDialog({
 }: EditTaskDialogProps) {
   const [isPending, startTransition] = React.useTransition()
 
-  const form = useForm<Inputs>({
+  const form = useForm<TaskSchema>({
     resolver: zodResolver(taskSchema),
     defaultValues: {
       title: task.title,
@@ -48,26 +49,27 @@ export function EditTaskDialog({
     },
   })
 
-  const onSubmit = (values: Inputs) => {
+  const onSubmit = (values: TaskSchema) => {
     startTransition(async () => {
-      try {
-        await updateTask({
-          boardId,
-          id: task.id,
-          statusId: values.statusId,
-          title: values.title,
-          description: values.description,
-          dueDate: values.dueDate,
-          priority: values.priority,
-          tag: values.tag,
-          subtasks: values.subtasks,
-        })
+      const { error } = await updateTask({
+        boardId,
+        id: task.id,
+        statusId: values.statusId,
+        title: values.title,
+        description: values.description,
+        dueDate: values.dueDate,
+        priority: values.priority,
+        tag: values.tag,
+        subtasks: values.subtasks,
+      })
 
-        setOpen(false)
-        toast.success("Task updated!")
-      } catch (error) {
-        catchError(error)
+      if (error) {
+        showErrorToast(error)
+        return
       }
+
+      setOpen(false)
+      toast.success("Task updated!")
     })
   }
 

@@ -3,7 +3,7 @@
 import * as React from "react"
 import { updateTaskDone } from "@/server/actions/task"
 
-import { catchError } from "@/utils/catch-error"
+import { showErrorToast } from "@/utils/hanld-error"
 import { Checkbox } from "@/components/ui/checkbox"
 
 interface TaskDoneCheckboxProps {
@@ -24,14 +24,14 @@ export function TaskDoneCheckbox({
     setDone((prev) => !prev)
 
     startTransition(async () => {
-      try {
-        await updateTaskDone({
-          taskId,
-          boardId,
-          isDone,
-        })
-      } catch (error) {
-        catchError(error)
+      const { error } = await updateTaskDone({
+        taskId,
+        boardId,
+        isDone,
+      })
+
+      if (error) {
+        showErrorToast(error)
       }
     })
   }

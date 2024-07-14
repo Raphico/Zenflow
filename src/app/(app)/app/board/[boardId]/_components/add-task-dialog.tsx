@@ -6,17 +6,14 @@ import type { Status } from "@/server/db/schema"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { toast } from "sonner"
-import type { z } from "zod"
 
-import { taskSchema } from "@/lib/zod/schemas/task"
-import { catchError } from "@/utils/catch-error"
+import { taskSchema, type TaskSchema } from "@/lib/zod/schemas/task"
+import { showErrorToast } from "@/utils/hanld-error"
 import { Button } from "@/components/ui/button"
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog"
 import { Icons } from "@/components/icons"
 
 import { TaskForm } from "./task-form"
-
-type Inputs = z.infer<typeof taskSchema>
 
 interface AddTaskDialogProps {
   boardId: number
@@ -32,7 +29,7 @@ export function AddTaskDialog({
   const [isPending, startTransition] = React.useTransition()
   const [open, setOpen] = React.useState(false)
 
-  const form = useForm<Inputs>({
+  const form = useForm<TaskSchema>({
     resolver: zodResolver(taskSchema),
     defaultValues: {
       title: "Untitled Task",
@@ -44,26 +41,27 @@ export function AddTaskDialog({
     },
   })
 
-  const onSubmit = (values: Inputs) => {
+  const onSubmit = (values: TaskSchema) => {
     startTransition(async () => {
-      try {
-        await addTask({
-          boardId,
-          statusId: values.statusId,
-          title: values.title,
-          description: values.description,
-          dueDate: values.dueDate,
-          priority: values.priority,
-          tag: values.tag,
-          subtasks: values.subtasks,
-        })
+      const { error } = await addTask({
+        boardId,
+        statusId: values.statusId,
+        title: values.title,
+        description: values.description,
+        dueDate: values.dueDate,
+        priority: values.priority,
+        tag: values.tag,
+        subtasks: values.subtasks,
+      })
 
-        setOpen(false)
-        toast.success("Task added!")
-        form.reset()
-      } catch (error) {
-        catchError(error)
+      if (error) {
+        showErrorToast(error)
+        return
       }
+
+      setOpen(false)
+      toast.success("Task added!")
+      form.reset()
     })
   }
 

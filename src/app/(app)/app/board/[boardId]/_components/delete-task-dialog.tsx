@@ -3,7 +3,7 @@ import { deleteTask } from "@/server/actions/task"
 import type { Task } from "@/server/db/schema"
 import { toast } from "sonner"
 
-import { catchError } from "@/utils/catch-error"
+import { showErrorToast } from "@/utils/hanld-error"
 import {
   AlertDialog,
   AlertDialogAction,
@@ -34,13 +34,14 @@ export function DeleteTaskDialog({
 
   const handleDeleteTask = () => {
     startTransition(async () => {
-      try {
-        await deleteTask({ boardId, taskId: task.id })
+      const { error } = await deleteTask({ boardId, taskId: task.id })
 
-        toast.success("Task Deleted!")
-      } catch (error) {
-        catchError(error)
+      if (error) {
+        showErrorToast(error)
+        return
       }
+
+      toast.success("Task Deleted!")
     })
   }
 

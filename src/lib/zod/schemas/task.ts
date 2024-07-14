@@ -17,6 +17,25 @@ export const taskSchema = z.object({
   subtasks: z.array(subtaskSchema),
 })
 
+export const addTaskSchema = taskSchema.extend({
+  boardId: z.number(),
+  statusId: z.number(),
+})
+
+export const updateTaskSchema = taskSchema.extend({
+  id: z.number(),
+  boardId: z.number(),
+})
+
+export const deleteTaskSchema = z.object({
+  taskId: z.number(),
+  boardId: z.number(),
+})
+
+export const updateTaskDoneSchema = deleteTaskSchema.extend({
+  isDone: z.boolean(),
+})
+
 export const taskSearchParamsSchema = z.object({
   showCompletedTasks: z.string().optional().default("true"),
   sort: z.string().optional().default("createdAt.desc"),
@@ -30,6 +49,10 @@ export const getTasksSchema = taskSearchParamsSchema
     statusId: taskSchema.shape.statusId,
   })
 
+export type DeleteTaskSchema = z.infer<typeof deleteTaskSchema>
+export type UpdateTaskDoneSchema = z.infer<typeof updateTaskDoneSchema>
+export type UpdateTaskSchema = z.infer<typeof updateTaskSchema>
+export type AddTaskSchema = z.infer<typeof addTaskSchema>
 export type SubtaskSchema = z.infer<typeof subtaskSchema>
 export type SubTask = z.infer<typeof subtaskSchema>
 export type TaskSchema = z.infer<typeof taskSchema>
