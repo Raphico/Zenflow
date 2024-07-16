@@ -1,7 +1,7 @@
 "use server"
 
 import { revalidatePath } from "next/cache"
-import { and, eq, ne, sql } from "drizzle-orm"
+import { and, eq, ne } from "drizzle-orm"
 
 import {
   type BoardSchema,
@@ -25,10 +25,13 @@ export async function createBoard(input: BoardSchema & { userId: string }) {
       throw new Error(`Board with ${input.name} already exists`)
     }
 
-    const newBoard = await db.insert(boards).values({
-      userId: input.userId,
-      name: input.name,
-    })
+    const newBoard = await db
+      .insert(boards)
+      .values({
+        userId: input.userId,
+        name: input.name,
+      })
+      .returning({ insertId: boards.id })
 
     revalidatePath("/dashboard")
 
@@ -45,15 +48,7 @@ export async function createBoard(input: BoardSchema & { userId: string }) {
 
 export async function deleteBoard(boardId: number) {
   try {
-    // Delete all statues, tasks, and subtasks of this board
-    await db.execute(sql`
-    DELETE subtasks, tasks, statuses, boards
-    FROM boards
-      LEFT JOIN statuses ON boards.id = statuses.boardId
-      LEFT JOIN tasks ON statuses.id = tasks.statusId
-      LEFT JOIN subtasks ON tasks.id = subtasks.taskId
-    WHERE boards.id = ${boardId};
-  `)
+    await db.delete(boards).where(eq(boards.id, boardId))
 
     revalidatePath("/app/dashboard")
 

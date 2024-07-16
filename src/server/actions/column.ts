@@ -1,7 +1,7 @@
 "use server"
 
 import { revalidatePath } from "next/cache"
-import { and, eq, ne, sql } from "drizzle-orm"
+import { and, eq, ne } from "drizzle-orm"
 
 import {
   type CreateColumnSchema,
@@ -84,26 +84,7 @@ export async function updateColumn(input: UpdateColumnSchema) {
 
 export async function deleteColumn(input: DeleteColumnSchema) {
   try {
-    const board = await db.query.statuses.findFirst({
-      where: eq(statuses.id, input.columnId),
-      columns: {
-        id: true,
-      },
-    })
-
-    if (!board) {
-      throw new Error("Board not found")
-    }
-
-    // Delete all tasks and subtasks of this status
-    await db.execute(sql`
-    DELETE subtasks, tasks, statuses
-    FROM statuses
-      LEFT JOIN tasks ON statuses.id = tasks.statusId
-      LEFT JOIN subtasks ON tasks.id = subtasks.taskId
-    WHERE statuses.id = ${input.columnId};
-  `)
-
+    await db.delete(statuses).where(and(eq(statuses.id, input.columnId)))
     revalidatePath(`/app/board/${input.boardId}`)
 
     return {

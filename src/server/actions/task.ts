@@ -1,7 +1,7 @@
 "use server"
 
 import { revalidatePath } from "next/cache"
-import { eq, sql } from "drizzle-orm"
+import { eq } from "drizzle-orm"
 
 import {
   type AddTaskSchema,
@@ -28,7 +28,7 @@ export async function addTask(input: AddTaskSchema) {
           priority: input.priority,
           tag: input.tag || null,
         })
-        .execute()
+        .returning({ insertId: tasks.id })
 
       const subtaskPromises = input.subtasks.map(async (subtask) => {
         await tx.insert(subtasks).values({
@@ -61,7 +61,6 @@ export async function updateTask(input: UpdateTaskSchema) {
       with: {
         subtasks: true,
       },
-      columns: { id: true },
     })
 
     if (!task) {
@@ -127,21 +126,7 @@ export async function updateTask(input: UpdateTaskSchema) {
 
 export async function deleteTask(input: DeleteTaskSchema) {
   try {
-    const taskExists = await db.query.tasks.findFirst({
-      where: eq(tasks.id, input.taskId),
-    })
-
-    if (!taskExists) {
-      throw new Error("Task doesn't exists!")
-    }
-
-    // Delete all subtasks of this task
-    await db.execute(sql`
-    DELETE subtasks, tasks
-    FROM tasks
-      LEFT JOIN subtasks ON tasks.id = subtasks.taskId
-    WHERE tasks.id = ${input.taskId};
-  `)
+    await db.delete(tasks).where(eq(tasks.id, input.taskId))
 
     revalidatePath(`/app/board/${input.boardId}`)
 
@@ -157,14 +142,6 @@ export async function deleteTask(input: DeleteTaskSchema) {
 
 export async function updateTaskDone(input: UpdateTaskDoneSchema) {
   try {
-    const taskExists = await db.query.tasks.findFirst({
-      where: eq(tasks.id, input.taskId),
-    })
-
-    if (!taskExists) {
-      throw new Error("Task doesn't exists!")
-    }
-
     await db
       .update(tasks)
       .set({

@@ -1,63 +1,74 @@
-import { relations } from "drizzle-orm"
+import { relations, sql } from "drizzle-orm"
 import {
   boolean,
-  datetime,
-  int,
-  mysqlEnum,
-  mysqlTable,
+  integer,
+  pgEnum,
+  pgTable,
   serial,
   timestamp,
   varchar,
-} from "drizzle-orm/mysql-core"
+} from "drizzle-orm/pg-core"
 
-export const boards = mysqlTable("boards", {
-  userId: varchar("userId", { length: 191 }).notNull(),
+export const priorityEnum = pgEnum("priority", ["P1", "P2", "P3", "P4"])
+
+export const boards = pgTable("boards", {
+  userId: varchar("user_id", { length: 191 }).notNull(),
   id: serial("id").primaryKey(),
   name: varchar("name", { length: 35 }).notNull(),
-  createdAt: timestamp("createdAt").defaultNow().notNull(),
-  updatedAt: timestamp("updatedAt").defaultNow(),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+  updatedAt: timestamp("updated_at").defaultNow(),
 })
 
 export type Board = typeof boards.$inferSelect
+export type NewBoard = typeof boards.$inferInsert
 
-export const statuses = mysqlTable("statuses", {
+export const statuses = pgTable("statuses", {
   id: serial("id").primaryKey(),
+  boardId: integer("board_id")
+    .notNull()
+    .references(() => boards.id, { onDelete: "cascade" }),
   title: varchar("title", { length: 35 }).notNull(),
-  boardId: int("boardId").notNull(),
-  createdAt: timestamp("createdAt").defaultNow().notNull(),
-  updatedAt: timestamp("updatedAt").defaultNow(),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+  updatedAt: timestamp("updated_at").defaultNow(),
 })
 
 export type Status = typeof statuses.$inferSelect
+export type NewStatus = typeof statuses.$inferInsert
 
-export const tasks = mysqlTable("tasks", {
+export const tasks = pgTable("tasks", {
   id: serial("id").primaryKey(),
+  statusId: integer("status_id")
+    .notNull()
+    .references(() => statuses.id, { onDelete: "cascade" }),
   title: varchar("title", { length: 35 }).notNull(),
   description: varchar("description", { length: 150 }),
-  priority: mysqlEnum("priority", ["P1", "P2", "P3", "P4"])
-    .default("P4")
-    .notNull(),
-  dueDate: datetime("dueDate"),
+  priority: priorityEnum("P1").notNull(),
+  dueDate: timestamp("due_date"),
   done: boolean("done").default(false).notNull(),
   tag: varchar("tag", { length: 25 }),
-  statusId: int("statusId").notNull(),
-  createdAt: timestamp("createdAt").defaultNow().notNull(),
-  updatedAt: timestamp("updatedAt").onUpdateNow(),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+  updatedAt: timestamp("updated_at").default(sql`current_timestamp`),
 })
 
 export type Task = typeof tasks.$inferSelect
+export type NewTask = typeof tasks.$inferInsert
 
-export const subtasks = mysqlTable("subtasks", {
+export const subtasks = pgTable("subtasks", {
   id: serial("id").primaryKey(),
+  taskId: integer("task_id")
+    .notNull()
+    .references(() => tasks.id, { onDelete: "cascade" }),
   title: varchar("title", { length: 35 }).notNull(),
   done: boolean("done").default(false).notNull(),
-  dueDate: datetime("dueDate"),
-  taskId: int("taskId").notNull(),
-  createdAt: timestamp("createdAt").defaultNow().notNull(),
-  updatedAt: timestamp("updatedAt").onUpdateNow(),
+  dueDate: timestamp("due_date"),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+  updatedAt: timestamp("updated_at").default(sql`current_timestamp`),
 })
 
-// relationships
+export type Subtask = typeof tasks.$inferSelect
+export type NewSubtask = typeof tasks.$inferInsert
+
+// relations
 export const boardsRelations = relations(boards, ({ many }) => ({
   statuses: many(statuses),
 }))
