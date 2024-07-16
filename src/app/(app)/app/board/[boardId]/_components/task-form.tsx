@@ -112,7 +112,6 @@ export function TaskForm({
                       date < new Date(new Date().setHours(0, 0, 0, 0)) ||
                       date < new Date("1900-01-01")
                     }
-                    initialFocus
                   />
                 </PopoverContent>
               </Popover>
