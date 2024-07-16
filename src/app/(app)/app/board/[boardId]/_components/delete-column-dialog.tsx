@@ -3,7 +3,6 @@ import { deleteColumn } from "@/server/actions/column"
 import type { Status } from "@/server/db/schema"
 import { toast } from "sonner"
 
-import { catchError } from "@/utils/catch-error"
 import { showErrorToast } from "@/utils/hanld-error"
 import {
   AlertDialog,
