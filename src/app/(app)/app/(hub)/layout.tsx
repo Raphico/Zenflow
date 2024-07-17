@@ -26,7 +26,7 @@ export default async function DashboardLayout({
           items={dashboardConfig.sidebarNav}
         />
       </header>
-      <main className="flex flex-1 flex-col px-8 pb-8 pt-2">{children}</main>
+      <main className="flex flex-1 flex-col pb-8 pt-2">{children}</main>
     </div>
   )
 }
