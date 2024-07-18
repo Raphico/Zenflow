@@ -5,10 +5,12 @@ import { updateUserPassword } from "@/server/actions/account"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { toast } from "sonner"
-import type { z } from "zod"
 
-import { changePasswordSchema } from "@/lib/zod/schemas/account"
-import { catchClerkError } from "@/utils/catch-clerk-error"
+import {
+  changePasswordSchema,
+  type ChangePasswordSchema,
+} from "@/lib/zod/schemas/account"
+import { showErrorToast } from "@/utils/hanld-error"
 import { Button } from "@/components/ui/button"
 import {
   Dialog,
@@ -27,32 +29,30 @@ import {
 import { Icons } from "@/components/icons"
 import { PasswordInput } from "@/components/password-input"
 
-type Inputs = z.infer<typeof changePasswordSchema>
-
 export function ChangePasswordForm() {
   const [isPending, startTransition] = React.useTransition()
   const [open, setOpen] = React.useState(false)
 
-  const form = useForm<Inputs>({
+  const form = useForm<ChangePasswordSchema>({
     resolver: zodResolver(changePasswordSchema),
     defaultValues: {
       newPassword: "",
     },
   })
 
-  const onSubmit = (values: Inputs) => {
+  const onSubmit = (values: ChangePasswordSchema) => {
     startTransition(async () => {
-      try {
-        await updateUserPassword({
-          newPassword: values.newPassword,
-        })
+      const { error } = await updateUserPassword({
+        newPassword: values.newPassword,
+      })
 
-        setOpen(false)
-
-        toast.success("Password successfully changed!")
-      } catch (error) {
-        catchClerkError(error)
+      if (error) {
+        showErrorToast(error)
+        return
       }
+
+      setOpen(false)
+      toast.success("Password successfully changed!")
     })
   }
 

@@ -6,10 +6,9 @@ import type { User } from "@clerk/nextjs/server"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { toast } from "sonner"
-import type { z } from "zod"
 
-import { profileSchema } from "@/lib/zod/schemas/account"
-import { catchClerkError } from "@/utils/catch-clerk-error"
+import { profileSchema, type ProfileSchema } from "@/lib/zod/schemas/account"
+import { showErrorToast } from "@/utils/hanld-error"
 import { Button } from "@/components/ui/button"
 import {
   Form,
@@ -26,31 +25,29 @@ interface ProfileFormProps {
   user: Pick<User, "username">
 }
 
-type Inputs = z.infer<typeof profileSchema>
-
 export function ProfileForm({ user }: ProfileFormProps) {
   const [isPending, startTransition] = React.useTransition()
 
-  const form = useForm<Inputs>({
+  const form = useForm<ProfileSchema>({
     resolver: zodResolver(profileSchema),
     defaultValues: {
       username: user?.username || "",
     },
   })
 
-  const onSubmit = (values: Inputs) => {
+  const onSubmit = (values: ProfileSchema) => {
     startTransition(async () => {
-      try {
-        await updateProfile({
-          username: values.username,
-        })
+      const { error } = await updateProfile({
+        username: values.username,
+      })
 
-        form.reset({ username: values.username })
-
-        toast.success("Profile updated!")
-      } catch (error) {
-        catchClerkError(error)
+      if (error) {
+        showErrorToast(error)
+        return
       }
+
+      form.reset({ username: values.username })
+      toast.success("Profile updated!")
     })
   }
 

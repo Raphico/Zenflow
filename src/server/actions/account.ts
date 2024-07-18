@@ -44,6 +44,10 @@ export async function updateUserPassword(input: ChangePasswordSchema) {
     await clerkClient.users.updateUser(userId, {
       password: input.newPassword,
     })
+
+    return {
+      error: null,
+    }
   } catch (err) {
     return {
       error: getErrorMessage(err),
