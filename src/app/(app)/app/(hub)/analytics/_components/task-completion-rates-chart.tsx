@@ -1,5 +1,6 @@
 "use client"
 
+import { type getTaskCompletionRates } from "@/server/data/analytics"
 import { format } from "date-fns"
 import {
   Line,
@@ -11,10 +12,7 @@ import {
 } from "recharts"
 
 interface TaskCompletionRatesChartProps {
-  data: {
-    createdAt: Date
-    completedTasks: number
-  }[]
+  data: Awaited<ReturnType<typeof getTaskCompletionRates>>
 }
 
 export function TaskCompletionRatesChart({

@@ -1,14 +1,12 @@
 "use client"
 
+import { type getPriorityAnalysis } from "@/server/data/analytics"
 import { Bar, BarChart, ResponsiveContainer, XAxis, YAxis } from "recharts"
 
 import { useMounted } from "@/hooks/use-mounted"
 
 interface PriorityAnalysisChartProps {
-  data: {
-    priority: "P1" | "P2" | "P3" | "P4"
-    count: number
-  }[]
+  data: Awaited<ReturnType<typeof getPriorityAnalysis>>
 }
 
 export function PriorityAnalysisChart({ data }: PriorityAnalysisChartProps) {

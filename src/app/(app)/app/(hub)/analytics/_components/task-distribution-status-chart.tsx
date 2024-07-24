@@ -1,14 +1,12 @@
 "use client"
 
+import { type getTaskDistributionByStatus } from "@/server/data/analytics"
 import { Bar, BarChart, ResponsiveContainer, XAxis, YAxis } from "recharts"
 
 import { useMounted } from "@/hooks/use-mounted"
 
 interface TaskDistributionByStatusChartProps {
-  data: {
-    title: string
-    count: number
-  }[]
+  data: Awaited<ReturnType<typeof getTaskDistributionByStatus>>
 }
 
 export function TaskDistributionByStatusChart({

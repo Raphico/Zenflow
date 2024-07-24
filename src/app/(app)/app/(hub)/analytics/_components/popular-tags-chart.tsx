@@ -1,14 +1,12 @@
 "use client"
 
+import { type getPopularTags } from "@/server/data/analytics"
 import { Bar, BarChart, ResponsiveContainer, XAxis, YAxis } from "recharts"
 
 import { useMounted } from "@/hooks/use-mounted"
 
 interface PopularTagsChartProps {
-  data: {
-    tag: string | null
-    count: number
-  }[]
+  data: Awaited<ReturnType<typeof getPopularTags>>
 }
 
 export function PopularTagsChart({ data }: PopularTagsChartProps) {
